@@ -123,11 +123,11 @@ final class StatusInformation
      *      total interprocess send delay: 0
      *      total interprocess receive delay: 0
      *
-     * @param $plainText
+     * @param string $plainText
      *
      * @return StatusInformation
      */
-    public static function fromPlainText($plainText): StatusInformation
+    public static function fromPlainText(string $plainText): StatusInformation
     {
         $parts = explode("\n", $plainText);
 

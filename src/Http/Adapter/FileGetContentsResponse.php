@@ -36,7 +36,7 @@ final class FileGetContentsResponse implements Response
      * @return FileGetContentsResponse
      * @throws NchanException
      */
-    public static function fromResponse(array $headers, string $body)
+    public static function fromResponse(array $headers, string $body): FileGetContentsResponse
     {
         // The first array value is for example "HTTP\1.1 200 OK" and must be set.
         if (!isset($headers[0])) {

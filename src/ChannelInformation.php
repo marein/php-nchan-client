@@ -35,10 +35,10 @@ final class ChannelInformation
      * @param string $lastMessageIdentifier
      */
     public function __construct(
-        $numberOfMessages,
-        $secondsUntilLastRequested,
-        $numberOfCurrentSubscribers,
-        $lastMessageIdentifier
+        int $numberOfMessages,
+        int $secondsUntilLastRequested,
+        int $numberOfCurrentSubscribers,
+        string $lastMessageIdentifier
     ) {
         $this->numberOfMessages = $numberOfMessages;
         $this->secondsUntilLastRequested = $secondsUntilLastRequested;

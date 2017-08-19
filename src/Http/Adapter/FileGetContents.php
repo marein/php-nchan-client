@@ -15,7 +15,7 @@ final class FileGetContents implements Client
     private $credentials;
 
     /**
-     * FileGetContentsHttpAdapater constructor.
+     * FileGetContents constructor.
      */
     public function __construct()
     {
@@ -91,7 +91,7 @@ final class FileGetContents implements Client
      *
      * @return string
      */
-    private function prepareHeadersForStreamContext(array $headers)
+    private function prepareHeadersForStreamContext(array $headers): string
     {
         return implode("\r\n", array_map(function (string $name, string $value) {
             return $name . ': ' . $value;
