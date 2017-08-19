@@ -1,6 +1,12 @@
 # php-nchan-client
 
-This project is under development. The api might change.
+This project is under development. The api (class and method names) might change.
+
+## Roadmap to 1.0.0
+
+* Unit tests
+* Implement the group api
+* Renaming things and documentation
 
 ## Extend with another HTTP Client library
 
