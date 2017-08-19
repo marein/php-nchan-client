@@ -14,10 +14,10 @@ features from other libraries like guzzle.
 
 namespace Your\Name\Space;
 
-use Common\Nchan\Http\Client;
-use Common\Nchan\Exception\NchanException;
-use Common\Nchan\Http\Request;
-use Common\Nchan\Http\Response;
+use Marein\Nchan\Http\Client;
+use Marein\Nchan\Exception\NchanException;
+use Marein\Nchan\Http\Request;
+use Marein\Nchan\Http\Response;
 use GuzzleHttp\ClientInterface;
 use Psr\Http\Message\ResponseInterface;
 
