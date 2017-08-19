@@ -1,0 +1,21 @@
+{
+  "name": "marein/php-nchan-client",
+  "description": "A PHP https://nchan.io client.",
+  "authors": [
+    {
+      "name": "Markus Reinhold",
+      "email": "markusreinhold@icloud.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Marein\\Nchan\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=7.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.0"
+  }
+}
