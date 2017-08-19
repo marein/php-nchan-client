@@ -10,6 +10,12 @@ This is a PHP client for [https://nchan.io](https://nchan.io).
 * Implement the group api
 * Renaming things and code documentation
 
+## Installation
+
+```
+composer require marein/php-nchan-client
+```
+
 ## Usage
 
 ### Publish a message
@@ -19,14 +25,14 @@ This is a PHP client for [https://nchan.io](https://nchan.io).
 
 namespace {
 
-    include '/path/to/autoload.php';
-
     use Marein\Nchan\Message;
     use Marein\Nchan\Nchan;
 
+    include '/path/to/autoload.php';
+
     $nchan = new Nchan('http://my-nchan-domain');  
     $channelInformation = $nchan->channel('/path-to-publisher-endpoint')->publish(new Message(
-        'event_name',
+        'message-name',
         'payload'
     ));
 
@@ -42,9 +48,9 @@ namespace {
 
 namespace {
 
-    include '/path/to/autoload.php';
-
     use Marein\Nchan\Nchan;
+
+    include '/path/to/autoload.php';
 
     $nchan = new Nchan('http://my-nchan-domain');  
     $channelInformation = $nchan->channel('/path-to-publisher-endpoint')->information();
@@ -60,9 +66,9 @@ namespace {
 
 namespace {
 
-    include '/path/to/autoload.php';
-
     use Marein\Nchan\Nchan;
+
+    include '/path/to/autoload.php';
 
     $nchan = new Nchan('http://my-nchan-domain');  
     $isDeleted = $nchan->channel('/path-to-publisher-endpoint')->delete();
@@ -78,9 +84,9 @@ First you have to create a location with the "nchan_stub_status;" directive. The
 
 namespace {
 
-    include '/path/to/autoload.php';
-
     use Marein\Nchan\Nchan;
+
+    include '/path/to/autoload.php';
 
     $nchan = new Nchan('http://my-nchan-domain');  
     $statusInformation = $nchan->status('/path-to-status-location')->information();
@@ -91,111 +97,8 @@ namespace {
 
 ## Extend with another HTTP Client library
 
-Sometimes the shipped client is not enough and you want to use features from other libraries like guzzle.
-
-### Guzzle
-
-```php
-<?php
-
-namespace Your\Name\Space;
-
-use Marein\Nchan\Http\Client;
-use Marein\Nchan\Exception\NchanException;
-use Marein\Nchan\Http\Request;
-use Marein\Nchan\Http\Response;
-use GuzzleHttp\ClientInterface;
-use Psr\Http\Message\ResponseInterface;
-
-class GuzzleAdapter implements Client
-{
-    /**
-     * @var ClientInterface
-     */
-    private $client;
-
-    /**
-     * GuzzleAdapter constructor.
-     *
-     * @param ClientInterface $client
-     */
-    public function __construct(ClientInterface $client)
-    {
-        $this->client = $client;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function get(Request $request): Response
-    {
-        return $this->request('GET', $request);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function post(Request $request): Response
-    {
-        return $this->request('POST', $request);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function delete(Request $request): Response
-    {
-        return $this->request('DELETE', $request);
-    }
-
-    /**
-     * @param string  $method
-     * @param Request $request
-     *
-     * @return Response
-     * @throws NchanException
-     */
-    private function request(string $method, Request $request): Response
-    {
-        try {
-            $response = $this->client->send(new \GuzzleHttp\Psr7\Request(
-                $method,
-                $request->url(),
-                $request->headers(),
-                $request->body()
-            ));
-
-            return $this->guzzleResponseAdapter($response);
-        } catch (\Exception $exception) {
-            throw new NchanException(
-                $exception->getMessage(),
-                $exception->getCode(),
-                $exception
-            );
-        }
-    }
-
-    private function guzzleResponseAdapter(ResponseInterface $response)
-    {
-        return new class($response) implements Response
-        {
-            private $response;
-
-            public function __construct(ResponseInterface $response)
-            {
-                $this->response = $response;
-            }
-
-            public function statusCode(): int
-            {
-                return $this->response->getStatusCode();
-            }
-
-            public function body(): string
-            {
-                return $this->response->getBody();
-            }
-        };
-    }
-}
-```
+Sometimes, the shipped client is not enough and you want to use features from other libraries like guzzle.
+You can change the http client easily because of the \Marein\Nchan\Http\Client interface. I created a guzzle adapter
+for those who want to use guzzle. This is also a good example to look at, if you want to use another library. The
+guzzle adapter lives at
+[marein/php-nchan-client-guzzle-adapter](https://github.com/marein/php-nchan-client-guzzle-adapter).
