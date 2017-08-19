@@ -1,12 +1,93 @@
 # php-nchan-client
 
-This project is under development. The api (class and method names) might change.
+__Note: This project is under development. The api (class and method names) might change.__
+
+This is a PHP client for [https://nchan.io](https://nchan.io).
 
 ## Roadmap to 1.0.0
 
 * Unit tests
 * Implement the group api
-* Renaming things and documentation
+* Renaming things and code documentation
+
+## Usage
+
+### Publish a message
+
+```php
+<?php
+
+namespace {
+
+    include '/path/to/autoload.php';
+
+    use Marein\Nchan\Message;
+    use Marein\Nchan\Nchan;
+
+    $nchan = new Nchan('http://my-nchan-domain');  
+    $channelInformation = $nchan->channel('/path-to-publisher-endpoint')->publish(new Message(
+        'event_name',
+        'payload'
+    ));
+
+    // Nchan returns some channel information after publishing a message.
+    var_dump($channelInformation);
+}
+```
+
+### Get channel information
+
+```php
+<?php
+
+namespace {
+
+    include '/path/to/autoload.php';
+
+    use Marein\Nchan\Nchan;
+
+    $nchan = new Nchan('http://my-nchan-domain');  
+    $channelInformation = $nchan->channel('/path-to-publisher-endpoint')->information();
+
+    var_dump($channelInformation);
+}
+```
+
+### Delete a channel
+
+```php
+<?php
+
+namespace {
+
+    include '/path/to/autoload.php';
+
+    use Marein\Nchan\Nchan;
+
+    $nchan = new Nchan('http://my-nchan-domain');  
+    $isDeleted = $nchan->channel('/path-to-publisher-endpoint')->delete();
+}
+```
+
+### Basic nchan information
+
+First you have to create a location with the "nchan_stub_status;" directive. Then you can query it.
+
+```php
+<?php
+
+namespace {
+
+    include '/path/to/autoload.php';
+
+    use Marein\Nchan\Nchan;
+
+    $nchan = new Nchan('http://my-nchan-domain');  
+    $statusInformation = $nchan->status('/path-to-status-location')->information();
+
+    var_dump($statusInformation);
+}
+```
 
 ## Extend with another HTTP Client library
 
