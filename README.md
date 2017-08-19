@@ -10,8 +10,7 @@ This project is under development. The api (class and method names) might change
 
 ## Extend with another HTTP Client library
 
-Sometimes the shipped client is not enough and a want to use
-features from other libraries like guzzle.
+Sometimes the shipped client is not enough and you want to use features from other libraries like guzzle.
 
 ### Guzzle
 
