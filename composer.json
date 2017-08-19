@@ -1,6 +1,7 @@
 {
   "name": "marein/php-nchan-client",
   "description": "A PHP https://nchan.io client.",
+  "license": "MIT",
   "authors": [
     {
       "name": "Markus Reinhold",
