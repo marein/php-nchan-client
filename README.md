@@ -28,7 +28,7 @@ composer require marein/php-nchan-client
 
 namespace {
 
-    use Marein\Nchan\Message;
+    use Marein\Nchan\Api\Model\Message;
     use Marein\Nchan\Nchan;
 
     include '/path/to/autoload.php';
