@@ -1,6 +1,6 @@
 <?php
 
-namespace Marein\Nchan;
+namespace Marein\Nchan\Api\Model;
 
 use Marein\Nchan\Exception\NchanException;
 
