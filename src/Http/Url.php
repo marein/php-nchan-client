@@ -30,6 +30,8 @@ final class Url
     }
 
     /**
+     * Returns the new Url with the concatenated values.
+     *
      * @param string $value
      *
      * @return Url
@@ -40,6 +42,8 @@ final class Url
     }
 
     /**
+     * Returns the url.
+     *
      * @return string
      */
     public function __toString(): string
@@ -48,6 +52,8 @@ final class Url
     }
 
     /**
+     * Returns the url.
+     *
      * @return string
      */
     public function toString(): string

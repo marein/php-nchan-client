@@ -8,6 +8,7 @@ interface Client
 {
     /**
      * Make a GET request.
+     * If something goes wrong, the client must throw an exception of type \Marein\Nchan\Exception\NchanException.
      *
      * @param Request $request
      *
@@ -18,6 +19,7 @@ interface Client
 
     /**
      * Make a POST request.
+     * If something goes wrong, the client must throw an exception of type \Marein\Nchan\Exception\NchanException.
      *
      * @param Request $request
      *
@@ -28,6 +30,7 @@ interface Client
 
     /**
      * Make a DELETE request.
+     * If something goes wrong, the client must throw an exception of type \Marein\Nchan\Exception\NchanException.
      *
      * @param Request $request
      *
