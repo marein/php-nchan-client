@@ -2,6 +2,7 @@
 
 namespace Marein\Nchan\Api;
 
+use Marein\Nchan\Exception\AuthenticationRequiredException;
 use Marein\Nchan\Exception\NchanException;
 use Marein\Nchan\Http\Client;
 use Marein\Nchan\Http\Request;
@@ -37,6 +38,7 @@ final class Status
      * Returns the current nchan status.
      *
      * @return StatusInformation
+     * @throws AuthenticationRequiredException
      * @throws NchanException
      */
     public function information(): StatusInformation
@@ -51,6 +53,11 @@ final class Status
         if ($response->statusCode() === Response::OK) {
             return StatusInformation::fromPlainText($response->body());
         }
+
+        AuthenticationRequiredException::throwIfResponseIsForbidden(
+            $response,
+            'The status location "' . $this->statusUrl . '" requires authentication to get information.'
+        );
 
         throw new NchanException('Unable to retrieve status information.');
     }

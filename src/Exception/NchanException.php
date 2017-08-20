@@ -2,7 +2,7 @@
 
 namespace Marein\Nchan\Exception;
 
-final class NchanException extends \Exception
+class NchanException extends \Exception
 {
 
 }

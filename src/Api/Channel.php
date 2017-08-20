@@ -3,6 +3,7 @@
 namespace Marein\Nchan\Api;
 
 use Marein\Nchan\ChannelInformation;
+use Marein\Nchan\Exception\AuthenticationRequiredException;
 use Marein\Nchan\Exception\NchanException;
 use Marein\Nchan\Http\Client;
 use Marein\Nchan\Http\Request;
@@ -40,6 +41,7 @@ final class Channel
      * @param Message $message
      *
      * @return ChannelInformation
+     * @throws AuthenticationRequiredException
      * @throws NchanException
      */
     public function publish(Message $message): ChannelInformation
@@ -58,6 +60,11 @@ final class Channel
             return ChannelInformation::fromJson($response->body());
         }
 
+        AuthenticationRequiredException::throwIfResponseIsForbidden(
+            $response,
+            'The publisher endpoint "' . $this->channelUrl . '" requires authentication to publish a message.'
+        );
+
         throw new NchanException(
             'Unable to publish to channel. Maybe the channel does not exists.'
         );
@@ -67,6 +74,7 @@ final class Channel
      * Returns the information from this channel.
      *
      * @return ChannelInformation
+     * @throws AuthenticationRequiredException
      * @throws NchanException
      */
     public function information(): ChannelInformation
@@ -86,6 +94,11 @@ final class Channel
             return new ChannelInformation(0, 0, 0, '');
         }
 
+        AuthenticationRequiredException::throwIfResponseIsForbidden(
+            $response,
+            'The publisher endpoint "' . $this->channelUrl . '" requires authentication to get information.'
+        );
+
         throw new NchanException(
             'Unable to get channel information. Maybe the channel does not exists.'
         );
@@ -95,6 +108,7 @@ final class Channel
      * Delete this channel.
      *
      * @return bool
+     * @throws AuthenticationRequiredException
      * @throws NchanException
      */
     public function delete(): bool
@@ -109,6 +123,11 @@ final class Channel
         if (in_array($response->statusCode(), [Response::OK, Response::NOT_FOUND])) {
             return true;
         }
+
+        AuthenticationRequiredException::throwIfResponseIsForbidden(
+            $response,
+            'The publisher endpoint "' . $this->channelUrl . '" requires authentication to get deleted.'
+        );
 
         throw new NchanException(
             'Unable to delete channel. Maybe the channel does not exists.'
