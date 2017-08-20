@@ -16,10 +16,12 @@ final class FileGetContents implements Client
 
     /**
      * FileGetContents constructor.
+     *
+     * @param Credentials|null $credentials
      */
-    public function __construct()
+    public function __construct(Credentials $credentials = null)
     {
-        $this->credentials = $this->withoutAuthentication();
+        $this->credentials = $credentials ? $credentials : new WithoutAuthenticationCredentials();
     }
 
     /**
@@ -99,82 +101,41 @@ final class FileGetContents implements Client
     }
 
     /**
-     * @return Credentials
+     * Returns a new instance without authentication.
+     *
+     * @return FileGetContents
      */
-    public function withoutAuthentication(): Credentials
+    public function withoutAuthentication(): FileGetContents
     {
-        return new class implements Credentials
-        {
-            public function authenticate(Request $request): Request
-            {
-                return $request;
-            }
-        };
+        return new self();
     }
 
     /**
+     * Returns a new instance with basic authentication.
+     *
      * @param string $username
      * @param string $password
      *
-     * @return Credentials
+     * @return FileGetContents
      */
-    public function withBasicAuthentication(string $username, string $password): Credentials
+    public function withBasicAuthentication(string $username, string $password): FileGetContents
     {
-        $this->credentials = new class($username, $password) implements Credentials
-        {
-            private $username, $password;
-
-            public function __construct(string $username, string $password)
-            {
-                $this->username = $username;
-                $this->password = $password;
-            }
-
-            public function authenticate(Request $request): Request
-            {
-                $headers = $request->headers();
-
-                $encodedCredentials = base64_encode($this->username . ':' . $this->password);
-
-                $headers['Authorization'] = 'Basic ' . $encodedCredentials;
-
-                return new Request(
-                    $request->url(),
-                    $headers,
-                    $request->body()
-                );
-            }
-        };
+        return new self(
+            new BasicAuthenticationCredentials($username, $password)
+        );
     }
 
     /**
+     * Returns a new instance with bearer authentication.
+     *
      * @param string $token
      *
-     * @return Credentials
+     * @return FileGetContents
      */
-    public function withBearerAuthentication(string $token): Credentials
+    public function withBearerAuthentication(string $token): FileGetContents
     {
-        $this->credentials = new class($token) implements Credentials
-        {
-            private $token;
-
-            public function __construct(string $token)
-            {
-                $this->token = $token;
-            }
-
-            public function authenticate(Request $request): Request
-            {
-                $headers = $request->headers();
-
-                $headers['Authorization'] = 'Bearer ' . $this->token;
-
-                return new Request(
-                    $request->url(),
-                    $headers,
-                    $request->body()
-                );
-            }
-        };
+        return new self(
+            new BearerAuthenticationCredentials($token)
+        );
     }
 }
