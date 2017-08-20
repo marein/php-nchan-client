@@ -98,7 +98,7 @@ namespace {
 ## Extend with another HTTP Client library
 
 Sometimes, the shipped client is not enough and you want to use features from other libraries like guzzle.
-You can change the http client easily because of the \Marein\Nchan\Http\Client interface. I created a guzzle adapter
+You can change the http client easily because of the \Marein\Nchan\Http\Client interface. I've created a guzzle adapter
 for those who want to use guzzle. This is also a good example to look at, if you want to use another library. The
 guzzle adapter lives at
 [marein/php-nchan-client-guzzle-adapter](https://github.com/marein/php-nchan-client-guzzle-adapter).
