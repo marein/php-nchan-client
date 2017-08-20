@@ -35,7 +35,7 @@ final class Channel
     }
 
     /**
-     * Publish the message in the given channel to nchan.
+     * Publish a message to this channel.
      *
      * @param Message $message
      *
@@ -64,6 +64,8 @@ final class Channel
     }
 
     /**
+     * Returns the information from this channel.
+     *
      * @return ChannelInformation
      * @throws NchanException
      */
@@ -90,6 +92,8 @@ final class Channel
     }
 
     /**
+     * Delete this channel.
+     *
      * @return bool
      * @throws NchanException
      */

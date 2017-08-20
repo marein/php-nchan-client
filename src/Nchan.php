@@ -34,6 +34,8 @@ final class Nchan
     }
 
     /**
+     * Create the api for the given channel name.
+     *
      * @param string $name
      *
      * @return Channel
@@ -44,6 +46,8 @@ final class Nchan
     }
 
     /**
+     * Create the api for the given status path. The path must be configured with the "nchan_stub_status;" directive.
+     *
      * @param string $path
      *
      * @return Status
@@ -54,6 +58,8 @@ final class Nchan
     }
 
     /**
+     * Create the api for the given group name.
+     *
      * @param string $name
      *
      * @throws \Exception

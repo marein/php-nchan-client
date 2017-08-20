@@ -34,6 +34,8 @@ final class Status
     }
 
     /**
+     * Returns the current nchan status.
+     *
      * @return StatusInformation
      * @throws NchanException
      */
