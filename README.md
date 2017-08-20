@@ -1,6 +1,7 @@
 # php-nchan-client
 
-__Note: This project is under development. The api (class and method names) might change.__
+__Note: This project is under development. The api (class and method names) will change. A stable version will exist
+in the next weeks.__
 
 This is a PHP client for [https://nchan.io](https://nchan.io).
 
@@ -9,9 +10,12 @@ change this library with another like guzzle. Take a look below at "Extend with 
 
 ## Roadmap to 1.0.0
 
-* Unit tests
+A stable version will exist in the next weeks.
+
+* Cover most classes with unit tests
 * Implement the group api
-* Renaming things and code documentation
+* Restructure namespaces
+* Code documentation
 
 ## Installation
 
