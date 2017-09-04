@@ -12,12 +12,12 @@ class MessageTest extends TestCase
     public function itShouldBeCreatedWithItsValues()
     {
         $expectedName = 'my-message-name';
-        $expectedPayload = 'my message content';
+        $expectedContent = 'my message content';
 
-        $message = new Message($expectedName, $expectedPayload);
+        $message = new Message($expectedName, $expectedContent);
 
         $this->assertEquals($expectedName, $message->name());
-        $this->assertEquals($expectedPayload, $message->content());
+        $this->assertEquals($expectedContent, $message->content());
     }
 
     /**
@@ -26,25 +26,25 @@ class MessageTest extends TestCase
     public function itShouldBeCreatedWithEmptyName()
     {
         $expectedName = '';
-        $expectedPayload = 'my message content';
+        $expectedContent = 'my message content';
 
-        $message = new Message($expectedName, $expectedPayload);
+        $message = new Message($expectedName, $expectedContent);
 
         $this->assertEquals($expectedName, $message->name());
-        $this->assertEquals($expectedPayload, $message->content());
+        $this->assertEquals($expectedContent, $message->content());
     }
 
     /**
      * @test
      */
-    public function itShouldBeCreatedWithEmptyPayload()
+    public function itShouldBeCreatedWithEmptyContent()
     {
         $expectedName = 'my-message-name';
-        $expectedPayload = '';
+        $expectedContent = '';
 
-        $message = new Message($expectedName, $expectedPayload);
+        $message = new Message($expectedName, $expectedContent);
 
         $this->assertEquals($expectedName, $message->name());
-        $this->assertEquals($expectedPayload, $message->content());
+        $this->assertEquals($expectedContent, $message->content());
     }
 }
