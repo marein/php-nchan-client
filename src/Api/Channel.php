@@ -2,14 +2,14 @@
 
 namespace Marein\Nchan\Api;
 
-use Marein\Nchan\ChannelInformation;
+use Marein\Nchan\Api\Model\ChannelInformation;
 use Marein\Nchan\Exception\AuthenticationRequiredException;
 use Marein\Nchan\Exception\NchanException;
 use Marein\Nchan\Http\Client;
 use Marein\Nchan\Http\Request;
 use Marein\Nchan\Http\Response;
 use Marein\Nchan\Http\Url;
-use Marein\Nchan\Message;
+use Marein\Nchan\Api\Model\Message;
 
 final class Channel
 {

@@ -8,7 +8,7 @@ use Marein\Nchan\Http\Client;
 use Marein\Nchan\Http\Request;
 use Marein\Nchan\Http\Response;
 use Marein\Nchan\Http\Url;
-use Marein\Nchan\StatusInformation;
+use Marein\Nchan\Api\Model\StatusInformation;
 
 final class Status
 {

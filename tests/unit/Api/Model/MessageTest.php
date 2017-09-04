@@ -1,8 +1,7 @@
 <?php
 
-namespace Marein\Nchan\Http\Adapter;
+namespace Marein\Nchan\Api\Model;
 
-use Marein\Nchan\Message;
 use PHPUnit\Framework\TestCase;
 
 class MessageTest extends TestCase
