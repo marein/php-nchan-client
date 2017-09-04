@@ -14,7 +14,6 @@ A stable version will exist in the next weeks.
 
 * Cover most classes with unit tests
 * Implement the group api
-* Restructure namespaces
 * Code documentation
 
 ## Installation
@@ -39,8 +38,8 @@ namespace {
 
     $nchan = new Nchan('http://my-nchan-domain');  
     $channelInformation = $nchan->channel('/path-to-publisher-endpoint')->publish(new Message(
-        'message-name',
-        'payload'
+        'my-message-name',
+        'my message content'
     ));
 
     // Nchan returns some channel information after publishing a message.
