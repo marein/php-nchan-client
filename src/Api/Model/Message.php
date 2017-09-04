@@ -12,18 +12,18 @@ final class Message
     /**
      * @var string
      */
-    private $payload;
+    private $content;
 
     /**
      * Message constructor.
      *
      * @param string $name
-     * @param string $payload
+     * @param string $content
      */
-    public function __construct(string $name, string $payload)
+    public function __construct(string $name, string $content)
     {
         $this->name = $name;
-        $this->payload = $payload;
+        $this->content = $content;
     }
 
     /**
@@ -37,8 +37,8 @@ final class Message
     /**
      * @return string
      */
-    public function payload(): string
+    public function content(): string
     {
-        return $this->payload;
+        return $this->content;
     }
 }

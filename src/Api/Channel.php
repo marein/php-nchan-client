@@ -53,7 +53,7 @@ final class Channel
                 'Content-Type'        => 'application/x-www-form-urlencoded',
                 'X-EventSource-Event' => $message->name()
             ],
-            $message->payload()
+            $message->content()
         ));
 
         if (in_array($response->statusCode(), [Response::CREATED, Response::ACCEPTED])) {

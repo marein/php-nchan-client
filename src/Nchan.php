@@ -29,8 +29,7 @@ final class Nchan
     public function __construct(string $baseUrl, Client $client = null)
     {
         $this->baseUrl = new Url($baseUrl);
-        $client = $client ?: new FileGetContents();
-        $this->client = $client;
+        $this->client = $client ?? new FileGetContents();
     }
 
     /**
