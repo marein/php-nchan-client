@@ -50,7 +50,7 @@ final class Channel
             $this->channelUrl,
             [
                 'Accept'              => 'application/json',
-                'Content-Type'        => 'application/x-www-form-urlencoded',
+                'Content-Type'        => $message->contentType(),
                 'X-EventSource-Event' => $message->name()
             ],
             $message->content()

@@ -31,13 +31,13 @@ composer require marein/php-nchan-client
 
 namespace {
 
-    use Marein\Nchan\Api\Model\Message;
+    use Marein\Nchan\Api\Model\PlainTextMessage;
     use Marein\Nchan\Nchan;
 
     include '/path/to/autoload.php';
 
     $nchan = new Nchan('http://my-nchan-domain');  
-    $channelInformation = $nchan->channel('/path-to-publisher-endpoint')->publish(new Message(
+    $channelInformation = $nchan->channel('/path-to-publisher-endpoint')->publish(new PlainTextMessage(
         'my-message-name',
         'my message content'
     ));

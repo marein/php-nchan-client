@@ -4,7 +4,7 @@ namespace Marein\Nchan\Api\Model;
 
 use PHPUnit\Framework\TestCase;
 
-class MessageTest extends TestCase
+class PlainTextMessageTest extends TestCase
 {
     /**
      * @test
@@ -13,11 +13,13 @@ class MessageTest extends TestCase
     {
         $expectedName = 'my-message-name';
         $expectedContent = 'my message content';
+        $expectedContentType = 'text/plain';
 
-        $message = new Message($expectedName, $expectedContent);
+        $message = new PlainTextMessage($expectedName, $expectedContent);
 
         $this->assertEquals($expectedName, $message->name());
         $this->assertEquals($expectedContent, $message->content());
+        $this->assertEquals($expectedContentType, $message->contentType());
     }
 
     /**
@@ -27,11 +29,13 @@ class MessageTest extends TestCase
     {
         $expectedName = '';
         $expectedContent = 'my message content';
+        $expectedContentType = 'text/plain';
 
-        $message = new Message($expectedName, $expectedContent);
+        $message = new PlainTextMessage($expectedName, $expectedContent);
 
         $this->assertEquals($expectedName, $message->name());
         $this->assertEquals($expectedContent, $message->content());
+        $this->assertEquals($expectedContentType, $message->contentType());
     }
 
     /**
@@ -41,10 +45,12 @@ class MessageTest extends TestCase
     {
         $expectedName = 'my-message-name';
         $expectedContent = '';
+        $expectedContentType = 'text/plain';
 
-        $message = new Message($expectedName, $expectedContent);
+        $message = new PlainTextMessage($expectedName, $expectedContent);
 
         $this->assertEquals($expectedName, $message->name());
         $this->assertEquals($expectedContent, $message->content());
+        $this->assertEquals($expectedContentType, $message->contentType());
     }
 }

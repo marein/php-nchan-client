@@ -2,7 +2,7 @@
 
 namespace Marein\Nchan\Api\Model;
 
-final class Message
+abstract class Message
 {
     /**
      * @var string
@@ -41,4 +41,9 @@ final class Message
     {
         return $this->content;
     }
+
+    /**
+     * @return string
+     */
+    abstract public function contentType(): string;
 }
