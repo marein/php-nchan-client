@@ -8,6 +8,7 @@ use Marein\Nchan\Exception\NchanException;
 use Marein\Nchan\Http\Client;
 use Marein\Nchan\Http\Request;
 use Marein\Nchan\Http\Response;
+use Marein\Nchan\Http\ThrowExceptionIfRequestRequiresAuthenticationClient;
 use Marein\Nchan\Http\Url;
 use Marein\Nchan\Api\Model\Message;
 
@@ -32,7 +33,7 @@ final class Channel
     public function __construct(Url $channelUrl, Client $client)
     {
         $this->channelUrl = $channelUrl;
-        $this->client = $client;
+        $this->client = new ThrowExceptionIfRequestRequiresAuthenticationClient($client);
     }
 
     /**
@@ -59,11 +60,6 @@ final class Channel
         if (in_array($response->statusCode(), [Response::CREATED, Response::ACCEPTED])) {
             return ChannelInformation::fromJson($response->body());
         }
-
-        AuthenticationRequiredException::throwIfResponseIsForbidden(
-            $response,
-            'The publisher endpoint "' . $this->channelUrl . '" requires authentication to publish a message.'
-        );
 
         throw new NchanException(
             'Unable to publish to channel. Maybe the channel does not exists.'
@@ -94,11 +90,6 @@ final class Channel
             return new ChannelInformation(0, 0, 0, '');
         }
 
-        AuthenticationRequiredException::throwIfResponseIsForbidden(
-            $response,
-            'The publisher endpoint "' . $this->channelUrl . '" requires authentication to get information.'
-        );
-
         throw new NchanException(
             'Unable to get channel information. Maybe the channel does not exists.'
         );
@@ -123,11 +114,6 @@ final class Channel
         if (in_array($response->statusCode(), [Response::OK, Response::NOT_FOUND])) {
             return true;
         }
-
-        AuthenticationRequiredException::throwIfResponseIsForbidden(
-            $response,
-            'The publisher endpoint "' . $this->channelUrl . '" requires authentication to get deleted.'
-        );
 
         throw new NchanException(
             'Unable to delete channel. Maybe the channel does not exists.'

@@ -7,6 +7,7 @@ use Marein\Nchan\Exception\NchanException;
 use Marein\Nchan\Http\Client;
 use Marein\Nchan\Http\Request;
 use Marein\Nchan\Http\Response;
+use Marein\Nchan\Http\ThrowExceptionIfRequestRequiresAuthenticationClient;
 use Marein\Nchan\Http\Url;
 use Marein\Nchan\Api\Model\StatusInformation;
 
@@ -31,7 +32,7 @@ final class Status
     public function __construct(Url $statusUrl, Client $client)
     {
         $this->statusUrl = $statusUrl;
-        $this->client = $client;
+        $this->client = new ThrowExceptionIfRequestRequiresAuthenticationClient($client);
     }
 
     /**
@@ -53,11 +54,6 @@ final class Status
         if ($response->statusCode() === Response::OK) {
             return StatusInformation::fromPlainText($response->body());
         }
-
-        AuthenticationRequiredException::throwIfResponseIsForbidden(
-            $response,
-            'The status location "' . $this->statusUrl . '" requires authentication to get information.'
-        );
 
         throw new NchanException('Unable to retrieve status information.');
     }
