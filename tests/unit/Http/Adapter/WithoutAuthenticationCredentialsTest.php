@@ -10,7 +10,7 @@ class WithoutAuthenticationCredentialsTest extends TestCase
     /**
      * @test
      */
-    public function itShouldExpandTheRequestWithAuthenticationHeader(): void
+    public function itShouldReturnTheSameRequest(): void
     {
         $credentials = new WithoutAuthenticationCredentials();
 
