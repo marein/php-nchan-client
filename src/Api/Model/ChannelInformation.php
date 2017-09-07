@@ -52,7 +52,7 @@ final class ChannelInformation
      *          "messages": 10,
      *          "requested": 1,
      *          "subscribers": 100,
-     *          "last_message_id": "1504818382:1",
+     *          "last_message_id": "1504818382:1"
      *      }
      *
      * @param string $json
