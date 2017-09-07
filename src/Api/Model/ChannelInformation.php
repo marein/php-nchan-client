@@ -47,6 +47,14 @@ final class ChannelInformation
     }
 
     /**
+     * The json must look like this:
+     *      {
+     *          "messages": 10,
+     *          "requested": 1,
+     *          "subscribers": 100,
+     *          "last_message_id": "1504818382:1",
+     *      }
+     *
      * @param string $json
      *
      * @return ChannelInformation
@@ -54,17 +62,32 @@ final class ChannelInformation
      */
     public static function fromJson(string $json): ChannelInformation
     {
-        $response = json_decode($json);
+        $response = json_decode($json, true);
 
-        if ($response === null) {
-            throw new NchanException('Unable to parse JSON response');
+        if (!is_array($response)) {
+            throw new NchanException('Unable to parse JSON response: ' . json_last_error_msg());
+        }
+
+        if (
+            !array_key_exists('messages', $response) ||
+            !array_key_exists('requested', $response) ||
+            !array_key_exists('subscribers', $response) ||
+            !array_key_exists('last_message_id', $response)
+        ) {
+            throw new NchanException(
+                sprintf(
+                    'Unable to parse JSON response: Keys "%s" are required. Keys "%s" exists.',
+                    implode('", "', ['messages', 'requested', 'subscribers', 'last_message_id']),
+                    implode('", "', array_keys($response))
+                )
+            );
         }
 
         return new self(
-            (int)$response->messages,
-            (int)$response->requested,
-            (int)$response->subscribers,
-            (string)$response->last_message_id
+            (int)$response['messages'],
+            (int)$response['requested'],
+            (int)$response['subscribers'],
+            (string)$response['last_message_id']
         );
     }
 
