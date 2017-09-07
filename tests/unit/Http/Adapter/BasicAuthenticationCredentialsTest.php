@@ -10,7 +10,7 @@ class BasicAuthenticationCredentialsTest extends TestCase
     /**
      * @test
      */
-    public function itShouldExpandTheRequestWithAuthenticationHeader()
+    public function itShouldExpandTheRequestWithAuthenticationHeader(): void
     {
         $username = 'starwars';
         $password = '25.05.1977';
@@ -29,7 +29,7 @@ class BasicAuthenticationCredentialsTest extends TestCase
     /**
      * @test
      */
-    public function itShouldOverrideAnExistingAuthenticationHeader()
+    public function itShouldOverrideAnExistingAuthenticationHeader(): void
     {
         $username = 'starwars';
         $password = '25.05.1977';

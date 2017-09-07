@@ -9,7 +9,7 @@ class JsonMessageTest extends TestCase
     /**
      * @test
      */
-    public function itShouldBeCreatedWithItsValues()
+    public function itShouldBeCreatedWithItsValues(): void
     {
         $expectedName = 'my-message-name';
         $expectedContent = 'my message content';
@@ -25,7 +25,7 @@ class JsonMessageTest extends TestCase
     /**
      * @test
      */
-    public function itShouldBeCreatedWithEmptyName()
+    public function itShouldBeCreatedWithEmptyName(): void
     {
         $expectedName = '';
         $expectedContent = 'my message content';
@@ -41,7 +41,7 @@ class JsonMessageTest extends TestCase
     /**
      * @test
      */
-    public function itShouldBeCreatedWithEmptyContent()
+    public function itShouldBeCreatedWithEmptyContent(): void
     {
         $expectedName = 'my-message-name';
         $expectedContent = '';

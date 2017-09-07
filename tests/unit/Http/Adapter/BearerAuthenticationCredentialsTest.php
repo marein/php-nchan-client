@@ -10,7 +10,7 @@ class BearerAuthenticationCredentialsTest extends TestCase
     /**
      * @test
      */
-    public function itShouldExpandTheRequestWithAuthenticationHeader()
+    public function itShouldExpandTheRequestWithAuthenticationHeader(): void
     {
         $token = 'my-token';
         $credentials = new BearerAuthenticationCredentials($token);
@@ -28,7 +28,7 @@ class BearerAuthenticationCredentialsTest extends TestCase
     /**
      * @test
      */
-    public function itShouldOverrideAnExistingAuthenticationHeader()
+    public function itShouldOverrideAnExistingAuthenticationHeader(): void
     {
         $token = 'my-token';
         $credentials = new BearerAuthenticationCredentials($token);

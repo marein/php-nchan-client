@@ -56,7 +56,7 @@ class ChannelInformationTest extends TestCase
      * @test
      * @dataProvider missingKeysProvider
      */
-    public function itShouldBeThrowAnExceptionWhenJsonHasMissingKeys($json): void
+    public function itShouldBeThrowAnExceptionWhenJsonHasMissingKeys(string $json): void
     {
         $this->expectException(NchanException::class);
 
