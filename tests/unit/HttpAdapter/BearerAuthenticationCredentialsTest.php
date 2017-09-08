@@ -1,6 +1,6 @@
 <?php
 
-namespace Marein\Nchan\Http\Adapter;
+namespace Marein\Nchan\HttpAdapter;
 
 use Marein\Nchan\Http\Request;
 use PHPUnit\Framework\TestCase;

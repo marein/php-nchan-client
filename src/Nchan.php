@@ -4,7 +4,7 @@ namespace Marein\Nchan;
 
 use Marein\Nchan\Api\Channel;
 use Marein\Nchan\Api\Status;
-use Marein\Nchan\Http\Adapter\FileGetContents;
+use Marein\Nchan\HttpAdapter\FileGetContents;
 use Marein\Nchan\Http\Client;
 use Marein\Nchan\Http\Url;
 
