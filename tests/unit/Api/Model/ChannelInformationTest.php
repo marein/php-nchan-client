@@ -68,7 +68,7 @@ class ChannelInformationTest extends TestCase
      *
      * @return array
      */
-    public function missingKeysProvider(): array
+    private function missingKeysProvider(): array
     {
         return [
             ['{"requested": 1, "subscribers": 100, "last_message_id": "1504818382:1"}'],
