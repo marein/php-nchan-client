@@ -64,7 +64,7 @@ class UrlTest extends TestCase
      *
      * @return array
      */
-    private function validUrlsProvider(): array
+    public function validUrlsProvider(): array
     {
         return [
             ['http://localhost'],
@@ -83,7 +83,7 @@ class UrlTest extends TestCase
      *
      * @return array
      */
-    private function invalidUrlsProvider(): array
+    public function invalidUrlsProvider(): array
     {
         return [
             ['/'],
