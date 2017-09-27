@@ -9,10 +9,18 @@ final class StatusInformation
     /**
      * @var array
      */
-    private static $requiredFromPlainTextKeys = [
-        'total published messages', 'stored messages', 'shared memory used', 'channels', 'subscribers',
-        'redis pending commands', 'redis connected servers', 'total interprocess alerts received',
-        'interprocess alerts in transit', 'interprocess queued alerts', 'total interprocess send delay',
+    private const REQUIRED_PLAIN_TEXT_KEYS = [
+        'total published messages',
+        'stored messages',
+        'shared memory used',
+        'channels',
+        'subscribers',
+        'redis pending commands',
+        'redis connected servers',
+        'total interprocess alerts received',
+        'interprocess alerts in transit',
+        'interprocess queued alerts',
+        'total interprocess send delay',
         'total interprocess receive delay'
     ];
 
@@ -152,11 +160,11 @@ final class StatusInformation
         }
 
         // Check if required keys exists in $response.
-        if (count(array_diff_key(array_flip(self::$requiredFromPlainTextKeys), $response)) !== 0) {
+        if (count(array_diff_key(array_flip(self::REQUIRED_PLAIN_TEXT_KEYS), $response)) !== 0) {
             throw new  NchanException(
                 sprintf(
                     'Unable to parse status information: Keys "%s" are required. Keys "%s" exists.',
-                    implode('", "', self::$requiredFromPlainTextKeys),
+                    implode('", "', self::REQUIRED_PLAIN_TEXT_KEYS),
                     implode('", "', array_keys($response))
                 )
             );
@@ -187,6 +195,8 @@ final class StatusInformation
     }
 
     /**
+     * Number of messages published to all channels through this Nchan server.
+     *
      * @return int
      */
     public function totalPublishedMessages(): int
@@ -195,6 +205,8 @@ final class StatusInformation
     }
 
     /**
+     * Number of messages currently buffered in memory.
+     *
      * @return int
      */
     public function storedMessages(): int
@@ -203,6 +215,9 @@ final class StatusInformation
     }
 
     /**
+     * Total shared memory used for buffering messages, storing channel information, and other purposes.
+     * This value should be comfortably below nchan_shared_memory_size.
+     *
      * @return int
      */
     public function sharedMemoryUsed(): int
@@ -211,6 +226,8 @@ final class StatusInformation
     }
 
     /**
+     * Number of channels present on this Nchan server.
+     *
      * @return int
      */
     public function channels(): int
@@ -219,6 +236,8 @@ final class StatusInformation
     }
 
     /**
+     * Number of subscribers to all channels on this Nchan server.
+     *
      * @return int
      */
     public function subscribers(): int
@@ -227,6 +246,9 @@ final class StatusInformation
     }
 
     /**
+     * Number of commands sent to Redis that are awaiting a reply.
+     * May spike during high load, especially if the Redis server is overloaded. Should tend towards 0.
+     *
      * @return int
      */
     public function pendingRedisCommands(): int
@@ -235,6 +257,8 @@ final class StatusInformation
     }
 
     /**
+     * Number of redis servers to which Nchan is currently connected.
+     *
      * @return int
      */
     public function connectedRedisServers(): int
@@ -243,6 +267,9 @@ final class StatusInformation
     }
 
     /**
+     * Number of interprocess communication packets transmitted between Nginx workers processes for Nchan.
+     * Can grow at 100-10000 per second at high load.
+     *
      * @return int
      */
     public function totalReceivedInterprocessAlerts(): int
@@ -251,6 +278,9 @@ final class StatusInformation
     }
 
     /**
+     * Number of interprocess communication packets in transit between Nginx workers.
+     * May be nonzero during high load, but should always tend toward 0 over time.
+     *
      * @return int
      */
     public function interprocessAlertsInTransit(): int
@@ -259,6 +289,9 @@ final class StatusInformation
     }
 
     /**
+     * Number of interprocess communication packets waiting to be sent.
+     * May be nonzero during high load, but should always tend toward 0 over time.
+     *
      * @return int
      */
     public function queuedInterprocessAlerts(): int
@@ -267,6 +300,9 @@ final class StatusInformation
     }
 
     /**
+     * Total amount of time interprocess communication packets spend being queued if delayed.
+     * May increase during high load.
+     *
      * @return int
      */
     public function totalInterprocessSendDelay(): int
@@ -275,6 +311,9 @@ final class StatusInformation
     }
 
     /**
+     * Total amount of time interprocess communication packets spend in transit if delayed.
+     * May increase during high load.
+     *
      * @return int
      */
     public function totalInterprocessReceiveDelay(): int
