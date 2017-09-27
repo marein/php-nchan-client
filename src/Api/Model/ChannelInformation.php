@@ -9,8 +9,11 @@ final class ChannelInformation
     /**
      * @var array
      */
-    private static $requiredFromJsonKeys = [
-        'messages', 'requested', 'subscribers', 'last_message_id'
+    private const REQUIRED_JSON_KEYS = [
+        'messages',
+        'requested',
+        'subscribers',
+        'last_message_id'
     ];
 
     /**
@@ -76,11 +79,11 @@ final class ChannelInformation
         }
 
         // Check if required keys exists in $response.
-        if (count(array_diff_key(array_flip(self::$requiredFromJsonKeys), $response)) !== 0) {
+        if (count(array_diff_key(array_flip(self::REQUIRED_JSON_KEYS), $response)) !== 0) {
             throw new  NchanException(
                 sprintf(
                     'Unable to parse JSON response: Keys "%s" are required. Keys "%s" exists.',
-                    implode('", "', self::$requiredFromJsonKeys),
+                    implode('", "', self::REQUIRED_JSON_KEYS),
                     implode('", "', array_keys($response))
                 )
             );
