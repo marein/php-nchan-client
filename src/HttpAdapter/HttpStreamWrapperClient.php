@@ -7,7 +7,7 @@ use Marein\Nchan\Http\Client;
 use Marein\Nchan\Http\Request;
 use Marein\Nchan\Http\Response;
 
-final class FileGetContents implements Client
+final class HttpStreamWrapperClient implements Client
 {
     /**
      * @var Credentials
@@ -15,7 +15,7 @@ final class FileGetContents implements Client
     private $credentials;
 
     /**
-     * FileGetContents constructor.
+     * HttpStreamWrapperClient constructor.
      *
      * @param Credentials|null $credentials
      */
@@ -85,7 +85,7 @@ final class FileGetContents implements Client
             throw new NchanException('Unable to connect to ' . $url);
         }
 
-        return FileGetContentsResponse::fromResponse($http_response_header, $responseBody);
+        return HttpStreamWrapperResponse::fromResponse($http_response_header, $responseBody);
     }
 
     /**
@@ -103,9 +103,9 @@ final class FileGetContents implements Client
     /**
      * Returns a new instance without authentication.
      *
-     * @return FileGetContents
+     * @return HttpStreamWrapperClient
      */
-    public function withoutAuthentication(): FileGetContents
+    public function withoutAuthentication(): HttpStreamWrapperClient
     {
         return new self();
     }
@@ -116,9 +116,9 @@ final class FileGetContents implements Client
      * @param string $username
      * @param string $password
      *
-     * @return FileGetContents
+     * @return HttpStreamWrapperClient
      */
-    public function withBasicAuthentication(string $username, string $password): FileGetContents
+    public function withBasicAuthentication(string $username, string $password): HttpStreamWrapperClient
     {
         return new self(
             new BasicAuthenticationCredentials($username, $password)
@@ -130,9 +130,9 @@ final class FileGetContents implements Client
      *
      * @param string $token
      *
-     * @return FileGetContents
+     * @return HttpStreamWrapperClient
      */
-    public function withBearerAuthentication(string $token): FileGetContents
+    public function withBearerAuthentication(string $token): HttpStreamWrapperClient
     {
         return new self(
             new BearerAuthenticationCredentials($token)

@@ -111,12 +111,12 @@ The shipped php client supports basic and bearer authentication. It needs to be 
 
 namespace {
 
-    use Marein\Nchan\HttpAdapter\FileGetContents;
+    use Marein\Nchan\HttpAdapter\HttpStreamWrapperClient;
     use Marein\Nchan\Nchan;
 
     include '/path/to/autoload.php';
 
-    $adapter = new FileGetContents();
+    $adapter = new HttpStreamWrapperClient();
 
     // For basic authentication
     $adapter = $adapter->withBasicAuthentication('nchan', 'password');
@@ -130,7 +130,7 @@ namespace {
 
 Note the "$adapter = $adapter->..."! This client ist immutable.
 
-Optionally, the \Marein\Nchan\HttpAdapter\FileGetContents class constructor takes an implementation of type
+Optionally, the \Marein\Nchan\HttpAdapter\HttpStreamWrapperClient class constructor takes an implementation of type
 \Marein\Nchan\HttpAdapter\Credentials. As long as you implement that interface, you can build your own authentication
 method. Take a look at \Marein\Nchan\HttpAdapter\BasicAuthenticationCredentials to see how this works.
 
