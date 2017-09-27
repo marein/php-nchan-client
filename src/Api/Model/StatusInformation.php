@@ -2,8 +2,20 @@
 
 namespace Marein\Nchan\Api\Model;
 
+use Marein\Nchan\Exception\NchanException;
+
 final class StatusInformation
 {
+    /**
+     * @var array
+     */
+    private static $requiredFromPlainTextKeys = [
+        'total published messages', 'stored messages', 'shared memory used', 'channels', 'subscribers',
+        'redis pending commands', 'redis connected servers', 'total interprocess alerts received',
+        'interprocess alerts in transit', 'interprocess queued alerts', 'total interprocess send delay',
+        'total interprocess receive delay'
+    ];
+
     /**
      * @var int
      */
@@ -52,7 +64,7 @@ final class StatusInformation
     /**
      * @var int
      */
-    private $interprocessQueuedAlerts;
+    private $queuedInterprocessAlerts;
 
     /**
      * @var int
@@ -76,7 +88,7 @@ final class StatusInformation
      * @param int $connectedRedisServers
      * @param int $totalReceivedInterprocessAlerts
      * @param int $interprocessAlertsInTransit
-     * @param int $interprocessQueuedAlerts
+     * @param int $queuedInterprocessAlerts
      * @param int $totalInterprocessSendDelay
      * @param int $totalInterprocessReceiveDelay
      */
@@ -90,7 +102,7 @@ final class StatusInformation
         int $connectedRedisServers,
         int $totalReceivedInterprocessAlerts,
         int $interprocessAlertsInTransit,
-        int $interprocessQueuedAlerts,
+        int $queuedInterprocessAlerts,
         int $totalInterprocessSendDelay,
         int $totalInterprocessReceiveDelay
     ) {
@@ -103,13 +115,13 @@ final class StatusInformation
         $this->connectedRedisServers = $connectedRedisServers;
         $this->totalReceivedInterprocessAlerts = $totalReceivedInterprocessAlerts;
         $this->interprocessAlertsInTransit = $interprocessAlertsInTransit;
-        $this->interprocessQueuedAlerts = $interprocessQueuedAlerts;
+        $this->queuedInterprocessAlerts = $queuedInterprocessAlerts;
         $this->totalInterprocessSendDelay = $totalInterprocessSendDelay;
         $this->totalInterprocessReceiveDelay = $totalInterprocessReceiveDelay;
     }
 
     /**
-     * The plain text should look like this:
+     * The plain text must look like this:
      *      total published messages: 3
      *      stored messages: 3
      *      shared memory used: 16K
@@ -126,31 +138,52 @@ final class StatusInformation
      * @param string $plainText
      *
      * @return StatusInformation
+     * @throws NchanException
      */
     public static function fromPlainText(string $plainText): StatusInformation
     {
-        $parts = explode("\n", $plainText);
+        $plainText = trim($plainText);
+        $lines = explode("\n", $plainText);
 
-        $getValue = function (int $index) use ($parts) {
-            $value = $parts[$index];
+        $response = [];
+        foreach ($lines as $line) {
+            list($key, $value) = explode(': ', $line);
+            $response[$key] = $value;
+        }
 
-            return substr($value, strpos($value, ': ') + 2);
-        };
+        // Check if required keys exists in $response.
+        if (count(array_diff_key(array_flip(self::$requiredFromPlainTextKeys), $response)) !== 0) {
+            throw new  NchanException(
+                sprintf(
+                    'Unable to parse status information: Keys "%s" are required. Keys "%s" exists.',
+                    implode('", "', self::$requiredFromPlainTextKeys),
+                    implode('", "', array_keys($response))
+                )
+            );
+        }
 
         return new self(
-            (int)$getValue(0),
-            (int)$getValue(1),
-            (int)$getValue(2),
-            (int)$getValue(3),
-            (int)$getValue(4),
-            (int)$getValue(5),
-            (int)$getValue(6),
-            (int)$getValue(7),
-            (int)$getValue(8),
-            (int)$getValue(9),
-            (int)$getValue(10),
-            (int)$getValue(11)
+            (int)$response['total published messages'],
+            (int)$response['stored messages'],
+            (int)$response['shared memory used'],
+            (int)$response['channels'],
+            (int)$response['subscribers'],
+            (int)$response['redis pending commands'],
+            (int)$response['redis connected servers'],
+            (int)$response['total interprocess alerts received'],
+            (int)$response['interprocess alerts in transit'],
+            (int)$response['interprocess queued alerts'],
+            (int)$response['total interprocess send delay'],
+            (int)$response['total interprocess receive delay']
         );
+    }
+
+    /**
+     * @return array
+     */
+    public static function requiredFromPlainTextKeys(): array
+    {
+        return self::$requiredFromPlainTextKeys;
     }
 
     /**
@@ -228,9 +261,9 @@ final class StatusInformation
     /**
      * @return int
      */
-    public function interprocessQueuedAlerts(): int
+    public function queuedInterprocessAlerts(): int
     {
-        return $this->interprocessQueuedAlerts;
+        return $this->queuedInterprocessAlerts;
     }
 
     /**

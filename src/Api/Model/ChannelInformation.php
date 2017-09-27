@@ -7,6 +7,13 @@ use Marein\Nchan\Exception\NchanException;
 final class ChannelInformation
 {
     /**
+     * @var array
+     */
+    private static $requiredFromJsonKeys = [
+        'messages', 'requested', 'subscribers', 'last_message_id'
+    ];
+
+    /**
      * @var int
      */
     private $numberOfMessages;
@@ -68,16 +75,12 @@ final class ChannelInformation
             throw new NchanException('Unable to parse JSON response: ' . json_last_error_msg());
         }
 
-        if (
-            !array_key_exists('messages', $response) ||
-            !array_key_exists('requested', $response) ||
-            !array_key_exists('subscribers', $response) ||
-            !array_key_exists('last_message_id', $response)
-        ) {
-            throw new NchanException(
+        // Check if required keys exists in $response.
+        if (count(array_diff_key(array_flip(self::$requiredFromJsonKeys), $response)) !== 0) {
+            throw new  NchanException(
                 sprintf(
                     'Unable to parse JSON response: Keys "%s" are required. Keys "%s" exists.',
-                    implode('", "', ['messages', 'requested', 'subscribers', 'last_message_id']),
+                    implode('", "', self::$requiredFromJsonKeys),
                     implode('", "', array_keys($response))
                 )
             );
