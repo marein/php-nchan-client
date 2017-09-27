@@ -1,13 +1,13 @@
 <?php
 
-namespace Marein\Nchan\Http\Adapter;
+namespace Marein\Nchan\HttpAdapter;
 
 use Marein\Nchan\Exception\NchanException;
 use Marein\Nchan\Http\Client;
 use Marein\Nchan\Http\Request;
 use Marein\Nchan\Http\Response;
 
-final class FileGetContents implements Client
+final class HttpStreamWrapperClient implements Client
 {
     /**
      * @var Credentials
@@ -15,13 +15,25 @@ final class FileGetContents implements Client
     private $credentials;
 
     /**
-     * FileGetContents constructor.
+     * HttpStreamWrapperClient constructor.
      *
-     * @param Credentials|null $credentials
+     * @param Credentials $credentials
      */
-    public function __construct(Credentials $credentials = null)
+    public function __construct(Credentials $credentials)
     {
-        $this->credentials = $credentials ? $credentials : new WithoutAuthenticationCredentials();
+        $this->credentials = $credentials;
+    }
+
+    /**
+     * Create an instance without authentication enabled.
+     *
+     * @return HttpStreamWrapperClient
+     */
+    public static function withDefaults(): HttpStreamWrapperClient
+    {
+        return new self(
+            new WithoutAuthenticationCredentials()
+        );
     }
 
     /**
@@ -85,7 +97,7 @@ final class FileGetContents implements Client
             throw new NchanException('Unable to connect to ' . $url);
         }
 
-        return FileGetContentsResponse::fromResponse($http_response_header, $responseBody);
+        return HttpStreamWrapperResponse::fromResponse($http_response_header, $responseBody);
     }
 
     /**
@@ -98,44 +110,5 @@ final class FileGetContents implements Client
         return implode("\r\n", array_map(function (string $name, string $value) {
             return $name . ': ' . $value;
         }, array_keys($headers), $headers));
-    }
-
-    /**
-     * Returns a new instance without authentication.
-     *
-     * @return FileGetContents
-     */
-    public function withoutAuthentication(): FileGetContents
-    {
-        return new self();
-    }
-
-    /**
-     * Returns a new instance with basic authentication.
-     *
-     * @param string $username
-     * @param string $password
-     *
-     * @return FileGetContents
-     */
-    public function withBasicAuthentication(string $username, string $password): FileGetContents
-    {
-        return new self(
-            new BasicAuthenticationCredentials($username, $password)
-        );
-    }
-
-    /**
-     * Returns a new instance with bearer authentication.
-     *
-     * @param string $token
-     *
-     * @return FileGetContents
-     */
-    public function withBearerAuthentication(string $token): FileGetContents
-    {
-        return new self(
-            new BearerAuthenticationCredentials($token)
-        );
     }
 }

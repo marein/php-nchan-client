@@ -1,11 +1,11 @@
 <?php
 
-namespace Marein\Nchan\Http\Adapter;
+namespace Marein\Nchan\HttpAdapter;
 
 use Marein\Nchan\Exception\NchanException;
 use Marein\Nchan\Http\Response;
 
-final class FileGetContentsResponse implements Response
+final class HttpStreamWrapperResponse implements Response
 {
     /**
      * @var int
@@ -18,7 +18,7 @@ final class FileGetContentsResponse implements Response
     private $body;
 
     /**
-     * FileGetContentsResponse constructor.
+     * HttpStreamWrapperResponse constructor.
      *
      * @param int    $statusCode
      * @param string $body
@@ -33,10 +33,10 @@ final class FileGetContentsResponse implements Response
      * @param array  $headers The result from $http_response_header.
      * @param string $body    The result from file_get_contents.
      *
-     * @return FileGetContentsResponse
+     * @return HttpStreamWrapperResponse
      * @throws NchanException
      */
-    public static function fromResponse(array $headers, string $body): FileGetContentsResponse
+    public static function fromResponse(array $headers, string $body): HttpStreamWrapperResponse
     {
         // The first array value is for example "HTTP\1.1 200 OK" and must be set.
         if (!isset($headers[0])) {

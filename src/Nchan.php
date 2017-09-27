@@ -4,9 +4,9 @@ namespace Marein\Nchan;
 
 use Marein\Nchan\Api\Channel;
 use Marein\Nchan\Api\Status;
-use Marein\Nchan\Http\Adapter\FileGetContents;
 use Marein\Nchan\Http\Client;
 use Marein\Nchan\Http\Url;
+use Marein\Nchan\HttpAdapter\HttpStreamWrapperClient;
 
 final class Nchan
 {
@@ -29,7 +29,7 @@ final class Nchan
     public function __construct(string $baseUrl, Client $client = null)
     {
         $this->baseUrl = new Url($baseUrl);
-        $this->client = $client ?? new FileGetContents();
+        $this->client = $client ?? HttpStreamWrapperClient::withDefaults();
     }
 
     /**
