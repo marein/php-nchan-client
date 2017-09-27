@@ -17,11 +17,23 @@ final class HttpStreamWrapperClient implements Client
     /**
      * HttpStreamWrapperClient constructor.
      *
-     * @param Credentials|null $credentials
+     * @param Credentials $credentials
      */
-    public function __construct(Credentials $credentials = null)
+    public function __construct(Credentials $credentials)
     {
-        $this->credentials = $credentials ? $credentials : new WithoutAuthenticationCredentials();
+        $this->credentials = $credentials;
+    }
+
+    /**
+     * Create an instance without authentication enabled.
+     *
+     * @return HttpStreamWrapperClient
+     */
+    public static function withDefaults(): HttpStreamWrapperClient
+    {
+        return new self(
+            new WithoutAuthenticationCredentials()
+        );
     }
 
     /**
@@ -98,44 +110,5 @@ final class HttpStreamWrapperClient implements Client
         return implode("\r\n", array_map(function (string $name, string $value) {
             return $name . ': ' . $value;
         }, array_keys($headers), $headers));
-    }
-
-    /**
-     * Returns a new instance without authentication.
-     *
-     * @return HttpStreamWrapperClient
-     */
-    public function withoutAuthentication(): HttpStreamWrapperClient
-    {
-        return new self();
-    }
-
-    /**
-     * Returns a new instance with basic authentication.
-     *
-     * @param string $username
-     * @param string $password
-     *
-     * @return HttpStreamWrapperClient
-     */
-    public function withBasicAuthentication(string $username, string $password): HttpStreamWrapperClient
-    {
-        return new self(
-            new BasicAuthenticationCredentials($username, $password)
-        );
-    }
-
-    /**
-     * Returns a new instance with bearer authentication.
-     *
-     * @param string $token
-     *
-     * @return HttpStreamWrapperClient
-     */
-    public function withBearerAuthentication(string $token): HttpStreamWrapperClient
-    {
-        return new self(
-            new BearerAuthenticationCredentials($token)
-        );
     }
 }
