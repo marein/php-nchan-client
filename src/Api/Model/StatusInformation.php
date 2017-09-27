@@ -187,14 +187,6 @@ final class StatusInformation
     }
 
     /**
-     * @return array
-     */
-    public static function requiredFromPlainTextKeys(): array
-    {
-        return self::$requiredFromPlainTextKeys;
-    }
-
-    /**
      * Number of messages published to all channels through this Nchan server.
      *
      * @return int
