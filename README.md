@@ -1,20 +1,27 @@
 # php-nchan-client
 
-__Note: This project is under development. The api (class and method names) will change. A stable version will exist
-in the next weeks.__
+__Note: This project is under development. The api (class and method names) will change.
+A stable version (1.0.0) will exist in the next weeks.__
+
+__Table of contents__
+
+* [Overview](#overview)
+* [Installation](#installation)
+* [Usage](#usage)
+  * [Publish a message](#publish-a-message)
+  * [Get channel information](#get-channel-information)
+  * [Delete a channel](#delete-a-channel)
+  * [Nchan status information](#nchan-status-information)
+  * [Use with authentication](#use-with-authentication)
+* [Extend with another HTTP Client library](#extend-with-another-http-client-library)
+
+## Overview
 
 This is a PHP client for [https://nchan.io](https://nchan.io).
 
 This library comes with a simple http client with some authentication features. If you need more, you can for sure
-change this library with another like guzzle. Take a look below at "Extend with another HTTP Client library".
-
-## Roadmap to 1.0.0
-
-A stable version will exist in the next weeks.
-
-* Cover most classes with unit tests
-* Implement the group api
-* Code documentation
+change this library with another like guzzle. Take a look below at
+"[Extend with another HTTP Client library](#extend-with-another-http-client-library)".
 
 ## Installation
 
@@ -81,7 +88,7 @@ namespace {
 }
 ```
 
-### Basic nchan information
+### Nchan status information
 
 First you have to create a location with the "nchan_stub_status" directive. Then you can query it.
 
@@ -112,8 +119,8 @@ The shipped php client supports basic and bearer authentication. It needs to be 
 namespace {
 
     use Marein\Nchan\HttpAdapter\HttpStreamWrapperClient;
-    use \Marein\Nchan\HttpAdapter\BasicAuthenticationCredentials;
-    use \Marein\Nchan\HttpAdapter\BearerAuthenticationCredentials;
+    use Marein\Nchan\HttpAdapter\BasicAuthenticationCredentials;
+    use Marein\Nchan\HttpAdapter\BearerAuthenticationCredentials;
     use Marein\Nchan\Nchan;
 
     include '/path/to/autoload.php';
