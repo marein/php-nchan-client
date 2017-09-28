@@ -155,7 +155,8 @@ final class StatusInformation
 
         $response = [];
         foreach ($lines as $line) {
-            list($key, $value) = explode(': ', $line);
+            // Appending ': ' prevents error if no ': ' exists.
+            [$key, $value] = explode(': ', $line . ': ');
             $response[$key] = $value;
         }
 
