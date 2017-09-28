@@ -157,4 +157,4 @@ guzzle adapter lives at
 
 Another good reason to exchange the provided client is to gain performance, since the client uses the http stream wrapper
 from php. There is a little overhead because the tcp connection gets closed after each request. Other implementations,
-like guzzle, can keep the connection live.
+like guzzle, can keep the connection alive.
