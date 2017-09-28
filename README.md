@@ -6,28 +6,32 @@ A stable version (1.0.0) will exist in the next weeks.__
 __Table of contents__
 
 * [Overview](#overview)
-* [Installation](#installation)
+* [Installation and requirements](#installation-and-requirements)
 * [Usage](#usage)
   * [Publish a message](#publish-a-message)
   * [Get channel information](#get-channel-information)
   * [Delete a channel](#delete-a-channel)
   * [Nchan status information](#nchan-status-information)
   * [Use with authentication](#use-with-authentication)
-* [Extend with another HTTP Client library](#extend-with-another-http-client-library)
+* [Exchange the provided http client](#exchange-the-provided-http-client)
 
 ## Overview
 
 This is a PHP client for [https://nchan.io](https://nchan.io).
 
-This library comes with a simple http client with some authentication features. If you need more, you can for sure
-change this library with another like guzzle. Take a look below at
-"[Extend with another HTTP Client library](#extend-with-another-http-client-library)".
+This library provides a http client which has some authentication features. If you need more, you can for sure
+exchange this library with another like guzzle. Take a look below to
+"[Exchange the provided http client](#exchange-the-provided-http-client)".
 
-## Installation
+## Installation and requirements
 
 ```
 composer require marein/php-nchan-client
 ```
+
+If you use the provided http client (default if you don't set anything),
+you must enable the php configuration
+[allow_url_fopen](http://php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen).
 
 ## Usage
 
@@ -111,7 +115,7 @@ namespace {
 ### Use with authentication
 
 Nchan gives you the possibility to authenticate endpoints with the "nchan_authorize_request" directive.
-The shipped php client supports basic and bearer authentication. It needs to be setup as follows.
+The provided http client supports basic and bearer authentication. It needs to be setup as follows.
 
 ```php
 <?php
@@ -143,10 +147,14 @@ The \Marein\Nchan\HttpAdapter\HttpStreamWrapperClient class constructor takes an
 \Marein\Nchan\HttpAdapter\Credentials. As long as you implement that interface, you can build your own authentication
 method. Take a look at \Marein\Nchan\HttpAdapter\BasicAuthenticationCredentials to see how this works.
 
-## Extend with another HTTP Client library
+## Exchange the provided http client
 
-Sometimes, the shipped client is not enough and you want to use features from other libraries like guzzle.
-You can change the http client easily because of the \Marein\Nchan\Http\Client interface. I've created a guzzle adapter
+Sometimes, the provided client is not enough and you want to use features from other libraries like guzzle.
+You can exchange the http client easily because of the \Marein\Nchan\Http\Client interface. I've created a guzzle adapter
 for those who want to use guzzle. This is also a good example to look at, if you want to use another library. The
 guzzle adapter lives at
 [marein/php-nchan-client-guzzle-adapter](https://github.com/marein/php-nchan-client-guzzle-adapter).
+
+Another good reason to exchange the provided client is to gain performance, since the client uses the http stream wrapper
+from php. There is a little overhead because the tcp connection gets closed after each request. Other implementations,
+like guzzle, can keep the connection live.
