@@ -94,11 +94,10 @@ final class Channel
     /**
      * Delete this channel.
      *
-     * @return bool
      * @throws AuthenticationRequiredException
      * @throws NchanException
      */
-    public function delete(): bool
+    public function delete(): void
     {
         $response = $this->client->delete(new Request(
             $this->channelUrl,
@@ -107,12 +106,10 @@ final class Channel
             ]
         ));
 
-        if (in_array($response->statusCode(), [Response::OK, Response::NOT_FOUND])) {
-            return true;
+        if (!in_array($response->statusCode(), [Response::OK, RESPONSE::NOT_FOUND])) {
+            throw new NchanException(
+                'Unable to delete channel. Maybe the channel does not exists.'
+            );
         }
-
-        throw new NchanException(
-            'Unable to delete channel. Maybe the channel does not exists.'
-        );
     }
 }
