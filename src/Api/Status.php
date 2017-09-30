@@ -51,10 +51,10 @@ final class Status
             ]
         ));
 
-        if ($response->statusCode() === Response::OK) {
-            return StatusInformation::fromPlainText($response->body());
+        if ($response->statusCode() !== Response::OK) {
+            throw new NchanException('Unable to retrieve status information.');
         }
 
-        throw new NchanException('Unable to retrieve status information.');
+        return StatusInformation::fromPlainText($response->body());
     }
 }

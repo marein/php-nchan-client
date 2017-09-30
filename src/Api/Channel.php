@@ -57,13 +57,13 @@ final class Channel
             $message->content()
         ));
 
-        if (in_array($response->statusCode(), [Response::CREATED, Response::ACCEPTED])) {
-            return ChannelInformation::fromJson($response->body());
+        if (!in_array($response->statusCode(), [Response::CREATED, Response::ACCEPTED])) {
+            throw new NchanException(
+                'Unable to publish to channel. Maybe the channel does not exists.'
+            );
         }
 
-        throw new NchanException(
-            'Unable to publish to channel. Maybe the channel does not exists.'
-        );
+        return ChannelInformation::fromJson($response->body());
     }
 
     /**
@@ -82,13 +82,13 @@ final class Channel
             ]
         ));
 
-        if ($response->statusCode() == Response::OK) {
-            return ChannelInformation::fromJson($response->body());
+        if ($response->statusCode() !== Response::OK) {
+            throw new NchanException(
+                'Unable to get channel information. Maybe the channel does not exists.'
+            );
         }
 
-        throw new NchanException(
-            'Unable to get channel information. Maybe the channel does not exists.'
-        );
+        return ChannelInformation::fromJson($response->body());
     }
 
     /**
