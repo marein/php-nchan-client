@@ -86,10 +86,6 @@ final class Channel
             return ChannelInformation::fromJson($response->body());
         }
 
-        if ($response->statusCode() == Response::NOT_FOUND) {
-            return new ChannelInformation(0, 0, 0, '');
-        }
-
         throw new NchanException(
             'Unable to get channel information. Maybe the channel does not exists.'
         );
