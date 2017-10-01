@@ -1,7 +1,7 @@
 # php-nchan-client
 
 __Note: This project is under development. The api (class and method names) will change.
-A stable version (1.0.0) will exist in the next weeks.__
+We are close to [milestone 1.0.0](https://github.com/marein/php-nchan-client/milestone/1).__
 
 __Table of contents__
 
