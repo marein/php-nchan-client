@@ -20,7 +20,7 @@ class ChannelInformationTest extends TestCase
         );
 
         $this->assertSame(10, $channelInformation->numberOfMessages());
-        $this->assertSame(1, $channelInformation->secondsUntilLastRequested());
+        $this->assertSame(1, $channelInformation->secondsSinceLastPublishedMessage());
         $this->assertSame(100, $channelInformation->numberOfCurrentSubscribers());
         $this->assertSame('1504818382:1', $channelInformation->lastMessageIdentifier());
     }
@@ -35,7 +35,7 @@ class ChannelInformationTest extends TestCase
         $channelInformation = ChannelInformation::fromJson($json);
 
         $this->assertSame(10, $channelInformation->numberOfMessages());
-        $this->assertSame(1, $channelInformation->secondsUntilLastRequested());
+        $this->assertSame(1, $channelInformation->secondsSinceLastPublishedMessage());
         $this->assertSame(100, $channelInformation->numberOfCurrentSubscribers());
         $this->assertSame('1504818382:1', $channelInformation->lastMessageIdentifier());
     }

@@ -24,7 +24,7 @@ final class ChannelInformation
     /**
      * @var int
      */
-    private $secondsUntilLastRequested;
+    private $secondsSinceLastPublishedMessage;
 
     /**
      * @var int
@@ -40,18 +40,18 @@ final class ChannelInformation
      * ChannelInformation constructor.
      *
      * @param int    $numberOfMessages
-     * @param int    $secondsUntilLastRequested
+     * @param int    $secondsSinceLastPublishedMessage
      * @param int    $numberOfCurrentSubscribers
      * @param string $lastMessageIdentifier
      */
     public function __construct(
         int $numberOfMessages,
-        int $secondsUntilLastRequested,
+        int $secondsSinceLastPublishedMessage,
         int $numberOfCurrentSubscribers,
         string $lastMessageIdentifier
     ) {
         $this->numberOfMessages = $numberOfMessages;
-        $this->secondsUntilLastRequested = $secondsUntilLastRequested;
+        $this->secondsSinceLastPublishedMessage = $secondsSinceLastPublishedMessage;
         $this->numberOfCurrentSubscribers = $numberOfCurrentSubscribers;
         $this->lastMessageIdentifier = $lastMessageIdentifier;
     }
@@ -108,9 +108,9 @@ final class ChannelInformation
     /**
      * @return int
      */
-    public function secondsUntilLastRequested(): int
+    public function secondsSinceLastPublishedMessage(): int
     {
-        return $this->secondsUntilLastRequested;
+        return $this->secondsSinceLastPublishedMessage;
     }
 
     /**
