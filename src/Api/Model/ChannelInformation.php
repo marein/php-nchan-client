@@ -98,6 +98,8 @@ final class ChannelInformation
     }
 
     /**
+     * Number of current messages in this channel.
+     *
      * @return int
      */
     public function numberOfMessages(): int
@@ -106,6 +108,8 @@ final class ChannelInformation
     }
 
     /**
+     * Seconds since the last message was published.
+     *
      * @return int
      */
     public function secondsSinceLastPublishedMessage(): int
@@ -114,6 +118,8 @@ final class ChannelInformation
     }
 
     /**
+     * Number of current subscribers in this channel.
+     *
      * @return int
      */
     public function numberOfCurrentSubscribers(): int
@@ -122,6 +128,8 @@ final class ChannelInformation
     }
 
     /**
+     * Last published message identifier.
+     *
      * @return string
      */
     public function lastMessageIdentifier(): string
