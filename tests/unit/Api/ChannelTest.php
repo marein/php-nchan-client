@@ -26,7 +26,8 @@ class ChannelTest extends TestCase
                     'Content-Type' => 'text/plain',
                     'Accept' => 'application/json',
                     'X-EventSource-Event' => 'my-message-name'
-                ]
+                ],
+                'my message content'
             );
 
             $response = $this->createMock(Response::class);
@@ -41,6 +42,7 @@ class ChannelTest extends TestCase
             $message = $this->createMock(Message::class);
             $message->method('contentType')->willReturn('text/plain');
             $message->method('name')->willReturn('my-message-name');
+            $message->method('content')->willReturn('my message content');
 
             $channel = new Channel(new Url('http://localhost'), $client);
             $information = $channel->publish($message);
