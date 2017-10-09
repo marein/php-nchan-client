@@ -4,7 +4,7 @@ __Note: This project is under development. The api (class and method names) will
 We are close to [milestone 1.0.0](https://github.com/marein/php-nchan-client/milestone/1).__
 
 [![Build Status](https://travis-ci.org/marein/php-nchan-client.svg?branch=master)](https://travis-ci.org/marein/php-nchan-client)
-[![Coverage Status](https://coveralls.io/repos/github/marein/php-nchan-client/badge.svg)](https://coveralls.io/github/marein/php-nchan-client)
+[![Coverage Status](https://coveralls.io/repos/github/marein/php-nchan-client/badge.svg?branch=master)](https://coveralls.io/github/marein/php-nchan-client?branch=master)
 
 __Table of contents__
 
