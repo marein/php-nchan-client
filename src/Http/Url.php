@@ -18,10 +18,6 @@ final class Url
     {
         $parsed = parse_url($value);
 
-        if ($parsed === false) {
-            throw new \InvalidArgumentException($value . ' is not a valid url.');
-        }
-
         if (!isset($parsed['host']) && !isset($parsed['scheme'])) {
             throw new \InvalidArgumentException('The url ' . $value . ' must at least consists of host and scheme.');
         }
