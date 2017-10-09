@@ -10,6 +10,7 @@ install:
 
 script:
     - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+    - vendor/bin/phpcs tests src --standard=PSR2
 
 after_success:
     - travis_retry vendor/bin/coveralls -v
