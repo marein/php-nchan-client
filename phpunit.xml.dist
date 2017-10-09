@@ -33,7 +33,7 @@
     <listeners>
         <listener class="PhpUnitStartServerListener" file="tests/configuration/PhpUnitStartServerListener.php">
             <arguments>
-                <string>integration</string>
+                <string>Marein\Nchan\HttpAdapter\HttpStreamWrapperClientTest</string>
                 <string>127.0.0.1:8000</string>
                 <string>tests/configuration/index.php</string>
             </arguments>
