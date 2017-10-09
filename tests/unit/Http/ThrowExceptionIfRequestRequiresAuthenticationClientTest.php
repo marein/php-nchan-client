@@ -18,7 +18,7 @@ class ThrowExceptionIfRequestRequiresAuthenticationClientTest extends TestCase
             $this->createForbiddenClient()
         );
 
-        $client->get(new Request('http://localhost', []));
+        $client->get(new Request(new Url('http://localhost'), []));
     }
 
     /**
@@ -32,7 +32,7 @@ class ThrowExceptionIfRequestRequiresAuthenticationClientTest extends TestCase
             $this->createForbiddenClient()
         );
 
-        $client->post(new Request('http://localhost', []));
+        $client->post(new Request(new Url('http://localhost'), []));
     }
 
     /**
@@ -46,7 +46,7 @@ class ThrowExceptionIfRequestRequiresAuthenticationClientTest extends TestCase
             $this->createForbiddenClient()
         );
 
-        $client->delete(new Request('http://localhost', []));
+        $client->delete(new Request(new Url('http://localhost'), []));
     }
 
     /**

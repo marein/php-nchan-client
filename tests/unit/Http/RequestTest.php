@@ -11,7 +11,7 @@ class RequestTest extends TestCase
      */
     public function itShouldBeCreatedWithItsValues(): void
     {
-        $expectedUrl = 'http://localhost/my-url';
+        $expectedUrl = new Url('http://localhost/my-url');
         $expectedHeaders = ['Accept' => 'application/json'];
         $expectedBody = 'my body';
 
@@ -27,7 +27,7 @@ class RequestTest extends TestCase
      */
     public function itShouldBeCreatedWithEmptyBody(): void
     {
-        $expectedUrl = 'http://localhost/my-url';
+        $expectedUrl = new Url('http://localhost/my-url');
         $expectedHeaders = ['Accept' => 'application/json'];
         $expectedBody = '';
 

@@ -4,6 +4,7 @@ namespace Marein\Nchan\HttpAdapter;
 
 use Marein\Nchan\Exception\NchanException;
 use Marein\Nchan\Http\Request;
+use Marein\Nchan\Http\Url;
 use PHPUnit\Framework\TestCase;
 
 class HttpStreamWrapperClientTest extends TestCase
@@ -24,7 +25,7 @@ class HttpStreamWrapperClientTest extends TestCase
     public function itShouldPerformGetRequest(): void
     {
         $request = new Request(
-            getenv('INTEGRATION_TEST_BASE_URL') . '?statusCode=201',
+            new Url(getenv('INTEGRATION_TEST_BASE_URL') . '?statusCode=201'),
             [
                 'Accept' => 'application/json'
             ]
@@ -49,7 +50,7 @@ class HttpStreamWrapperClientTest extends TestCase
     public function itShouldPerformPostRequest(): void
     {
         $request = new Request(
-            getenv('INTEGRATION_TEST_BASE_URL') . '?statusCode=201',
+            new Url(getenv('INTEGRATION_TEST_BASE_URL') . '?statusCode=201'),
             [
                 'Accept'       => 'application/json',
                 'Content-Type' => 'application/x-www-form-urlencoded'
@@ -79,7 +80,7 @@ class HttpStreamWrapperClientTest extends TestCase
     public function itShouldPerformDeleteRequest(): void
     {
         $request = new Request(
-            getenv('INTEGRATION_TEST_BASE_URL') . '?statusCode=201',
+            new Url(getenv('INTEGRATION_TEST_BASE_URL') . '?statusCode=201'),
             [
                 'Accept' => 'application/json'
             ]
@@ -106,7 +107,7 @@ class HttpStreamWrapperClientTest extends TestCase
         $this->expectException(NchanException::class);
 
         $request = new Request(
-            'http://invalid.url',
+            new Url('http://invalid.url'),
             [
                 'Accept' => 'application/json'
             ]

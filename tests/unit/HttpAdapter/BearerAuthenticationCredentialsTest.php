@@ -3,6 +3,7 @@
 namespace Marein\Nchan\HttpAdapter;
 
 use Marein\Nchan\Http\Request;
+use Marein\Nchan\Http\Url;
 use PHPUnit\Framework\TestCase;
 
 class BearerAuthenticationCredentialsTest extends TestCase
@@ -18,7 +19,7 @@ class BearerAuthenticationCredentialsTest extends TestCase
         $expectedAuthorizationHeaderValue = 'Bearer ' . $token;
 
         $request = $credentials->authenticate(new Request(
-            'http://localhost',
+            new Url('http://localhost'),
             []
         ));
 
@@ -36,7 +37,7 @@ class BearerAuthenticationCredentialsTest extends TestCase
         $expectedAuthorizationHeaderValue = 'Bearer ' . $token;
 
         $request = $credentials->authenticate(new Request(
-            'http://localhost',
+            new Url('http://localhost'),
             [
                 'Authorization' => 'Token other-token'
             ]

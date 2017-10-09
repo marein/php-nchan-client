@@ -3,6 +3,7 @@
 namespace Marein\Nchan\HttpAdapter;
 
 use Marein\Nchan\Http\Request;
+use Marein\Nchan\Http\Url;
 use PHPUnit\Framework\TestCase;
 
 class BasicAuthenticationCredentialsTest extends TestCase
@@ -19,7 +20,7 @@ class BasicAuthenticationCredentialsTest extends TestCase
         $expectedAuthorizationHeaderValue = 'Basic ' . base64_encode($username . ':' . $password);
 
         $request = $credentials->authenticate(new Request(
-            'http://localhost',
+            new Url('http://localhost'),
             []
         ));
 
@@ -38,7 +39,7 @@ class BasicAuthenticationCredentialsTest extends TestCase
         $expectedAuthorizationHeaderValue = 'Basic ' . base64_encode($username . ':' . $password);
 
         $request = $credentials->authenticate(new Request(
-            'http://localhost',
+            new Url('http://localhost'),
             [
                 'Authorization' => 'Token my-token'
             ]

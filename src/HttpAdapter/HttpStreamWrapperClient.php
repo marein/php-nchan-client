@@ -71,7 +71,7 @@ final class HttpStreamWrapperClient implements Client
     {
         $request = $this->credentials->authenticate($request);
 
-        $url = $request->url();
+        $url = $request->url()->toString();
         $headers = $request->headers();
         $body = $request->body();
 

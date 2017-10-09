@@ -3,6 +3,7 @@
 namespace Marein\Nchan\HttpAdapter;
 
 use Marein\Nchan\Http\Request;
+use Marein\Nchan\Http\Url;
 use PHPUnit\Framework\TestCase;
 
 class WithoutAuthenticationCredentialsTest extends TestCase
@@ -15,7 +16,7 @@ class WithoutAuthenticationCredentialsTest extends TestCase
         $credentials = new WithoutAuthenticationCredentials();
 
         $expectedRequest = new Request(
-            'http://localhost',
+            new Url('http://localhost'),
             []
         );
 

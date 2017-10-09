@@ -21,7 +21,7 @@ class ChannelTest extends TestCase
         // 201 and 202 are valid status codes
         foreach ([201, 202] as $statusCode) {
             $expectedRequest = new Request(
-                'http://localhost',
+                new Url('http://localhost'),
                 [
                     'Content-Type' => 'text/plain',
                     'Accept' => 'application/json',
@@ -57,7 +57,7 @@ class ChannelTest extends TestCase
     public function itShouldReturnInformation(): void
     {
         $expectedRequest = new Request(
-            'http://localhost',
+            new Url('http://localhost'),
             [
                 'Accept' => 'application/json',
             ]
@@ -86,7 +86,7 @@ class ChannelTest extends TestCase
         // 200 and 404 are valid status codes
         foreach ([200, 404] as $statusCode) {
             $expectedRequest = new Request(
-                'http://localhost',
+                new Url('http://localhost'),
                 [
                     'Accept' => 'application/json',
                 ]
