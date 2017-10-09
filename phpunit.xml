@@ -14,7 +14,13 @@
 
     <testsuites>
         <testsuite name="unit">
-            <directory>./tests</directory>
+            <directory>./tests/unit/</directory>
+        </testsuite>
+    </testsuites>
+
+    <testsuites>
+        <testsuite name="integration">
+            <directory>./tests/integration</directory>
         </testsuite>
     </testsuites>
 
@@ -24,4 +30,17 @@
         </whitelist>
     </filter>
 
+    <listeners>
+        <listener class="PhpUnitStartServerListener" file="tests/configuration/PhpUnitStartServerListener.php">
+            <arguments>
+                <string>integration</string>
+                <string>127.0.0.1:8000</string>
+                <string>tests/configuration/index.php</string>
+            </arguments>
+        </listener>
+    </listeners>
+
+    <php>
+        <env name="INTEGRATION_TEST_BASE_URL" value="http://127.0.0.1:8000/"/>
+    </php>
 </phpunit>
