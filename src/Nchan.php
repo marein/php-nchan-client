@@ -55,16 +55,4 @@ final class Nchan
     {
         return new Status($this->baseUrl->append($path), $this->client);
     }
-
-    /**
-     * Create the api for the given group name.
-     *
-     * @param string $name
-     *
-     * @throws \Exception
-     */
-    public function group(string $name): void
-    {
-        throw new \Exception('Not implemented yet');
-    }
 }
