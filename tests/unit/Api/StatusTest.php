@@ -47,7 +47,7 @@ STRING
     /**
      * @test
      */
-    public function itShouldThrowExceptionOnForbiddenRequest()
+    public function informationShouldThrowExceptionIfForbidden()
     {
         $this->expectException(AuthenticationRequiredException::class);
 
@@ -64,7 +64,7 @@ STRING
     /**
      * @test
      */
-    public function itShouldThrowExceptionOnInvalidRequest()
+    public function informationShouldThrowExceptionOnNotExpectedStatusCode()
     {
         $this->expectException(NchanException::class);
 

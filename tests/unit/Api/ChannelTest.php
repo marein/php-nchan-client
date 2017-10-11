@@ -129,7 +129,7 @@ class ChannelTest extends TestCase
     /**
      * @test
      */
-    public function informationShouldThrowExceptionOnInvalidStatusCode()
+    public function informationShouldThrowExceptionOnNotExpectedStatusCode()
     {
         $this->expectException(NchanException::class);
 
@@ -146,7 +146,7 @@ class ChannelTest extends TestCase
     /**
      * @test
      */
-    public function deleteShouldThrowExceptionOnInvalidStatusCode()
+    public function deleteShouldThrowExceptionOnNotExpectedStatusCode()
     {
         $this->expectException(NchanException::class);
 
@@ -163,7 +163,7 @@ class ChannelTest extends TestCase
     /**
      * @test
      */
-    public function itShouldThrowExceptionOnForbiddenPublishRequest()
+    public function publishShouldThrowExceptionIfForbidden()
     {
         $this->expectException(AuthenticationRequiredException::class);
 
@@ -182,7 +182,7 @@ class ChannelTest extends TestCase
     /**
      * @test
      */
-    public function itShouldThrowExceptionOnForbiddenInformationRequest()
+    public function informationShouldThrowExceptionIfForbidden()
     {
         $this->expectException(AuthenticationRequiredException::class);
 
@@ -199,7 +199,7 @@ class ChannelTest extends TestCase
     /**
      * @test
      */
-    public function itShouldThrowExceptionOnForbiddenDeleteRequest()
+    public function deleteShouldThrowExceptionIfForbidden()
     {
         $this->expectException(AuthenticationRequiredException::class);
 
