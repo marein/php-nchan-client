@@ -29,7 +29,7 @@ final class ChannelInformation
     /**
      * @var int
      */
-    private $numberOfCurrentSubscribers;
+    private $numberOfSubscribers;
 
     /**
      * @var string
@@ -41,18 +41,18 @@ final class ChannelInformation
      *
      * @param int    $numberOfMessages
      * @param int    $secondsSinceLastPublishedMessage
-     * @param int    $numberOfCurrentSubscribers
+     * @param int    $numberOfSubscribers
      * @param string $lastMessageIdentifier
      */
     public function __construct(
         int $numberOfMessages,
         int $secondsSinceLastPublishedMessage,
-        int $numberOfCurrentSubscribers,
+        int $numberOfSubscribers,
         string $lastMessageIdentifier
     ) {
         $this->numberOfMessages = $numberOfMessages;
         $this->secondsSinceLastPublishedMessage = $secondsSinceLastPublishedMessage;
-        $this->numberOfCurrentSubscribers = $numberOfCurrentSubscribers;
+        $this->numberOfSubscribers = $numberOfSubscribers;
         $this->lastMessageIdentifier = $lastMessageIdentifier;
     }
 
@@ -122,9 +122,9 @@ final class ChannelInformation
      *
      * @return int
      */
-    public function numberOfCurrentSubscribers(): int
+    public function numberOfSubscribers(): int
     {
-        return $this->numberOfCurrentSubscribers;
+        return $this->numberOfSubscribers;
     }
 
     /**
