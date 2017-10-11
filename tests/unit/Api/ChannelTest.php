@@ -137,7 +137,7 @@ class ChannelTest extends TestCase
         $response->method('statusCode')->willReturn(302);
 
         $client = $this->createMock(Client::class);
-        $client->method('post')->willReturn($response);
+        $client->method('get')->willReturn($response);
 
         $channel = new Channel(new Url('http://localhost'), $client);
         $channel->information();
@@ -154,7 +154,7 @@ class ChannelTest extends TestCase
         $response->method('statusCode')->willReturn(302);
 
         $client = $this->createMock(Client::class);
-        $client->method('post')->willReturn($response);
+        $client->method('delete')->willReturn($response);
 
         $channel = new Channel(new Url('http://localhost'), $client);
         $channel->delete();
