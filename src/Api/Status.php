@@ -52,7 +52,12 @@ final class Status
         ));
 
         if ($response->statusCode() !== Response::OK) {
-            throw new NchanException('Unable to retrieve status information.');
+            throw new NchanException(
+                sprintf(
+                    'Unable to retrieve status information. HTTP status code was %s.',
+                    $response->statusCode()
+                )
+            );
         }
 
         return StatusInformation::fromPlainText($response->body());
