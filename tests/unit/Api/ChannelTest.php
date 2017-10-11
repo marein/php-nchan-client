@@ -5,6 +5,7 @@ namespace Marein\Nchan\Api;
 use Marein\Nchan\Api\Model\ChannelInformation;
 use Marein\Nchan\Api\Model\Message;
 use Marein\Nchan\Exception\AuthenticationRequiredException;
+use Marein\Nchan\Exception\NchanException;
 use Marein\Nchan\Http\Client;
 use Marein\Nchan\Http\Request;
 use Marein\Nchan\Http\Response;
@@ -104,6 +105,59 @@ class ChannelTest extends TestCase
             // Test passed
             $this->assertTrue(true);
         }
+    }
+
+    /**
+     * @test
+     */
+    public function publishShouldThrowExceptionOnNotExpectedStatusCode()
+    {
+        $this->expectException(NchanException::class);
+
+        $response = $this->createMock(Response::class);
+        $response->method('statusCode')->willReturn(302);
+
+        $client = $this->createMock(Client::class);
+        $client->method('post')->willReturn($response);
+
+        $message = $this->createMock(Message::class);
+
+        $channel = new Channel(new Url('http://localhost'), $client);
+        $channel->publish($message);
+    }
+
+    /**
+     * @test
+     */
+    public function informationShouldThrowExceptionOnInvalidStatusCode()
+    {
+        $this->expectException(NchanException::class);
+
+        $response = $this->createMock(Response::class);
+        $response->method('statusCode')->willReturn(302);
+
+        $client = $this->createMock(Client::class);
+        $client->method('post')->willReturn($response);
+
+        $channel = new Channel(new Url('http://localhost'), $client);
+        $channel->information();
+    }
+
+    /**
+     * @test
+     */
+    public function deleteShouldThrowExceptionOnInvalidStatusCode()
+    {
+        $this->expectException(NchanException::class);
+
+        $response = $this->createMock(Response::class);
+        $response->method('statusCode')->willReturn(302);
+
+        $client = $this->createMock(Client::class);
+        $client->method('post')->willReturn($response);
+
+        $channel = new Channel(new Url('http://localhost'), $client);
+        $channel->delete();
     }
 
     /**
