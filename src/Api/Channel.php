@@ -59,7 +59,10 @@ final class Channel
 
         if (!in_array($response->statusCode(), [Response::CREATED, Response::ACCEPTED])) {
             throw new NchanException(
-                'Unable to publish to channel. Maybe the channel does not exists.'
+                sprintf(
+                    'Unable to publish to channel. Maybe the channel does not exists. HTTP status code was %s.',
+                    $response->statusCode()
+                )
             );
         }
 
@@ -84,7 +87,10 @@ final class Channel
 
         if ($response->statusCode() !== Response::OK) {
             throw new NchanException(
-                'Unable to get channel information. Maybe the channel does not exists.'
+                sprintf(
+                    'Unable to get channel information. Maybe the channel does not exists. HTTP status code was %s.',
+                    $response->statusCode()
+                )
             );
         }
 
@@ -108,7 +114,10 @@ final class Channel
 
         if (!in_array($response->statusCode(), [Response::OK, RESPONSE::NOT_FOUND])) {
             throw new NchanException(
-                'Unable to delete channel. Maybe the channel does not exists.'
+                sprintf(
+                    'Unable to delete channel. Maybe the channel does not exists. HTTP status code was %s.',
+                    $response->statusCode()
+                )
             );
         }
     }
