@@ -10,34 +10,16 @@ class ChannelInformationTest extends TestCase
     /**
      * @test
      */
-    public function itShouldBeCreatedWithItsValues(): void
-    {
-        $channelInformation = new ChannelInformation(
-            10,
-            1,
-            100,
-            '1504818382:1'
-        );
-
-        $this->assertSame(10, $channelInformation->numberOfMessages());
-        $this->assertSame(1, $channelInformation->secondsSinceLastPublishedMessage());
-        $this->assertSame(100, $channelInformation->numberOfSubscribers());
-        $this->assertSame('1504818382:1', $channelInformation->lastMessageIdentifier());
-    }
-
-    /**
-     * @test
-     */
     public function itShouldBeCreatedFromValidJson(): void
     {
         $json = $this->validJson();
 
         $channelInformation = ChannelInformation::fromJson($json);
 
-        $this->assertSame(10, $channelInformation->numberOfMessages());
-        $this->assertSame(1, $channelInformation->secondsSinceLastPublishedMessage());
-        $this->assertSame(100, $channelInformation->numberOfSubscribers());
-        $this->assertSame('1504818382:1', $channelInformation->lastMessageIdentifier());
+        $this->assertSame(10, $channelInformation->numberOfMessages);
+        $this->assertSame(1, $channelInformation->secondsSinceLastPublishedMessage);
+        $this->assertSame(100, $channelInformation->numberOfSubscribers);
+        $this->assertSame('1504818382:1', $channelInformation->lastMessageIdentifier);
     }
 
     /**

@@ -4,6 +4,21 @@ namespace Marein\Nchan\Api\Model;
 
 use Marein\Nchan\Exception\NchanException;
 
+/**
+ * Represents the data structure for the channel api.
+ *
+ * @property-read int $numberOfMessages
+ * Number of current messages in this channel.
+ *
+ * @property-read int $secondsSinceLastPublishedMessage
+ * Seconds since the last message was published.
+ *
+ * @property-read int $numberOfSubscribers
+ * Number of current subscribers in this channel.
+ *
+ * @property-read int $lastMessageIdentifier
+ * Last published message identifier.
+ */
 final class ChannelInformation
 {
     /**
@@ -44,7 +59,7 @@ final class ChannelInformation
      * @param int    $numberOfSubscribers
      * @param string $lastMessageIdentifier
      */
-    public function __construct(
+    private function __construct(
         int $numberOfMessages,
         int $secondsSinceLastPublishedMessage,
         int $numberOfSubscribers,
@@ -98,42 +113,14 @@ final class ChannelInformation
     }
 
     /**
-     * Number of current messages in this channel.
+     * Returns the value of the given variable.
      *
-     * @return int
-     */
-    public function numberOfMessages(): int
-    {
-        return $this->numberOfMessages;
-    }
-
-    /**
-     * Seconds since the last message was published.
+     * @param string $name
      *
-     * @return int
+     * @return mixed
      */
-    public function secondsSinceLastPublishedMessage(): int
+    public function __get(string $name)
     {
-        return $this->secondsSinceLastPublishedMessage;
-    }
-
-    /**
-     * Number of current subscribers in this channel.
-     *
-     * @return int
-     */
-    public function numberOfSubscribers(): int
-    {
-        return $this->numberOfSubscribers;
-    }
-
-    /**
-     * Last published message identifier.
-     *
-     * @return string
-     */
-    public function lastMessageIdentifier(): string
-    {
-        return $this->lastMessageIdentifier;
+        return $this->$name;
     }
 }
