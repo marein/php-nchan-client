@@ -4,6 +4,52 @@ namespace Marein\Nchan\Api\Model;
 
 use Marein\Nchan\Exception\NchanException;
 
+/**
+ * Represents the data structure for the status api.
+ *
+ * @property-read int $numberOfTotalPublishedMessages
+ * Number of messages published to all channels through this Nchan server.
+ *
+ * @property-read int $numberOfStoredMessages
+ * Number of messages currently buffered in memory.
+ *
+ * @property-read int $sharedMemoryUsedInKilobyte
+ * Total shared memory used for buffering messages, storing channel information, and other purposes.
+ * This value should be comfortably below nchan_shared_memory_size.
+ *
+ * @property-read int $numberOfChannels
+ * Number of channels present on this Nchan server.
+ *
+ * @property-read int $numberOfSubscribers
+ * Number of subscribers to all channels on this Nchan server.
+ *
+ * @property-read int $numberOfPendingRedisCommands
+ * Number of commands sent to Redis that are awaiting a reply.
+ * May spike during high load, especially if the Redis server is overloaded. Should tend towards 0.
+ *
+ * @property-read int $numberOfConnectedRedisServers
+ * Number of redis servers to which Nchan is currently connected.
+ *
+ * @property-read int $numberOfTotalReceivedInterprocessAlerts
+ * Number of interprocess communication packets transmitted between Nginx workers processes for Nchan.
+ * Can grow at 100-10000 per second at high load.
+ *
+ * @property-read int $numberOfInterprocessAlertsInTransit
+ * Number of interprocess communication packets in transit between Nginx workers.
+ * May be nonzero during high load, but should always tend toward 0 over time.
+ *
+ * @property-read int $numberOfQueuedInterprocessAlerts
+ * Number of interprocess communication packets waiting to be sent.
+ * May be nonzero during high load, but should always tend toward 0 over time.
+ *
+ * @property-read int $numberOfTotalInterprocessSendDelay
+ * Total amount of time interprocess communication packets spend being queued if delayed.
+ * May increase during high load.
+ *
+ * @property-read int $numberOfTotalInterprocessReceiveDelay
+ * Total amount of time interprocess communication packets spend in transit if delayed.
+ * May increase during high load.
+ */
 final class StatusInformation
 {
     /**
@@ -27,105 +73,106 @@ final class StatusInformation
     /**
      * @var int
      */
-    private $totalPublishedMessages;
+    private $numberOfTotalPublishedMessages;
 
     /**
      * @var int
      */
-    private $storedMessages;
+    private $numberOfStoredMessages;
 
     /**
      * @var int
      */
-    private $sharedMemoryUsed;
+    private $sharedMemoryUsedInKilobyte;
 
     /**
      * @var int
      */
-    private $channels;
+    private $numberOfChannels;
 
     /**
      * @var int
      */
-    private $subscribers;
+    private $numberOfSubscribers;
 
     /**
      * @var int
      */
-    private $pendingRedisCommands;
+    private $numberOfPendingRedisCommands;
 
     /**
      * @var int
      */
-    private $connectedRedisServers;
+    private $numberOfConnectedRedisServers;
 
     /**
      * @var int
      */
-    private $totalReceivedInterprocessAlerts;
+    private $numberOfTotalReceivedInterprocessAlerts;
 
     /**
      * @var int
      */
-    private $interprocessAlertsInTransit;
+    private $numberOfInterprocessAlertsInTransit;
 
     /**
      * @var int
      */
-    private $queuedInterprocessAlerts;
+    private $numberOfQueuedInterprocessAlerts;
 
     /**
      * @var int
      */
-    private $totalInterprocessSendDelay;
+    private $numberOfTotalInterprocessSendDelay;
 
     /**
      * @var int
      */
-    private $totalInterprocessReceiveDelay;
+    private $numberOfTotalInterprocessReceiveDelay;
 
     /**
      * StatusInformation constructor.
      *
-     * @param int $totalPublishedMessages
-     * @param int $storedMessages
-     * @param int $sharedMemoryUsed
-     * @param int $channels
-     * @param int $subscribers
-     * @param int $pendingRedisCommands
-     * @param int $connectedRedisServers
-     * @param int $totalReceivedInterprocessAlerts
-     * @param int $interprocessAlertsInTransit
-     * @param int $queuedInterprocessAlerts
-     * @param int $totalInterprocessSendDelay
-     * @param int $totalInterprocessReceiveDelay
+     * @param int $numberOfTotalPublishedMessages
+     * @param int $numberOfStoredMessages
+     * @param int $sharedMemoryUsedInKilobyte
+     * @param int $numberOfChannels
+     * @param int $numberOfSubscribers
+     * @param int $numberOfPendingRedisCommands
+     * @param int $numberOfConnectedRedisServers
+     * @param int $numberOfTotalReceivedInterprocessAlerts
+     * @param int $numberOfInterprocessAlertsInTransit
+     * @param int $numberOfQueuedInterprocessAlerts
+     * @param int $numberOfTotalInterprocessSendDelay
+     * @param int $numberOfTotalInterprocessReceiveDelay
      */
-    public function __construct(
-        int $totalPublishedMessages,
-        int $storedMessages,
-        int $sharedMemoryUsed,
-        int $channels,
-        int $subscribers,
-        int $pendingRedisCommands,
-        int $connectedRedisServers,
-        int $totalReceivedInterprocessAlerts,
-        int $interprocessAlertsInTransit,
-        int $queuedInterprocessAlerts,
-        int $totalInterprocessSendDelay,
-        int $totalInterprocessReceiveDelay
-    ) {
-        $this->totalPublishedMessages = $totalPublishedMessages;
-        $this->storedMessages = $storedMessages;
-        $this->sharedMemoryUsed = $sharedMemoryUsed;
-        $this->channels = $channels;
-        $this->subscribers = $subscribers;
-        $this->pendingRedisCommands = $pendingRedisCommands;
-        $this->connectedRedisServers = $connectedRedisServers;
-        $this->totalReceivedInterprocessAlerts = $totalReceivedInterprocessAlerts;
-        $this->interprocessAlertsInTransit = $interprocessAlertsInTransit;
-        $this->queuedInterprocessAlerts = $queuedInterprocessAlerts;
-        $this->totalInterprocessSendDelay = $totalInterprocessSendDelay;
-        $this->totalInterprocessReceiveDelay = $totalInterprocessReceiveDelay;
+    private function __construct(
+        int $numberOfTotalPublishedMessages,
+        int $numberOfStoredMessages,
+        int $sharedMemoryUsedInKilobyte,
+        int $numberOfChannels,
+        int $numberOfSubscribers,
+        int $numberOfPendingRedisCommands,
+        int $numberOfConnectedRedisServers,
+        int $numberOfTotalReceivedInterprocessAlerts,
+        int $numberOfInterprocessAlertsInTransit,
+        int $numberOfQueuedInterprocessAlerts,
+        int $numberOfTotalInterprocessSendDelay,
+        int $numberOfTotalInterprocessReceiveDelay
+    )
+    {
+        $this->numberOfTotalPublishedMessages = $numberOfTotalPublishedMessages;
+        $this->numberOfStoredMessages = $numberOfStoredMessages;
+        $this->sharedMemoryUsedInKilobyte = $sharedMemoryUsedInKilobyte;
+        $this->numberOfChannels = $numberOfChannels;
+        $this->numberOfSubscribers = $numberOfSubscribers;
+        $this->numberOfPendingRedisCommands = $numberOfPendingRedisCommands;
+        $this->numberOfConnectedRedisServers = $numberOfConnectedRedisServers;
+        $this->numberOfTotalReceivedInterprocessAlerts = $numberOfTotalReceivedInterprocessAlerts;
+        $this->numberOfInterprocessAlertsInTransit = $numberOfInterprocessAlertsInTransit;
+        $this->numberOfQueuedInterprocessAlerts = $numberOfQueuedInterprocessAlerts;
+        $this->numberOfTotalInterprocessSendDelay = $numberOfTotalInterprocessSendDelay;
+        $this->numberOfTotalInterprocessReceiveDelay = $numberOfTotalInterprocessReceiveDelay;
     }
 
     /**
@@ -188,129 +235,14 @@ final class StatusInformation
     }
 
     /**
-     * Number of messages published to all channels through this Nchan server.
+     * Returns the value of the given variable.
      *
-     * @return int
-     */
-    public function totalPublishedMessages(): int
-    {
-        return $this->totalPublishedMessages;
-    }
-
-    /**
-     * Number of messages currently buffered in memory.
+     * @param string $name
      *
-     * @return int
+     * @return mixed
      */
-    public function storedMessages(): int
+    public function __get(string $name)
     {
-        return $this->storedMessages;
-    }
-
-    /**
-     * Total shared memory used for buffering messages, storing channel information, and other purposes.
-     * This value should be comfortably below nchan_shared_memory_size.
-     *
-     * @return int
-     */
-    public function sharedMemoryUsed(): int
-    {
-        return $this->sharedMemoryUsed;
-    }
-
-    /**
-     * Number of channels present on this Nchan server.
-     *
-     * @return int
-     */
-    public function channels(): int
-    {
-        return $this->channels;
-    }
-
-    /**
-     * Number of subscribers to all channels on this Nchan server.
-     *
-     * @return int
-     */
-    public function subscribers(): int
-    {
-        return $this->subscribers;
-    }
-
-    /**
-     * Number of commands sent to Redis that are awaiting a reply.
-     * May spike during high load, especially if the Redis server is overloaded. Should tend towards 0.
-     *
-     * @return int
-     */
-    public function pendingRedisCommands(): int
-    {
-        return $this->pendingRedisCommands;
-    }
-
-    /**
-     * Number of redis servers to which Nchan is currently connected.
-     *
-     * @return int
-     */
-    public function connectedRedisServers(): int
-    {
-        return $this->connectedRedisServers;
-    }
-
-    /**
-     * Number of interprocess communication packets transmitted between Nginx workers processes for Nchan.
-     * Can grow at 100-10000 per second at high load.
-     *
-     * @return int
-     */
-    public function totalReceivedInterprocessAlerts(): int
-    {
-        return $this->totalReceivedInterprocessAlerts;
-    }
-
-    /**
-     * Number of interprocess communication packets in transit between Nginx workers.
-     * May be nonzero during high load, but should always tend toward 0 over time.
-     *
-     * @return int
-     */
-    public function interprocessAlertsInTransit(): int
-    {
-        return $this->interprocessAlertsInTransit;
-    }
-
-    /**
-     * Number of interprocess communication packets waiting to be sent.
-     * May be nonzero during high load, but should always tend toward 0 over time.
-     *
-     * @return int
-     */
-    public function queuedInterprocessAlerts(): int
-    {
-        return $this->queuedInterprocessAlerts;
-    }
-
-    /**
-     * Total amount of time interprocess communication packets spend being queued if delayed.
-     * May increase during high load.
-     *
-     * @return int
-     */
-    public function totalInterprocessSendDelay(): int
-    {
-        return $this->totalInterprocessSendDelay;
-    }
-
-    /**
-     * Total amount of time interprocess communication packets spend in transit if delayed.
-     * May increase during high load.
-     *
-     * @return int
-     */
-    public function totalInterprocessReceiveDelay(): int
-    {
-        return $this->totalInterprocessReceiveDelay;
+        return $this->$name;
     }
 }

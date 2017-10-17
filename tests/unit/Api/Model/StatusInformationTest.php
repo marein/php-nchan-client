@@ -10,58 +10,24 @@ class StatusInformationTest extends TestCase
     /**
      * @test
      */
-    public function itShouldBeCreatedWithItsValues(): void
-    {
-        $statusInformation = new StatusInformation(
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10,
-            11,
-            12
-        );
-
-        $this->assertSame(1, $statusInformation->totalPublishedMessages());
-        $this->assertSame(2, $statusInformation->storedMessages());
-        $this->assertSame(3, $statusInformation->sharedMemoryUsed());
-        $this->assertSame(4, $statusInformation->channels());
-        $this->assertSame(5, $statusInformation->subscribers());
-        $this->assertSame(6, $statusInformation->pendingRedisCommands());
-        $this->assertSame(7, $statusInformation->connectedRedisServers());
-        $this->assertSame(8, $statusInformation->totalReceivedInterprocessAlerts());
-        $this->assertSame(9, $statusInformation->interprocessAlertsInTransit());
-        $this->assertSame(10, $statusInformation->queuedInterprocessAlerts());
-        $this->assertSame(11, $statusInformation->totalInterprocessSendDelay());
-        $this->assertSame(12, $statusInformation->totalInterprocessReceiveDelay());
-    }
-
-    /**
-     * @test
-     */
     public function itShouldBeCreatedFromValidPlainText(): void
     {
         $plainText = $this->validPlainText();
 
         $statusInformation = StatusInformation::fromPlainText($plainText);
 
-        $this->assertSame(1, $statusInformation->totalPublishedMessages());
-        $this->assertSame(2, $statusInformation->storedMessages());
-        $this->assertSame(3, $statusInformation->sharedMemoryUsed());
-        $this->assertSame(4, $statusInformation->channels());
-        $this->assertSame(5, $statusInformation->subscribers());
-        $this->assertSame(6, $statusInformation->pendingRedisCommands());
-        $this->assertSame(7, $statusInformation->connectedRedisServers());
-        $this->assertSame(8, $statusInformation->totalReceivedInterprocessAlerts());
-        $this->assertSame(9, $statusInformation->interprocessAlertsInTransit());
-        $this->assertSame(10, $statusInformation->queuedInterprocessAlerts());
-        $this->assertSame(11, $statusInformation->totalInterprocessSendDelay());
-        $this->assertSame(12, $statusInformation->totalInterprocessReceiveDelay());
+        $this->assertSame(1, $statusInformation->numberOfTotalPublishedMessages);
+        $this->assertSame(2, $statusInformation->numberOfStoredMessages);
+        $this->assertSame(3, $statusInformation->sharedMemoryUsedInKilobyte);
+        $this->assertSame(4, $statusInformation->numberOfChannels);
+        $this->assertSame(5, $statusInformation->numberOfSubscribers);
+        $this->assertSame(6, $statusInformation->numberOfPendingRedisCommands);
+        $this->assertSame(7, $statusInformation->numberOfConnectedRedisServers);
+        $this->assertSame(8, $statusInformation->numberOfTotalReceivedInterprocessAlerts);
+        $this->assertSame(9, $statusInformation->numberOfInterprocessAlertsInTransit);
+        $this->assertSame(10, $statusInformation->numberOfQueuedInterprocessAlerts);
+        $this->assertSame(11, $statusInformation->numberOfTotalInterprocessSendDelay);
+        $this->assertSame(12, $statusInformation->numberOfTotalInterprocessReceiveDelay);
     }
 
     /**
