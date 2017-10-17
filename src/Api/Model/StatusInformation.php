@@ -159,8 +159,7 @@ final class StatusInformation
         int $numberOfQueuedInterprocessAlerts,
         int $totalInterprocessSendDelayInSeconds,
         int $totalInterprocessReceiveDelayInSeconds
-    )
-    {
+    ) {
         $this->numberOfTotalPublishedMessages = $numberOfTotalPublishedMessages;
         $this->numberOfStoredMessages = $numberOfStoredMessages;
         $this->sharedMemoryUsedInKilobyte = $sharedMemoryUsedInKilobyte;
