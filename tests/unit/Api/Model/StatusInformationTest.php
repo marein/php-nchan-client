@@ -26,8 +26,8 @@ class StatusInformationTest extends TestCase
         $this->assertSame(8, $statusInformation->numberOfTotalReceivedInterprocessAlerts);
         $this->assertSame(9, $statusInformation->numberOfInterprocessAlertsInTransit);
         $this->assertSame(10, $statusInformation->numberOfQueuedInterprocessAlerts);
-        $this->assertSame(11, $statusInformation->numberOfTotalInterprocessSendDelay);
-        $this->assertSame(12, $statusInformation->numberOfTotalInterprocessReceiveDelay);
+        $this->assertSame(11, $statusInformation->totalInterprocessSendDelayInSeconds);
+        $this->assertSame(12, $statusInformation->totalInterprocessReceiveDelayInSeconds);
     }
 
     /**

@@ -42,11 +42,11 @@ use Marein\Nchan\Exception\NchanException;
  * Number of interprocess communication packets waiting to be sent.
  * May be nonzero during high load, but should always tend toward 0 over time.
  *
- * @property-read int $numberOfTotalInterprocessSendDelay
+ * @property-read int $totalInterprocessSendDelayInSeconds
  * Total amount of time interprocess communication packets spend being queued if delayed.
  * May increase during high load.
  *
- * @property-read int $numberOfTotalInterprocessReceiveDelay
+ * @property-read int $totalInterprocessReceiveDelayInSeconds
  * Total amount of time interprocess communication packets spend in transit if delayed.
  * May increase during high load.
  */
@@ -123,12 +123,12 @@ final class StatusInformation
     /**
      * @var int
      */
-    private $numberOfTotalInterprocessSendDelay;
+    private $totalInterprocessSendDelayInSeconds;
 
     /**
      * @var int
      */
-    private $numberOfTotalInterprocessReceiveDelay;
+    private $totalInterprocessReceiveDelayInSeconds;
 
     /**
      * StatusInformation constructor.
@@ -143,8 +143,8 @@ final class StatusInformation
      * @param int $numberOfTotalReceivedInterprocessAlerts
      * @param int $numberOfInterprocessAlertsInTransit
      * @param int $numberOfQueuedInterprocessAlerts
-     * @param int $numberOfTotalInterprocessSendDelay
-     * @param int $numberOfTotalInterprocessReceiveDelay
+     * @param int $totalInterprocessSendDelayInSeconds
+     * @param int $totalInterprocessReceiveDelayInSeconds
      */
     private function __construct(
         int $numberOfTotalPublishedMessages,
@@ -157,8 +157,8 @@ final class StatusInformation
         int $numberOfTotalReceivedInterprocessAlerts,
         int $numberOfInterprocessAlertsInTransit,
         int $numberOfQueuedInterprocessAlerts,
-        int $numberOfTotalInterprocessSendDelay,
-        int $numberOfTotalInterprocessReceiveDelay
+        int $totalInterprocessSendDelayInSeconds,
+        int $totalInterprocessReceiveDelayInSeconds
     )
     {
         $this->numberOfTotalPublishedMessages = $numberOfTotalPublishedMessages;
@@ -171,8 +171,8 @@ final class StatusInformation
         $this->numberOfTotalReceivedInterprocessAlerts = $numberOfTotalReceivedInterprocessAlerts;
         $this->numberOfInterprocessAlertsInTransit = $numberOfInterprocessAlertsInTransit;
         $this->numberOfQueuedInterprocessAlerts = $numberOfQueuedInterprocessAlerts;
-        $this->numberOfTotalInterprocessSendDelay = $numberOfTotalInterprocessSendDelay;
-        $this->numberOfTotalInterprocessReceiveDelay = $numberOfTotalInterprocessReceiveDelay;
+        $this->totalInterprocessSendDelayInSeconds = $totalInterprocessSendDelayInSeconds;
+        $this->totalInterprocessReceiveDelayInSeconds = $totalInterprocessReceiveDelayInSeconds;
     }
 
     /**
