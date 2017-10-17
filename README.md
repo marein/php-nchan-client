@@ -50,11 +50,14 @@ namespace {
 
     include '/path/to/autoload.php';
 
-    $nchan = new Nchan('http://my-nchan-domain');  
-    $channelInformation = $nchan->channel('/path-to-publisher-endpoint')->publish(new PlainTextMessage(
-        'my-message-name',
-        'my message content'
-    ));
+    $nchan = new Nchan('http://my-nchan-domain');
+    $channel = $nchan->channel('/path-to-publisher-endpoint');
+    $channelInformation = $channel->publish(
+        new PlainTextMessage(
+            'my-message-name',
+            'my message content'
+        )
+    );
 
     // Nchan returns some channel information after publishing a message.
     var_dump($channelInformation);
@@ -73,7 +76,8 @@ namespace {
     include '/path/to/autoload.php';
 
     $nchan = new Nchan('http://my-nchan-domain');
-    $channelInformation = $nchan->channel('/path-to-publisher-endpoint')->information();
+    $channel = $nchan->channel('/path-to-publisher-endpoint');
+    $channelInformation = $channel->information();
 
     var_dump($channelInformation);
 }
@@ -91,7 +95,8 @@ namespace {
     include '/path/to/autoload.php';
 
     $nchan = new Nchan('http://my-nchan-domain');
-    $isDeleted = $nchan->channel('/path-to-publisher-endpoint')->delete();
+    $channel = $nchan->channel('/path-to-publisher-endpoint');
+    $channel->delete();
 }
 ```
 
@@ -109,7 +114,8 @@ namespace {
     include '/path/to/autoload.php';
 
     $nchan = new Nchan('http://my-nchan-domain');
-    $statusInformation = $nchan->status('/path-to-status-location')->information();
+    $status = $nchan->status('/path-to-status-location');
+    $statusInformation = $status->information();
 
     var_dump($statusInformation);
 }
