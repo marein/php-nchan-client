@@ -7,16 +7,16 @@ use Marein\Nchan\Exception\NchanException;
 /**
  * Represents the data structure for the channel api.
  *
- * @property-read int $numberOfMessages
+ * @property-read int    $numberOfMessages
  * Number of current messages in this channel.
  *
- * @property-read int $secondsSinceLastPublishedMessage
+ * @property-read int    $secondsSinceLastPublishedMessage
  * Seconds since the last message was published.
  *
- * @property-read int $numberOfSubscribers
+ * @property-read int    $numberOfSubscribers
  * Number of current subscribers in this channel.
  *
- * @property-read int $lastMessageIdentifier
+ * @property-read string $lastMessageIdentifier
  * Last published message identifier.
  */
 final class ChannelInformation
