@@ -11,7 +11,7 @@ use Marein\Nchan\HttpAdapter\HttpStreamWrapperClient;
 final class Nchan
 {
     /**
-     * @var string
+     * @var Url
      */
     private $baseUrl;
 
