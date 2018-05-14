@@ -2,12 +2,15 @@
 
 namespace {
 
-    use PHPUnit\Framework\BaseTestListener;
+    use PHPUnit\Framework\TestListener;
+    use PHPUnit\Framework\TestListenerDefaultImplementation;
     use PHPUnit\Framework\TestSuite;
     use Symfony\Component\Process\Process;
 
-    final class PhpUnitStartServerListener extends BaseTestListener
+    final class PhpUnitStartServerListener implements TestListener
     {
+        use TestListenerDefaultImplementation;
+
         /**
          * @var string
          */
@@ -42,8 +45,6 @@ namespace {
          */
         public function startTestSuite(TestSuite $suite): void
         {
-            parent::startTestSuite($suite);
-
             if ($suite->getName() === $this->suiteName) {
                 $process = new Process(
                     sprintf(
