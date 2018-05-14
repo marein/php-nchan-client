@@ -61,6 +61,8 @@ final class HttpStreamWrapperClient implements Client
     }
 
     /**
+     * Perform a request.
+     *
      * @param string  $method
      * @param Request $request
      *
@@ -101,6 +103,17 @@ final class HttpStreamWrapperClient implements Client
     }
 
     /**
+     * Prepare the given headers for stream context.
+     *
+     * Transform the array from
+     * [
+     *   'firstHeaderName' => 'firstHeaderValue',
+     *   'secondHeaderName' => 'secondHeaderValue'
+     * ]
+     * to string
+     * "firstHeaderName: firstHeaderValue\r\n
+     *  secondHeaderName: secondHeaderValue".
+     *
      * @param array $headers
      *
      * @return string
