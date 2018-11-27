@@ -33,7 +33,9 @@ final class Status
     public function __construct(Url $statusUrl, Client $client)
     {
         $this->statusUrl = $statusUrl;
-        $this->client = new ThrowExceptionIfRequestRequiresAuthenticationClient($client);
+        $this->client = new ThrowExceptionIfRequestRequiresAuthenticationClient(
+            $client
+        );
     }
 
     /**
@@ -45,12 +47,14 @@ final class Status
      */
     public function information(): StatusInformation
     {
-        $response = $this->client->get(new Request(
-            $this->statusUrl,
-            [
-                'Accept' => 'text/plain'
-            ]
-        ));
+        $response = $this->client->get(
+            new Request(
+                $this->statusUrl,
+                [
+                    'Accept' => 'text/plain'
+                ]
+            )
+        );
 
         if ($response->statusCode() !== Response::OK) {
             throw new NchanException(

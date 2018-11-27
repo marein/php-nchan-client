@@ -34,7 +34,9 @@ final class Channel
     public function __construct(Url $channelUrl, Client $client)
     {
         $this->channelUrl = $channelUrl;
-        $this->client = new ThrowExceptionIfRequestRequiresAuthenticationClient($client);
+        $this->client = new ThrowExceptionIfRequestRequiresAuthenticationClient(
+            $client
+        );
     }
 
     /**
@@ -48,15 +50,17 @@ final class Channel
      */
     public function publish(Message $message): ChannelInformation
     {
-        $response = $this->client->post(new Request(
-            $this->channelUrl,
-            [
-                'Accept'              => 'application/json',
-                'Content-Type'        => $message->contentType(),
-                'X-EventSource-Event' => $message->name()
-            ],
-            $message->content()
-        ));
+        $response = $this->client->post(
+            new Request(
+                $this->channelUrl,
+                [
+                    'Accept'              => 'application/json',
+                    'Content-Type'        => $message->contentType(),
+                    'X-EventSource-Event' => $message->name()
+                ],
+                $message->content()
+            )
+        );
 
         if (!in_array($response->statusCode(), [Response::CREATED, Response::ACCEPTED])) {
             throw new NchanException(
@@ -79,12 +83,14 @@ final class Channel
      */
     public function information(): ChannelInformation
     {
-        $response = $this->client->get(new Request(
-            $this->channelUrl,
-            [
-                'Accept' => 'application/json'
-            ]
-        ));
+        $response = $this->client->get(
+            new Request(
+                $this->channelUrl,
+                [
+                    'Accept' => 'application/json'
+                ]
+            )
+        );
 
         if ($response->statusCode() !== Response::OK) {
             throw new NchanException(
@@ -106,12 +112,14 @@ final class Channel
      */
     public function delete(): void
     {
-        $response = $this->client->delete(new Request(
-            $this->channelUrl,
-            [
-                'Accept' => 'application/json'
-            ]
-        ));
+        $response = $this->client->delete(
+            new Request(
+                $this->channelUrl,
+                [
+                    'Accept' => 'application/json'
+                ]
+            )
+        );
 
         if (!in_array($response->statusCode(), [Response::OK, RESPONSE::NOT_FOUND])) {
             throw new NchanException(

@@ -20,7 +20,12 @@ final class Url
         $parsed = parse_url($value);
 
         if (!isset($parsed['host']) && !isset($parsed['scheme'])) {
-            throw new \InvalidArgumentException('The url ' . $value . ' must at least consists of host and scheme.');
+            throw new \InvalidArgumentException(
+                sprintf(
+                    'The url "%s" must at least consists of host and scheme.',
+                    $value
+                )
+            );
         }
 
         $this->value = $value;
@@ -35,7 +40,7 @@ final class Url
      */
     public function append(string $value): Url
     {
-        return new Url((string)$this . $value);
+        return new Url($this . $value);
     }
 
     /**

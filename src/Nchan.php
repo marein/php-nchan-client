@@ -42,7 +42,10 @@ final class Nchan
      */
     public function channel(string $name): Channel
     {
-        return new Channel($this->baseUrl->append($name), $this->client);
+        return new Channel(
+            $this->baseUrl->append($name),
+            $this->client
+        );
     }
 
     /**
@@ -54,6 +57,9 @@ final class Nchan
      */
     public function status(string $path): Status
     {
-        return new Status($this->baseUrl->append($path), $this->client);
+        return new Status(
+            $this->baseUrl->append($path),
+            $this->client
+        );
     }
 }
