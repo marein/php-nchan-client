@@ -4,6 +4,7 @@
         backupGlobals="false"
         backupStaticAttributes="false"
         colors="true"
+        cacheResult="false"
         convertErrorsToExceptions="true"
         convertNoticesToExceptions="true"
         convertWarningsToExceptions="true"
