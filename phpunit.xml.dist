@@ -39,5 +39,6 @@
 
     <php>
         <env name="INTEGRATION_TEST_BASE_URL" value="http://127.0.0.1:8000/"/>
+        <env name="INTEGRATION_TEST_INVALID_BASE_URL" value="http://127.0.0.1:8001/"/>
     </php>
 </phpunit>
