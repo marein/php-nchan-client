@@ -90,7 +90,8 @@ class UrlTest extends TestCase
             ['/'],
             ['/?foo=bar'],
             ['/foo/bar'],
-            ['malformed']
+            ['malformed'],
+            ['http:///:80']
         ];
     }
 }

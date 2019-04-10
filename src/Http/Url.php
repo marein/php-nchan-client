@@ -19,6 +19,15 @@ final class Url
     {
         $parsed = parse_url($value);
 
+        if ($parsed === false) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    'The url "%s" is malformed.',
+                    $value
+                )
+            );
+        }
+
         if (!isset($parsed['host']) && !isset($parsed['scheme'])) {
             throw new \InvalidArgumentException(
                 sprintf(
