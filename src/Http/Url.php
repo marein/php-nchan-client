@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Marein\Nchan\Http;
 
+use Marein\Nchan\Exception\InvalidUrlException;
+
 final class Url
 {
     /**
@@ -14,13 +16,15 @@ final class Url
      * Url constructor.
      *
      * @param string $value
+     *
+     * @throws InvalidUrlException
      */
     public function __construct(string $value)
     {
         $parsed = parse_url($value);
 
         if ($parsed === false) {
-            throw new \InvalidArgumentException(
+            throw new InvalidUrlException(
                 sprintf(
                     'The url "%s" is malformed.',
                     $value
@@ -29,7 +33,7 @@ final class Url
         }
 
         if (!isset($parsed['host']) && !isset($parsed['scheme'])) {
-            throw new \InvalidArgumentException(
+            throw new InvalidUrlException(
                 sprintf(
                     'The url "%s" must at least consists of host and scheme.',
                     $value
@@ -46,6 +50,7 @@ final class Url
      * @param string $value
      *
      * @return Url
+     * @throws InvalidUrlException
      */
     public function append(string $value): Url
     {

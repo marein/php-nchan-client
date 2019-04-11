@@ -5,6 +5,7 @@ namespace Marein\Nchan;
 
 use Marein\Nchan\Api\Channel;
 use Marein\Nchan\Api\Status;
+use Marein\Nchan\Exception\InvalidUrlException;
 use Marein\Nchan\Http\Client;
 use Marein\Nchan\Http\Url;
 use Marein\Nchan\HttpAdapter\HttpStreamWrapperClient;
@@ -26,6 +27,8 @@ final class Nchan
      *
      * @param string      $baseUrl
      * @param Client|null $client
+     *
+     * @throws InvalidUrlException
      */
     public function __construct(string $baseUrl, Client $client = null)
     {
@@ -39,6 +42,7 @@ final class Nchan
      * @param string $name
      *
      * @return Channel
+     * @throws InvalidUrlException
      */
     public function channel(string $name): Channel
     {
@@ -54,6 +58,7 @@ final class Nchan
      * @param string $path
      *
      * @return Status
+     * @throws InvalidUrlException
      */
     public function status(string $path): Status
     {

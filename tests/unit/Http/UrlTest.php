@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Marein\Nchan\Http;
 
+use Marein\Nchan\Exception\InvalidUrlException;
 use PHPUnit\Framework\TestCase;
 
 class UrlTest extends TestCase
@@ -25,7 +26,7 @@ class UrlTest extends TestCase
      */
     public function itShouldThrowAnExceptionOnInvalidUrls(string $url): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidUrlException::class);
 
         new Url($url);
     }
