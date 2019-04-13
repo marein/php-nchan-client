@@ -1,9 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Marein\Nchan\Api;
+namespace Marein\Nchan\Tests\Unit\Api;
 
 use Marein\Nchan\Api\Model\StatusInformation;
+use Marein\Nchan\Api\Status;
 use Marein\Nchan\Exception\AuthenticationRequiredException;
 use Marein\Nchan\Exception\NchanException;
 use Marein\Nchan\Http\Client;

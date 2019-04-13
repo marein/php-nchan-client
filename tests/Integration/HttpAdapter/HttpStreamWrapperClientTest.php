@@ -1,11 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace Marein\Nchan\HttpAdapter;
+namespace Marein\Nchan\Tests\Integration\HttpAdapter;
 
 use Marein\Nchan\Exception\NchanException;
 use Marein\Nchan\Http\Request;
 use Marein\Nchan\Http\Url;
+use Marein\Nchan\HttpAdapter\Credentials;
+use Marein\Nchan\HttpAdapter\HttpStreamWrapperClient;
 use PHPUnit\Framework\TestCase;
 
 class HttpStreamWrapperClientTest extends TestCase

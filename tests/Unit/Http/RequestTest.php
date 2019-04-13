@@ -1,8 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Marein\Nchan\Http;
+namespace Marein\Nchan\Tests\Unit\Http;
 
+use Marein\Nchan\Http\Request;
+use Marein\Nchan\Http\Url;
 use PHPUnit\Framework\TestCase;
 
 class RequestTest extends TestCase

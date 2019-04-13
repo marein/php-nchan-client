@@ -14,10 +14,10 @@
 
     <testsuites>
         <testsuite name="unit">
-            <directory>./tests/unit/</directory>
+            <directory>./tests/Unit/</directory>
         </testsuite>
         <testsuite name="integration">
-            <directory>./tests/integration</directory>
+            <directory>./tests/Integration</directory>
         </testsuite>
     </testsuites>
 
@@ -28,11 +28,11 @@
     </filter>
 
     <listeners>
-        <listener class="PhpUnitStartServerListener" file="tests/configuration/PhpUnitStartServerListener.php">
+        <listener class="PhpUnitStartServerListener" file="tests/TestServer/PhpUnitStartServerListener.php">
             <arguments>
-                <string>Marein\Nchan\HttpAdapter\HttpStreamWrapperClientTest</string>
+                <string>Marein\Nchan\Tests\Integration\HttpAdapter\HttpStreamWrapperClientTest</string>
                 <string>127.0.0.1:8000</string>
-                <string>tests/configuration/index.php</string>
+                <string>tests/TestServer/index.php</string>
             </arguments>
         </listener>
     </listeners>

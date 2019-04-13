@@ -1,8 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Marein\Nchan\Api;
+namespace Marein\Nchan\Tests\Unit\Api;
 
+use Marein\Nchan\Api\Channel;
 use Marein\Nchan\Api\Model\ChannelInformation;
 use Marein\Nchan\Api\Model\Message;
 use Marein\Nchan\Exception\AuthenticationRequiredException;

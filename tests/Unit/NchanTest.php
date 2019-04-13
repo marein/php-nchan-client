@@ -1,11 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Marein\Nchan;
+namespace Marein\Nchan\Tests\Unit;
 
 use Marein\Nchan\Api\Channel;
 use Marein\Nchan\Api\Status;
 use Marein\Nchan\Http\Client;
+use Marein\Nchan\Nchan;
 use PHPUnit\Framework\TestCase;
 
 class NchanTest extends TestCase

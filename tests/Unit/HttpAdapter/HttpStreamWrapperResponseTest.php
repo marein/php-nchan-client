@@ -1,9 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Marein\Nchan\HttpAdapter;
+namespace Marein\Nchan\Tests\Unit\HttpAdapter;
 
 use Marein\Nchan\Exception\NchanException;
+use Marein\Nchan\HttpAdapter\HttpStreamWrapperResponse;
 use PHPUnit\Framework\TestCase;
 
 class HttpStreamWrapperResponseTest extends TestCase

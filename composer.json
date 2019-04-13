@@ -13,6 +13,11 @@
       "Marein\\Nchan\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Marein\\Nchan\\Tests\\": "tests"
+    }
+  },
   "require": {
     "php": "^7.3"
   },

@@ -1,10 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Marein\Nchan\HttpAdapter;
+namespace Marein\Nchan\Tests\Unit\HttpAdapter;
 
 use Marein\Nchan\Http\Request;
 use Marein\Nchan\Http\Url;
+use Marein\Nchan\HttpAdapter\BasicAuthenticationCredentials;
 use PHPUnit\Framework\TestCase;
 
 class BasicAuthenticationCredentialsTest extends TestCase

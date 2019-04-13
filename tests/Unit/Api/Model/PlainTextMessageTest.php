@@ -1,8 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Marein\Nchan\Api\Model;
+namespace Marein\Nchan\Tests\Unit\Api\Model;
 
+use Marein\Nchan\Api\Model\PlainTextMessage;
 use PHPUnit\Framework\TestCase;
 
 class PlainTextMessageTest extends TestCase
