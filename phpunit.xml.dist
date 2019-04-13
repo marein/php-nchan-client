@@ -28,7 +28,7 @@
     </filter>
 
     <listeners>
-        <listener class="PhpUnitStartServerListener" file="tests/TestServer/PhpUnitStartServerListener.php">
+        <listener class="Marein\Nchan\Tests\TestServer\PhpUnitStartServerListener">
             <arguments>
                 <string>Marein\Nchan\Tests\Integration\HttpAdapter\HttpStreamWrapperClientTest</string>
                 <string>127.0.0.1:8000</string>

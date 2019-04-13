@@ -1,64 +1,63 @@
 <?php
 declare(strict_types=1);
 
-namespace {
+namespace Marein\Nchan\Tests\TestServer;
 
-    use PHPUnit\Framework\TestListener;
-    use PHPUnit\Framework\TestListenerDefaultImplementation;
-    use PHPUnit\Framework\TestSuite;
-    use Symfony\Component\Process\Process;
+use PHPUnit\Framework\TestListener;
+use PHPUnit\Framework\TestListenerDefaultImplementation;
+use PHPUnit\Framework\TestSuite;
+use Symfony\Component\Process\Process;
 
-    final class PhpUnitStartServerListener implements TestListener
+final class PhpUnitStartServerListener implements TestListener
+{
+    use TestListenerDefaultImplementation;
+
+    /**
+     * @var string
+     */
+    private $suiteName;
+
+    /**
+     * @var string
+     */
+    private $socket;
+
+    /**
+     * @var string
+     */
+    private $documentRoot;
+
+    /**
+     * PhpUnitStartServerListener constructor.
+     *
+     * @param string $suiteName
+     * @param string $socket
+     * @param string $documentRoot
+     */
+    public function __construct(string $suiteName, string $socket, string $documentRoot)
     {
-        use TestListenerDefaultImplementation;
+        $this->suiteName = $suiteName;
+        $this->socket = $socket;
+        $this->documentRoot = $documentRoot;
+    }
 
-        /**
-         * @var string
-         */
-        private $suiteName;
+    /**
+     * @inheritdoc
+     */
+    public function startTestSuite(TestSuite $suite): void
+    {
+        if ($suite->getName() === $this->suiteName) {
+            $process = new Process(
+                sprintf(
+                    'php -S %s %s',
+                    $this->socket,
+                    $this->documentRoot
+                )
+            );
+            $process->start();
 
-        /**
-         * @var string
-         */
-        private $socket;
-
-        /**
-         * @var string
-         */
-        private $documentRoot;
-
-        /**
-         * PhpUnitStartServerListener constructor.
-         *
-         * @param string $suiteName
-         * @param string $socket
-         * @param string $documentRoot
-         */
-        public function __construct(string $suiteName, string $socket, string $documentRoot)
-        {
-            $this->suiteName = $suiteName;
-            $this->socket = $socket;
-            $this->documentRoot = $documentRoot;
-        }
-
-        /**
-         * @inheritdoc
-         */
-        public function startTestSuite(TestSuite $suite): void
-        {
-            if ($suite->getName() === $this->suiteName) {
-                $process = new Process(
-                    sprintf(
-                        'php -S %s %s',
-                        $this->socket,
-                        $this->documentRoot
-                    )
-                );
-                $process->start();
-
-                // Wait for the server.
-                sleep(1);
-            }
+            // Wait for the server.
+            sleep(1);
         }
     }
 }
