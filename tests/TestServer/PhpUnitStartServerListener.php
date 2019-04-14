@@ -48,11 +48,12 @@ final class PhpUnitStartServerListener implements TestListener
     {
         if ($suite->getName() === $this->suiteName) {
             $process = new Process(
-                sprintf(
-                    'php -S %s %s',
+                [
+                    'php',
+                    '-S',
                     $this->socket,
                     $this->documentRoot
-                )
+                ]
             );
             $process->start();
 
