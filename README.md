@@ -99,7 +99,7 @@ namespace {
 
 ### Nchan status information
 
-First you have to create a location with the "nchan_stub_status" directive. Then you can query it.
+First you have to create a location with the `nchan_stub_status directive`. Then you can query it.
 
 ```php
 <?php
@@ -120,7 +120,7 @@ namespace {
 
 ### Use with authentication
 
-Nchan gives you the possibility to authenticate endpoints with the "nchan_authorize_request" directive.
+Nchan gives you the possibility to authenticate endpoints with the `nchan_authorize_request` directive.
 The provided http client supports basic and bearer authentication. It needs to be setup as follows.
 
 ```php
@@ -149,14 +149,21 @@ namespace {
 }
 ```
 
-The \Marein\Nchan\HttpAdapter\HttpStreamWrapperClient class constructor takes an implementation of type
-\Marein\Nchan\HttpAdapter\Credentials. As long as you implement that interface, you can build your own authentication
-method. Take a look at \Marein\Nchan\HttpAdapter\BasicAuthenticationCredentials to see how this works.
+The
+`\Marein\Nchan\HttpAdapter\HttpStreamWrapperClient`
+class constructor takes an implementation of type
+`\Marein\Nchan\HttpAdapter\Credentials`.
+As long as you implement that interface, you can build your own authentication
+method. Take a look at
+`\Marein\Nchan\HttpAdapter\BasicAuthenticationCredentials`
+to see how this works.
 
 ## Exchange the provided http client
 
 Sometimes, the provided client is not enough and you want to use features from other libraries like guzzle.
-You can exchange the http client easily because of the \Marein\Nchan\Http\Client interface. I've created a guzzle adapter
+You can exchange the http client easily because of the
+`\Marein\Nchan\Http\Client`
+interface. I've created a guzzle adapter
 for those who want to use guzzle. This is also a good example to look at, if you want to use another library. The
 guzzle adapter lives at
 [marein/php-nchan-client-guzzle-adapter](https://github.com/marein/php-nchan-client-guzzle-adapter).
