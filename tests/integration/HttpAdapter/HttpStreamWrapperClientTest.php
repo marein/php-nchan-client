@@ -108,7 +108,7 @@ class HttpStreamWrapperClientTest extends TestCase
         $this->expectException(NchanException::class);
 
         $request = new Request(
-            new Url('http://invalid.url'),
+            new Url(getenv('INTEGRATION_TEST_INVALID_BASE_URL')),
             [
                 'Accept' => 'application/json'
             ]
