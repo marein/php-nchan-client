@@ -46,28 +46,19 @@ final class PhpUnitStartServerListener implements TestListener
      */
     public function startTestSuite(TestSuite $suite): void
     {
-        if ($suite->getName() !== $this->suiteName) {
-            return;
+        if ($suite->getName() === $this->suiteName) {
+            $process = new Process(
+                [
+                    'php',
+                    '-S',
+                    $this->socket,
+                    $this->documentRoot
+                ]
+            );
+            $process->start();
+
+            // Wait for the server.
+            sleep(1);
         }
-
-        $process = new Process(
-            [
-                'php',
-                '-S',
-                $this->socket,
-                $this->documentRoot
-            ]
-        );
-        $process->start();
-
-        $process->waitUntil(
-            function (string $type, string $output) {
-                if ($type === Process::ERR) {
-                    throw new \RuntimeException($output);
-                }
-
-                return true;
-            }
-        );
     }
 }
