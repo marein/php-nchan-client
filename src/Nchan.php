@@ -26,6 +26,8 @@ final class Nchan
      *
      * @param string      $baseUrl
      * @param Client|null $client
+     *
+     * @throws \InvalidArgumentException In case of an invalid url.
      */
     public function __construct(string $baseUrl, Client $client = null)
     {
@@ -39,6 +41,7 @@ final class Nchan
      * @param string $name
      *
      * @return Channel
+     * @throws \InvalidArgumentException In case of an invalid url.
      */
     public function channel(string $name): Channel
     {
@@ -54,6 +57,7 @@ final class Nchan
      * @param string $path
      *
      * @return Status
+     * @throws \InvalidArgumentException In case of an invalid url.
      */
     public function status(string $path): Status
     {
