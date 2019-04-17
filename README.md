@@ -1,7 +1,7 @@
 # php-nchan-client
 
-[![Build Status](https://travis-ci.org/marein/php-nchan-client.svg?branch=master)](https://travis-ci.org/marein/php-nchan-client)
-[![Coverage Status](https://coveralls.io/repos/github/marein/php-nchan-client/badge.svg?branch=master)](https://coveralls.io/github/marein/php-nchan-client?branch=master)
+[![Build Status](https://travis-ci.org/marein/php-nchan-client.svg?branch=v1.0)](https://travis-ci.org/marein/php-nchan-client)
+[![Coverage Status](https://coveralls.io/repos/github/marein/php-nchan-client/badge.svg?branch=v1.0)](https://coveralls.io/github/marein/php-nchan-client?branch=v1.0)
 
 __Table of contents__
 
