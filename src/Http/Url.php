@@ -14,6 +14,8 @@ final class Url
      * Url constructor.
      *
      * @param string $value
+     *
+     * @throws \InvalidArgumentException In case of an invalid url.
      */
     public function __construct(string $value)
     {
@@ -37,6 +39,7 @@ final class Url
      * @param string $value
      *
      * @return Url
+     * @throws \InvalidArgumentException In case of an invalid url.
      */
     public function append(string $value): Url
     {
