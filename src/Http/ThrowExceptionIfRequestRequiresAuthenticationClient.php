@@ -76,7 +76,7 @@ class ThrowExceptionIfRequestRequiresAuthenticationClient implements Client
         if ($response->statusCode() === Response::FORBIDDEN) {
             throw new AuthenticationRequiredException(
                 sprintf(
-                    'Request to "%s %s" requires authentication."',
+                    'Request to "%s %s" requires authentication.',
                     $method,
                     $request->url()
                 )
