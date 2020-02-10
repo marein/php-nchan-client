@@ -11,6 +11,3 @@ script:
     - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
     - vendor/bin/phpcs tests src --standard=PSR2
     - vendor/bin/phpstan analyse -l max src
-
-after_success:
-    - travis_retry vendor/bin/php-coveralls -v
