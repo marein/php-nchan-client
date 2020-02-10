@@ -1,0 +1,32 @@
+name: Main
+
+on:
+  push:
+    branches: master
+  pull_request:
+
+jobs:
+  pipeline:
+    strategy:
+      matrix:
+        operating-system: [ubuntu-latest]
+        php-version: ['7.3']
+    name: ${{ matrix.php-version }}
+    runs-on: ${{ matrix.operating-system }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v1
+        with:
+          php-version: ${{ matrix.php-version }}
+
+      - name: Prepare
+        run: composer install
+
+      - name: Testsuite
+        run: |
+          vendor/bin/phpunit
+          vendor/bin/phpcs tests src --standard=PSR2
+          vendor/bin/phpstan analyse -l max src
