@@ -1,5 +1,7 @@
 # php-nchan-client
 
+![CI](https://github.com/marein/php-nchan-client/workflows/CI/badge.svg?branch=master)
+
 __Table of contents__
 
 * [Overview](#overview)
