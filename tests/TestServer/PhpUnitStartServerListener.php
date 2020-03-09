@@ -15,17 +15,17 @@ final class PhpUnitStartServerListener implements TestListener
     /**
      * @var string
      */
-    private $suiteName;
+    private string $suiteName;
 
     /**
      * @var string
      */
-    private $socket;
+    private string $socket;
 
     /**
      * @var string
      */
-    private $documentRoot;
+    private string $documentRoot;
 
     /**
      * PhpUnitStartServerListener constructor.

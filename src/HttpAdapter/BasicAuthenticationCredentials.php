@@ -10,12 +10,12 @@ class BasicAuthenticationCredentials implements Credentials
     /**
      * @var string
      */
-    private $username;
+    private string $username;
 
     /**
      * @var string
      */
-    private $password;
+    private string $password;
 
     /**
      * BasicAuthenticationCredentials constructor.

@@ -10,7 +10,7 @@ final class Url
     /**
      * @var string
      */
-    private $value;
+    private string $value;
 
     /**
      * Url constructor.

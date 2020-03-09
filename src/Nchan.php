@@ -15,12 +15,12 @@ final class Nchan
     /**
      * @var Url
      */
-    private $baseUrl;
+    private Url $baseUrl;
 
     /**
      * @var Client
      */
-    private $client;
+    private Client $client;
 
     /**
      * Nchan constructor.

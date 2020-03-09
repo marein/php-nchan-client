@@ -10,7 +10,7 @@ class ThrowExceptionIfRequestRequiresAuthenticationClient implements Client
     /**
      * @var Client
      */
-    private $client;
+    private Client $client;
 
     /**
      * ThrowExceptionIfRequestRequiresAuthenticationClient constructor.

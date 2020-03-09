@@ -13,7 +13,7 @@ final class HttpStreamWrapperClient implements Client
     /**
      * @var Credentials
      */
-    private $credentials;
+    private Credentials $credentials;
 
     /**
      * HttpStreamWrapperClient constructor.

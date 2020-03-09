@@ -35,22 +35,22 @@ final class ChannelInformation
     /**
      * @var int
      */
-    private $numberOfMessages;
+    private int $numberOfMessages;
 
     /**
      * @var int
      */
-    private $secondsSinceLastPublishedMessage;
+    private int $secondsSinceLastPublishedMessage;
 
     /**
      * @var int
      */
-    private $numberOfSubscribers;
+    private int $numberOfSubscribers;
 
     /**
      * @var string
      */
-    private $lastMessageIdentifier;
+    private string $lastMessageIdentifier;
 
     /**
      * ChannelInformation constructor.

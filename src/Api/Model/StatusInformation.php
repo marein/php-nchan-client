@@ -74,62 +74,62 @@ final class StatusInformation
     /**
      * @var int
      */
-    private $numberOfTotalPublishedMessages;
+    private int $numberOfTotalPublishedMessages;
 
     /**
      * @var int
      */
-    private $numberOfStoredMessages;
+    private int $numberOfStoredMessages;
 
     /**
      * @var int
      */
-    private $sharedMemoryUsedInKilobyte;
+    private int $sharedMemoryUsedInKilobyte;
 
     /**
      * @var int
      */
-    private $numberOfChannels;
+    private int $numberOfChannels;
 
     /**
      * @var int
      */
-    private $numberOfSubscribers;
+    private int $numberOfSubscribers;
 
     /**
      * @var int
      */
-    private $numberOfPendingRedisCommands;
+    private int $numberOfPendingRedisCommands;
 
     /**
      * @var int
      */
-    private $numberOfConnectedRedisServers;
+    private int $numberOfConnectedRedisServers;
 
     /**
      * @var int
      */
-    private $numberOfTotalReceivedInterprocessAlerts;
+    private int $numberOfTotalReceivedInterprocessAlerts;
 
     /**
      * @var int
      */
-    private $numberOfInterprocessAlertsInTransit;
+    private int $numberOfInterprocessAlertsInTransit;
 
     /**
      * @var int
      */
-    private $numberOfQueuedInterprocessAlerts;
+    private int $numberOfQueuedInterprocessAlerts;
 
     /**
      * @var int
      */
-    private $totalInterprocessSendDelayInSeconds;
+    private int $totalInterprocessSendDelayInSeconds;
 
     /**
      * @var int
      */
-    private $totalInterprocessReceiveDelayInSeconds;
+    private int $totalInterprocessReceiveDelayInSeconds;
 
     /**
      * StatusInformation constructor.

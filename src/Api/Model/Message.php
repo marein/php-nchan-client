@@ -8,12 +8,12 @@ abstract class Message
     /**
      * @var string
      */
-    private $name;
+    private string $name;
 
     /**
      * @var string
      */
-    private $content;
+    private string $content;
 
     /**
      * Message constructor.

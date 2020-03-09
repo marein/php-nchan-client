@@ -8,17 +8,17 @@ final class Request
     /**
      * @var Url
      */
-    private $url;
+    private Url $url;
 
     /**
      * @var array
      */
-    private $headers;
+    private array $headers;
 
     /**
      * @var string
      */
-    private $body;
+    private string $body;
 
     /**
      * Request constructor.

@@ -10,7 +10,7 @@ class BearerAuthenticationCredentials implements Credentials
     /**
      * @var string
      */
-    private $token;
+    private string $token;
 
     /**
      * BearerAuthenticationCredentials constructor.

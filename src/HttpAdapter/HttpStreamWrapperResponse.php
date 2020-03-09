@@ -11,12 +11,12 @@ final class HttpStreamWrapperResponse implements Response
     /**
      * @var int
      */
-    private $statusCode;
+    private int $statusCode;
 
     /**
      * @var string
      */
-    private $body;
+    private string $body;
 
     /**
      * HttpStreamWrapperResponse constructor.

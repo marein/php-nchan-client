@@ -18,12 +18,12 @@ final class Channel
     /**
      * @var Url
      */
-    private $channelUrl;
+    private Url $channelUrl;
 
     /**
      * @var Client
      */
-    private $client;
+    private Client $client;
 
     /**
      * Channel constructor.

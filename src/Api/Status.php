@@ -17,12 +17,12 @@ final class Status
     /**
      * @var Url
      */
-    private $statusUrl;
+    private Url $statusUrl;
 
     /**
      * @var Client
      */
-    private $client;
+    private Client $client;
 
     /**
      * Status constructor.
