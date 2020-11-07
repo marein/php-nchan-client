@@ -90,11 +90,16 @@ final class HttpStreamWrapperClient implements Client
 
         $context = stream_context_create($options);
 
-        $responseBody = @file_get_contents(
+        // Suppress errors for file_get_contents. We will analyze this ourselves.
+        set_error_handler(fn() => true);
+
+        $responseBody = file_get_contents(
             $url,
             false,
             $context
         );
+
+        restore_error_handler();
 
         if ($responseBody === false) {
             throw new NchanException('Unable to connect to ' . $url . '.');
