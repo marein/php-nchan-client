@@ -120,7 +120,7 @@ final class HttpStreamWrapperClient implements Client
      * "firstHeaderName: firstHeaderValue\r\n
      *  secondHeaderName: secondHeaderValue".
      *
-     * @param array $headers
+     * @param array<string, string> $headers
      *
      * @return string
      */

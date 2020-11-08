@@ -11,7 +11,7 @@ final class Request
     private Url $url;
 
     /**
-     * @var array
+     * @var array<string, string>
      */
     private array $headers;
 
@@ -23,9 +23,9 @@ final class Request
     /**
      * Request constructor.
      *
-     * @param Url    $url
-     * @param array  $headers
-     * @param string $body
+     * @param Url                   $url
+     * @param array<string, string> $headers
+     * @param string                $body
      */
     public function __construct(Url $url, array $headers, string $body = '')
     {
@@ -43,7 +43,7 @@ final class Request
     }
 
     /**
-     * @return array
+     * @return array<string, string>
      */
     public function headers(): array
     {

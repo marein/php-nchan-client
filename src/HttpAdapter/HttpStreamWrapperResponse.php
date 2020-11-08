@@ -33,8 +33,8 @@ final class HttpStreamWrapperResponse implements Response
     /**
      * Create a HttpStreamWrapperResponse object from $http_response_header and file_get_contents result.
      *
-     * @param array  $headers The result from $http_response_header.
-     * @param string $body    The result from file_get_contents.
+     * @param array<int, string> $headers The result from $http_response_header.
+     * @param string             $body    The result from file_get_contents.
      *
      * @return HttpStreamWrapperResponse
      * @throws NchanException
