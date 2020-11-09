@@ -91,7 +91,7 @@ final class HttpStreamWrapperClient implements Client
         $context = stream_context_create($options);
 
         // Suppress errors for file_get_contents. We will analyze this ourselves.
-        set_error_handler(fn() => true);
+        $errorReportingLevelBeforeFileGetContents = error_reporting(0);
 
         $responseBody = file_get_contents(
             $url,
@@ -99,10 +99,12 @@ final class HttpStreamWrapperClient implements Client
             $context
         );
 
-        restore_error_handler();
+        error_reporting($errorReportingLevelBeforeFileGetContents);
 
         if ($responseBody === false) {
-            throw new NchanException('Unable to connect to ' . $url . '.');
+            throw new NchanException(
+                error_get_last()['message'] ?? 'Unable to connect to ' . $url . '.'
+            );
         }
 
         return HttpStreamWrapperResponse::fromResponse($http_response_header, $responseBody);
