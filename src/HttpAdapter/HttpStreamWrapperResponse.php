@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Marein\Nchan\HttpAdapter;
@@ -21,7 +22,7 @@ final class HttpStreamWrapperResponse implements Response
     /**
      * HttpStreamWrapperResponse constructor.
      *
-     * @param int    $statusCode
+     * @param int $statusCode
      * @param string $body
      */
     public function __construct(int $statusCode, string $body)
@@ -34,7 +35,7 @@ final class HttpStreamWrapperResponse implements Response
      * Create a HttpStreamWrapperResponse object from $http_response_header and file_get_contents result.
      *
      * @param array<int, string> $headers The result from $http_response_header.
-     * @param string             $body    The result from file_get_contents.
+     * @param string $body The result from file_get_contents.
      *
      * @return HttpStreamWrapperResponse
      * @throws NchanException

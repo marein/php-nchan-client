@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Marein\Nchan;
@@ -25,7 +26,7 @@ final class Nchan
     /**
      * Nchan constructor.
      *
-     * @param string      $baseUrl
+     * @param string $baseUrl
      * @param Client|null $client
      *
      * @throws InvalidUrlException

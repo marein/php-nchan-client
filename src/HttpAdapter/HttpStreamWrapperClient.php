@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Marein\Nchan\HttpAdapter;
@@ -64,7 +65,7 @@ final class HttpStreamWrapperClient implements Client
     /**
      * Perform a request.
      *
-     * @param string  $method
+     * @param string $method
      * @param Request $request
      *
      * @return Response
@@ -81,9 +82,9 @@ final class HttpStreamWrapperClient implements Client
         $options = [
             'http' =>
                 [
-                    'method'        => $method,
-                    'header'        => $this->prepareHeadersForStreamContext($headers),
-                    'content'       => $body,
+                    'method' => $method,
+                    'header' => $this->prepareHeadersForStreamContext($headers),
+                    'content' => $body,
                     'ignore_errors' => true
                 ]
         ];
@@ -128,8 +129,13 @@ final class HttpStreamWrapperClient implements Client
      */
     private function prepareHeadersForStreamContext(array $headers): string
     {
-        return implode("\r\n", array_map(function (string $name, string $value) {
-            return $name . ': ' . $value;
-        }, array_keys($headers), $headers));
+        return implode(
+            "\r\n",
+            array_map(
+                static fn(string $name, string $value) => $name . ': ' . $value,
+                array_keys($headers),
+                $headers
+            )
+        );
     }
 }

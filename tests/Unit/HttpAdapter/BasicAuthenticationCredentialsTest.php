@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Marein\Nchan\Tests\Unit\HttpAdapter;
@@ -21,10 +22,12 @@ class BasicAuthenticationCredentialsTest extends TestCase
 
         $expectedAuthorizationHeaderValue = 'Basic ' . base64_encode($username . ':' . $password);
 
-        $request = $credentials->authenticate(new Request(
-            new Url('http://localhost'),
-            []
-        ));
+        $request = $credentials->authenticate(
+            new Request(
+                new Url('http://localhost'),
+                []
+            )
+        );
 
         $this->assertTrue($request->headers()['Authorization'] === $expectedAuthorizationHeaderValue);
     }
@@ -40,12 +43,14 @@ class BasicAuthenticationCredentialsTest extends TestCase
 
         $expectedAuthorizationHeaderValue = 'Basic ' . base64_encode($username . ':' . $password);
 
-        $request = $credentials->authenticate(new Request(
-            new Url('http://localhost'),
-            [
-                'Authorization' => 'Token my-token'
-            ]
-        ));
+        $request = $credentials->authenticate(
+            new Request(
+                new Url('http://localhost'),
+                [
+                    'Authorization' => 'Token my-token'
+                ]
+            )
+        );
 
         $this->assertTrue($request->headers()['Authorization'] === $expectedAuthorizationHeaderValue);
     }

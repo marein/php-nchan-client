@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Marein\Nchan\Http;
@@ -61,8 +62,8 @@ class ThrowExceptionIfRequestRequiresAuthenticationClient implements Client
     /**
      * Throws an exception if request requires authentication.
      *
-     * @param string   $method
-     * @param Request  $request
+     * @param string $method
+     * @param Request $request
      * @param Response $response
      *
      * @return Response

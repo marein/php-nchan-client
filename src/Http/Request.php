@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Marein\Nchan\Http;
@@ -23,9 +24,9 @@ final class Request
     /**
      * Request constructor.
      *
-     * @param Url                   $url
+     * @param Url $url
      * @param array<string, string> $headers
-     * @param string                $body
+     * @param string $body
      */
     public function __construct(Url $url, array $headers, string $body = '')
     {

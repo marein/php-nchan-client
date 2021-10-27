@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Marein\Nchan\Tests\Integration\HttpAdapter;
@@ -55,12 +56,14 @@ class HttpStreamWrapperClientTest extends TestCase
         $request = new Request(
             new Url(getenv('INTEGRATION_TEST_BASE_URL') . '?statusCode=201'),
             [
-                'Accept'       => 'application/json',
+                'Accept' => 'application/json',
                 'Content-Type' => 'application/x-www-form-urlencoded'
             ],
-            http_build_query([
-                'message' => 'my-message-name'
-            ])
+            http_build_query(
+                [
+                    'message' => 'my-message-name'
+                ]
+            )
         );
 
         $credentials = $this->createMock(Credentials::class);

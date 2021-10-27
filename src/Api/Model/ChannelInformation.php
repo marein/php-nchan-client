@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Marein\Nchan\Api\Model;
@@ -8,13 +9,13 @@ use Marein\Nchan\Exception\NchanException;
 /**
  * Represents the data structure for the channel api.
  *
- * @property-read int    $numberOfMessages
+ * @property-read int $numberOfMessages
  * Number of current messages in this channel.
  *
- * @property-read int    $secondsSinceLastPublishedMessage
+ * @property-read int $secondsSinceLastPublishedMessage
  * Seconds since the last message was published.
  *
- * @property-read int    $numberOfSubscribers
+ * @property-read int $numberOfSubscribers
  * Number of current subscribers in this channel.
  *
  * @property-read string $lastMessageIdentifier
@@ -55,9 +56,9 @@ final class ChannelInformation
     /**
      * ChannelInformation constructor.
      *
-     * @param int    $numberOfMessages
-     * @param int    $secondsSinceLastPublishedMessage
-     * @param int    $numberOfSubscribers
+     * @param int $numberOfMessages
+     * @param int $secondsSinceLastPublishedMessage
+     * @param int $numberOfSubscribers
      * @param string $lastMessageIdentifier
      */
     private function __construct(

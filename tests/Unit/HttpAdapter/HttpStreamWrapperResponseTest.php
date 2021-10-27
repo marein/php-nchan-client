@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Marein\Nchan\Tests\Unit\HttpAdapter;
@@ -31,9 +32,12 @@ class HttpStreamWrapperResponseTest extends TestCase
         $expectedStatusCode = 200;
         $expectedBody = 'my body';
 
-        $response = HttpStreamWrapperResponse::fromResponse([
-            'HTTP\1.1 200 OK'
-        ], $expectedBody);
+        $response = HttpStreamWrapperResponse::fromResponse(
+            [
+                'HTTP\1.1 200 OK'
+            ],
+            $expectedBody
+        );
 
         $this->assertEquals($expectedStatusCode, $response->statusCode());
         $this->assertEquals($expectedBody, $response->body());

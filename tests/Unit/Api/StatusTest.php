@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Marein\Nchan\Tests\Unit\Api;
@@ -20,7 +21,8 @@ class StatusTest extends TestCase
     public function itShouldReturnInformation(): void
     {
         $response = $this->createMock(Response::class);
-        $response->method('body')->willReturn(<<< STRING
+        $response->method('body')->willReturn(
+            <<< STRING
 total published messages: 1
 stored messages: 2
 shared memory used: 3K

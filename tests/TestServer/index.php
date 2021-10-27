@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace {
@@ -7,9 +8,11 @@ namespace {
         http_response_code((int)$_GET['statusCode']);
     }
 
-    echo serialize([
-        'GET'    => $_GET,
-        'POST'   => $_POST,
-        'SERVER' => $_SERVER
-    ]);
+    echo serialize(
+        [
+            'GET' => $_GET,
+            'POST' => $_POST,
+            'SERVER' => $_SERVER
+        ]
+    );
 }
