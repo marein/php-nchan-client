@@ -16,22 +16,10 @@ use Marein\Nchan\Http\Url;
 
 final class Channel
 {
-    /**
-     * @var Url
-     */
     private Url $channelUrl;
 
-    /**
-     * @var Client
-     */
     private Client $client;
 
-    /**
-     * Channel constructor.
-     *
-     * @param Url $channelUrl
-     * @param Client $client
-     */
     public function __construct(Url $channelUrl, Client $client)
     {
         $this->channelUrl = $channelUrl;
@@ -41,11 +29,6 @@ final class Channel
     }
 
     /**
-     * Publish a message to this channel.
-     *
-     * @param Message $message
-     *
-     * @return ChannelInformation
      * @throws AuthenticationRequiredException
      * @throws NchanException
      */
@@ -76,9 +59,6 @@ final class Channel
     }
 
     /**
-     * Returns the information from this channel.
-     *
-     * @return ChannelInformation
      * @throws AuthenticationRequiredException
      * @throws NchanException
      */
@@ -106,8 +86,6 @@ final class Channel
     }
 
     /**
-     * Delete this channel.
-     *
      * @throws AuthenticationRequiredException
      * @throws NchanException
      */

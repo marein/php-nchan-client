@@ -7,24 +7,15 @@ namespace Marein\Nchan\Api\Model;
 use Marein\Nchan\Exception\NchanException;
 
 /**
- * Represents the data structure for the channel api.
- *
  * @property-read int $numberOfMessages
- * Number of current messages in this channel.
- *
  * @property-read int $secondsSinceLastPublishedMessage
- * Seconds since the last message was published.
- *
  * @property-read int $numberOfSubscribers
- * Number of current subscribers in this channel.
- *
  * @property-read string $lastMessageIdentifier
- * Last published message identifier.
  */
 final class ChannelInformation
 {
     /**
-     * @var array
+     * @var string[]
      */
     private const REQUIRED_JSON_KEYS = [
         'messages',
@@ -33,34 +24,14 @@ final class ChannelInformation
         'last_message_id'
     ];
 
-    /**
-     * @var int
-     */
     private int $numberOfMessages;
 
-    /**
-     * @var int
-     */
     private int $secondsSinceLastPublishedMessage;
 
-    /**
-     * @var int
-     */
     private int $numberOfSubscribers;
 
-    /**
-     * @var string
-     */
     private string $lastMessageIdentifier;
 
-    /**
-     * ChannelInformation constructor.
-     *
-     * @param int $numberOfMessages
-     * @param int $secondsSinceLastPublishedMessage
-     * @param int $numberOfSubscribers
-     * @param string $lastMessageIdentifier
-     */
     private function __construct(
         int $numberOfMessages,
         int $secondsSinceLastPublishedMessage,
@@ -82,9 +53,6 @@ final class ChannelInformation
      *          "last_message_id": "1504818382:1"
      *      }
      *
-     * @param string $json
-     *
-     * @return ChannelInformation
      * @throws NchanException
      */
     public static function fromJson(string $json): ChannelInformation
@@ -115,10 +83,6 @@ final class ChannelInformation
     }
 
     /**
-     * Returns the value of the given variable.
-     *
-     * @param string $name
-     *
      * @return mixed
      */
     public function __get(string $name)

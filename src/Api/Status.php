@@ -15,22 +15,10 @@ use Marein\Nchan\Http\Url;
 
 final class Status
 {
-    /**
-     * @var Url
-     */
     private Url $statusUrl;
 
-    /**
-     * @var Client
-     */
     private Client $client;
 
-    /**
-     * Status constructor.
-     *
-     * @param Url $statusUrl
-     * @param Client $client
-     */
     public function __construct(Url $statusUrl, Client $client)
     {
         $this->statusUrl = $statusUrl;
@@ -40,9 +28,6 @@ final class Status
     }
 
     /**
-     * Returns the current nchan status.
-     *
-     * @return StatusInformation
      * @throws AuthenticationRequiredException
      * @throws NchanException
      */

@@ -6,9 +6,6 @@ namespace Marein\Nchan\Http;
 
 final class Request
 {
-    /**
-     * @var Url
-     */
     private Url $url;
 
     /**
@@ -16,17 +13,10 @@ final class Request
      */
     private array $headers;
 
-    /**
-     * @var string
-     */
     private string $body;
 
     /**
-     * Request constructor.
-     *
-     * @param Url $url
      * @param array<string, string> $headers
-     * @param string $body
      */
     public function __construct(Url $url, array $headers, string $body = '')
     {
@@ -35,9 +25,6 @@ final class Request
         $this->body = $body;
     }
 
-    /**
-     * @return Url
-     */
     public function url(): Url
     {
         return $this->url;
@@ -51,9 +38,6 @@ final class Request
         return $this->headers;
     }
 
-    /**
-     * @return string
-     */
     public function body(): string
     {
         return $this->body;

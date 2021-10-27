@@ -12,17 +12,7 @@ interface Response
     public const FORBIDDEN = 403;
     public const NOT_FOUND = 404;
 
-    /**
-     * Returns the HTTP response status code.
-     *
-     * @return int
-     */
     public function statusCode(): int;
 
-    /**
-     * Returns the response body.
-     *
-     * @return string
-     */
     public function body(): string;
 }
