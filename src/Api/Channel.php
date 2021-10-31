@@ -1,9 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Marein\Nchan\Api;
 
 use Marein\Nchan\Api\Model\ChannelInformation;
+use Marein\Nchan\Api\Model\Message;
 use Marein\Nchan\Exception\AuthenticationRequiredException;
 use Marein\Nchan\Exception\NchanException;
 use Marein\Nchan\Http\Client;
@@ -11,26 +13,13 @@ use Marein\Nchan\Http\Request;
 use Marein\Nchan\Http\Response;
 use Marein\Nchan\Http\ThrowExceptionIfRequestRequiresAuthenticationClient;
 use Marein\Nchan\Http\Url;
-use Marein\Nchan\Api\Model\Message;
 
 final class Channel
 {
-    /**
-     * @var Url
-     */
     private Url $channelUrl;
 
-    /**
-     * @var Client
-     */
     private Client $client;
 
-    /**
-     * Channel constructor.
-     *
-     * @param Url    $channelUrl
-     * @param Client $client
-     */
     public function __construct(Url $channelUrl, Client $client)
     {
         $this->channelUrl = $channelUrl;
@@ -40,11 +29,6 @@ final class Channel
     }
 
     /**
-     * Publish a message to this channel.
-     *
-     * @param Message $message
-     *
-     * @return ChannelInformation
      * @throws AuthenticationRequiredException
      * @throws NchanException
      */
@@ -54,8 +38,8 @@ final class Channel
             new Request(
                 $this->channelUrl,
                 [
-                    'Accept'              => 'application/json',
-                    'Content-Type'        => $message->contentType(),
+                    'Accept' => 'application/json',
+                    'Content-Type' => $message->contentType(),
                     'X-EventSource-Event' => $message->name()
                 ],
                 $message->content()
@@ -75,9 +59,6 @@ final class Channel
     }
 
     /**
-     * Returns the information from this channel.
-     *
-     * @return ChannelInformation
      * @throws AuthenticationRequiredException
      * @throws NchanException
      */
@@ -105,8 +86,6 @@ final class Channel
     }
 
     /**
-     * Delete this channel.
-     *
      * @throws AuthenticationRequiredException
      * @throws NchanException
      */

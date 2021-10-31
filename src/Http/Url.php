@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Marein\Nchan\Http;
@@ -7,16 +8,9 @@ use Marein\Nchan\Exception\InvalidUrlException;
 
 final class Url
 {
-    /**
-     * @var string
-     */
     private string $value;
 
     /**
-     * Url constructor.
-     *
-     * @param string $value
-     *
      * @throws InvalidUrlException
      */
     public function __construct(string $value)
@@ -45,11 +39,6 @@ final class Url
     }
 
     /**
-     * Returns the new Url with the concatenated values.
-     *
-     * @param string $value
-     *
-     * @return Url
      * @throws InvalidUrlException
      */
     public function append(string $value): Url
@@ -57,21 +46,11 @@ final class Url
         return new Url($this . $value);
     }
 
-    /**
-     * Returns the url.
-     *
-     * @return string
-     */
     public function __toString(): string
     {
         return $this->toString();
     }
 
-    /**
-     * Returns the url.
-     *
-     * @return string
-     */
     public function toString(): string
     {
         return $this->value;

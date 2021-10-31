@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Marein\Nchan;
@@ -12,36 +13,20 @@ use Marein\Nchan\HttpAdapter\HttpStreamWrapperClient;
 
 final class Nchan
 {
-    /**
-     * @var Url
-     */
     private Url $baseUrl;
 
-    /**
-     * @var Client
-     */
     private Client $client;
 
     /**
-     * Nchan constructor.
-     *
-     * @param string      $baseUrl
-     * @param Client|null $client
-     *
      * @throws InvalidUrlException
      */
-    public function __construct(string $baseUrl, Client $client = null)
+    public function __construct(string $baseUrl, ?Client $client = null)
     {
         $this->baseUrl = new Url($baseUrl);
         $this->client = $client ?? HttpStreamWrapperClient::withDefaults();
     }
 
     /**
-     * Create the api for the given channel name.
-     *
-     * @param string $name
-     *
-     * @return Channel
      * @throws InvalidUrlException
      */
     public function channel(string $name): Channel
@@ -53,11 +38,8 @@ final class Nchan
     }
 
     /**
-     * Create the api for the given status path. The path must be configured with the "nchan_stub_status;" directive.
+     * The path must be configured with the "nchan_stub_status;" directive.
      *
-     * @param string $path
-     *
-     * @return Status
      * @throws InvalidUrlException
      */
     public function status(string $path): Status

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Marein\Nchan\Tests\Unit\HttpAdapter;
@@ -20,10 +21,12 @@ class BearerAuthenticationCredentialsTest extends TestCase
 
         $expectedAuthorizationHeaderValue = 'Bearer ' . $token;
 
-        $request = $credentials->authenticate(new Request(
-            new Url('http://localhost'),
-            []
-        ));
+        $request = $credentials->authenticate(
+            new Request(
+                new Url('http://localhost'),
+                []
+            )
+        );
 
         $this->assertTrue($request->headers()['Authorization'] === $expectedAuthorizationHeaderValue);
     }
@@ -38,12 +41,14 @@ class BearerAuthenticationCredentialsTest extends TestCase
 
         $expectedAuthorizationHeaderValue = 'Bearer ' . $token;
 
-        $request = $credentials->authenticate(new Request(
-            new Url('http://localhost'),
-            [
-                'Authorization' => 'Token other-token'
-            ]
-        ));
+        $request = $credentials->authenticate(
+            new Request(
+                new Url('http://localhost'),
+                [
+                    'Authorization' => 'Token other-token'
+                ]
+            )
+        );
 
         $this->assertTrue($request->headers()['Authorization'] === $expectedAuthorizationHeaderValue);
     }

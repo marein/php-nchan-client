@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Marein\Nchan\Http;
@@ -7,24 +8,13 @@ use Marein\Nchan\Exception\AuthenticationRequiredException;
 
 class ThrowExceptionIfRequestRequiresAuthenticationClient implements Client
 {
-    /**
-     * @var Client
-     */
     private Client $client;
 
-    /**
-     * ThrowExceptionIfRequestRequiresAuthenticationClient constructor.
-     *
-     * @param Client $client
-     */
     public function __construct(Client $client)
     {
         $this->client = $client;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function get(Request $request): Response
     {
         return $this->throwExceptionIfRequestRequiresAuthenticationOrReturnResponse(
@@ -34,9 +24,6 @@ class ThrowExceptionIfRequestRequiresAuthenticationClient implements Client
         );
     }
 
-    /**
-     * @inheritdoc
-     */
     public function post(Request $request): Response
     {
         return $this->throwExceptionIfRequestRequiresAuthenticationOrReturnResponse(
@@ -46,9 +33,6 @@ class ThrowExceptionIfRequestRequiresAuthenticationClient implements Client
         );
     }
 
-    /**
-     * @inheritdoc
-     */
     public function delete(Request $request): Response
     {
         return $this->throwExceptionIfRequestRequiresAuthenticationOrReturnResponse(
@@ -59,13 +43,6 @@ class ThrowExceptionIfRequestRequiresAuthenticationClient implements Client
     }
 
     /**
-     * Throws an exception if request requires authentication.
-     *
-     * @param string   $method
-     * @param Request  $request
-     * @param Response $response
-     *
-     * @return Response
      * @throws AuthenticationRequiredException
      */
     private function throwExceptionIfRequestRequiresAuthenticationOrReturnResponse(

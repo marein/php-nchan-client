@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Marein\Nchan\Api\Model;
@@ -6,8 +7,6 @@ namespace Marein\Nchan\Api\Model;
 use Marein\Nchan\Exception\NchanException;
 
 /**
- * Represents the data structure for the status api.
- *
  * @property-read int $numberOfTotalPublishedMessages
  * Number of messages published to all channels through this Nchan server.
  *
@@ -29,7 +28,6 @@ use Marein\Nchan\Exception\NchanException;
  * May spike during high load, especially if the Redis server is overloaded. Should tend towards 0.
  *
  * @property-read int $numberOfConnectedRedisServers
- * Number of redis servers to which Nchan is currently connected.
  *
  * @property-read int $numberOfTotalReceivedInterprocessAlerts
  * Number of interprocess communication packets transmitted between Nginx workers processes for Nchan.
@@ -54,7 +52,7 @@ use Marein\Nchan\Exception\NchanException;
 final class StatusInformation
 {
     /**
-     * @var array
+     * @var string[]
      */
     private const REQUIRED_PLAIN_TEXT_KEYS = [
         'total published messages',
@@ -71,82 +69,30 @@ final class StatusInformation
         'total interprocess receive delay'
     ];
 
-    /**
-     * @var int
-     */
     private int $numberOfTotalPublishedMessages;
 
-    /**
-     * @var int
-     */
     private int $numberOfStoredMessages;
 
-    /**
-     * @var int
-     */
     private int $sharedMemoryUsedInKilobyte;
 
-    /**
-     * @var int
-     */
     private int $numberOfChannels;
 
-    /**
-     * @var int
-     */
     private int $numberOfSubscribers;
 
-    /**
-     * @var int
-     */
     private int $numberOfPendingRedisCommands;
 
-    /**
-     * @var int
-     */
     private int $numberOfConnectedRedisServers;
 
-    /**
-     * @var int
-     */
     private int $numberOfTotalReceivedInterprocessAlerts;
 
-    /**
-     * @var int
-     */
     private int $numberOfInterprocessAlertsInTransit;
 
-    /**
-     * @var int
-     */
     private int $numberOfQueuedInterprocessAlerts;
 
-    /**
-     * @var int
-     */
     private int $totalInterprocessSendDelayInSeconds;
 
-    /**
-     * @var int
-     */
     private int $totalInterprocessReceiveDelayInSeconds;
 
-    /**
-     * StatusInformation constructor.
-     *
-     * @param int $numberOfTotalPublishedMessages
-     * @param int $numberOfStoredMessages
-     * @param int $sharedMemoryUsedInKilobyte
-     * @param int $numberOfChannels
-     * @param int $numberOfSubscribers
-     * @param int $numberOfPendingRedisCommands
-     * @param int $numberOfConnectedRedisServers
-     * @param int $numberOfTotalReceivedInterprocessAlerts
-     * @param int $numberOfInterprocessAlertsInTransit
-     * @param int $numberOfQueuedInterprocessAlerts
-     * @param int $totalInterprocessSendDelayInSeconds
-     * @param int $totalInterprocessReceiveDelayInSeconds
-     */
     private function __construct(
         int $numberOfTotalPublishedMessages,
         int $numberOfStoredMessages,
@@ -190,9 +136,6 @@ final class StatusInformation
      *      total interprocess send delay: 0
      *      total interprocess receive delay: 0
      *
-     * @param string $plainText
-     *
-     * @return StatusInformation
      * @throws NchanException
      */
     public static function fromPlainText(string $plainText): StatusInformation
@@ -235,10 +178,6 @@ final class StatusInformation
     }
 
     /**
-     * Returns the value of the given variable.
-     *
-     * @param string $name
-     *
      * @return mixed
      */
     public function __get(string $name)

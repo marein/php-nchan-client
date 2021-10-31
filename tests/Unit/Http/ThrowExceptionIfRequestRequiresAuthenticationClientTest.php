@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Marein\Nchan\Tests\Unit\Http;
@@ -60,8 +61,7 @@ class ThrowExceptionIfRequestRequiresAuthenticationClientTest extends TestCase
      */
     private function createForbiddenClient(): Client
     {
-        return new class implements Client
-        {
+        return new class implements Client {
             public function get(Request $request): Response
             {
                 return $this->createForbiddenResponse();
@@ -79,8 +79,7 @@ class ThrowExceptionIfRequestRequiresAuthenticationClientTest extends TestCase
 
             private function createForbiddenResponse(): Response
             {
-                return new class implements Response
-                {
+                return new class implements Response {
                     public function statusCode(): int
                     {
                         return Response::FORBIDDEN;

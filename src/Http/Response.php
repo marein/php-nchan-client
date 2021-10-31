@@ -1,27 +1,18 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Marein\Nchan\Http;
 
 interface Response
 {
-    const OK = 200;
-    const CREATED = 201;
-    const ACCEPTED = 202;
-    const FORBIDDEN = 403;
-    const NOT_FOUND = 404;
+    public const OK = 200;
+    public const CREATED = 201;
+    public const ACCEPTED = 202;
+    public const FORBIDDEN = 403;
+    public const NOT_FOUND = 404;
 
-    /**
-     * Returns the HTTP response status code.
-     *
-     * @return int
-     */
     public function statusCode(): int;
 
-    /**
-     * Returns the response body.
-     *
-     * @return string
-     */
     public function body(): string;
 }

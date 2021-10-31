@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Marein\Nchan\HttpAdapter;
@@ -10,26 +11,13 @@ use Marein\Nchan\Http\Response;
 
 final class HttpStreamWrapperClient implements Client
 {
-    /**
-     * @var Credentials
-     */
     private Credentials $credentials;
 
-    /**
-     * HttpStreamWrapperClient constructor.
-     *
-     * @param Credentials $credentials
-     */
     public function __construct(Credentials $credentials)
     {
         $this->credentials = $credentials;
     }
 
-    /**
-     * Create an instance without authentication enabled.
-     *
-     * @return HttpStreamWrapperClient
-     */
     public static function withDefaults(): HttpStreamWrapperClient
     {
         return new self(
@@ -37,37 +25,22 @@ final class HttpStreamWrapperClient implements Client
         );
     }
 
-    /**
-     * @inheritdoc
-     */
     public function get(Request $request): Response
     {
         return $this->request('GET', $request);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function post(Request $request): Response
     {
         return $this->request('POST', $request);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function delete(Request $request): Response
     {
         return $this->request('DELETE', $request);
     }
 
     /**
-     * Perform a request.
-     *
-     * @param string  $method
-     * @param Request $request
-     *
-     * @return Response
      * @throws NchanException
      */
     private function request(string $method, Request $request): Response
@@ -81,9 +54,9 @@ final class HttpStreamWrapperClient implements Client
         $options = [
             'http' =>
                 [
-                    'method'        => $method,
-                    'header'        => $this->prepareHeadersForStreamContext($headers),
-                    'content'       => $body,
+                    'method' => $method,
+                    'header' => $this->prepareHeadersForStreamContext($headers),
+                    'content' => $body,
                     'ignore_errors' => true
                 ]
         ];
@@ -111,9 +84,7 @@ final class HttpStreamWrapperClient implements Client
     }
 
     /**
-     * Prepare the given headers for stream context.
-     *
-     * Transform the array from
+     * Transforms the array from
      * [
      *   'firstHeaderName' => 'firstHeaderValue',
      *   'secondHeaderName' => 'secondHeaderValue'
@@ -123,13 +94,16 @@ final class HttpStreamWrapperClient implements Client
      *  secondHeaderName: secondHeaderValue".
      *
      * @param array<string, string> $headers
-     *
-     * @return string
      */
     private function prepareHeadersForStreamContext(array $headers): string
     {
-        return implode("\r\n", array_map(function (string $name, string $value) {
-            return $name . ': ' . $value;
-        }, array_keys($headers), $headers));
+        return implode(
+            "\r\n",
+            array_map(
+                static fn(string $name, string $value) => $name . ': ' . $value,
+                array_keys($headers),
+                $headers
+            )
+        );
     }
 }
