@@ -8,8 +8,11 @@ use Marein\Nchan\Exception\NchanException;
 
 /**
  * @property-read int $numberOfMessages
+ *
  * @property-read int $secondsSinceLastPublishedMessage
+ *
  * @property-read int $numberOfSubscribers
+ *
  * @property-read string $lastMessageIdentifier
  */
 final class ChannelInformation
