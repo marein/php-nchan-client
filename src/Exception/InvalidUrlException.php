@@ -6,5 +6,4 @@ namespace Marein\Nchan\Exception;
 
 final class InvalidUrlException extends NchanException
 {
-
 }
