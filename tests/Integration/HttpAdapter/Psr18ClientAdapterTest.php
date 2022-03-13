@@ -10,7 +10,7 @@ use Marein\Nchan\HttpAdapter\Psr18ClientAdapter;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpClient\Psr18Client;
 
-class Psr18ClientTest extends ClientTestCase
+class Psr18ClientAdapterTest extends ClientTestCase
 {
     protected function createClient(Request $request): Client
     {
