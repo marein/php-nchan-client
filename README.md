@@ -36,117 +36,137 @@ you must enable the php configuration
 
 ### Publish a message
 
-```php
-<?php
+<details>
+  <summary>Show code</summary>
 
-namespace {
+  ```php
+  <?php
 
-    use Marein\Nchan\Api\Model\PlainTextMessage;
-    use Marein\Nchan\Nchan;
+  namespace {
 
-    include '/path/to/autoload.php';
+      use Marein\Nchan\Api\Model\PlainTextMessage;
+      use Marein\Nchan\Nchan;
 
-    $nchan = new Nchan('http://my-nchan-domain');
-    $channel = $nchan->channel('/path-to-publisher-endpoint');
-    $channelInformation = $channel->publish(
-        new PlainTextMessage(
-            'my-message-name',
-            'my message content'
-        )
-    );
+      include '/path/to/autoload.php';
 
-    // Nchan returns some channel information after publishing a message.
-    var_dump($channelInformation);
-}
-```
+      $nchan = new Nchan('http://my-nchan-domain');
+      $channel = $nchan->channel('/path-to-publisher-endpoint');
+      $channelInformation = $channel->publish(
+          new PlainTextMessage(
+              'my-message-name',
+              'my message content'
+          )
+      );
+
+      // Nchan returns some channel information after publishing a message.
+      var_dump($channelInformation);
+  }
+  ```
+</details>
 
 ### Get channel information
 
-```php
-<?php
+<details>
+  <summary>Show code</summary>
 
-namespace {
+  ```php
+  <?php
 
-    use Marein\Nchan\Nchan;
+  namespace {
 
-    include '/path/to/autoload.php';
+      use Marein\Nchan\Nchan;
 
-    $nchan = new Nchan('http://my-nchan-domain');
-    $channel = $nchan->channel('/path-to-publisher-endpoint');
-    $channelInformation = $channel->information();
+      include '/path/to/autoload.php';
 
-    var_dump($channelInformation);
-}
-```
+      $nchan = new Nchan('http://my-nchan-domain');
+      $channel = $nchan->channel('/path-to-publisher-endpoint');
+      $channelInformation = $channel->information();
+
+      var_dump($channelInformation);
+  }
+  ```
+</details>
 
 ### Delete a channel
 
-```php
-<?php
+<details>
+  <summary>Show code</summary>
 
-namespace {
+  ```php
+  <?php
 
-    use Marein\Nchan\Nchan;
+  namespace {
 
-    include '/path/to/autoload.php';
+      use Marein\Nchan\Nchan;
 
-    $nchan = new Nchan('http://my-nchan-domain');
-    $channel = $nchan->channel('/path-to-publisher-endpoint');
-    $channel->delete();
-}
-```
+      include '/path/to/autoload.php';
+
+      $nchan = new Nchan('http://my-nchan-domain');
+      $channel = $nchan->channel('/path-to-publisher-endpoint');
+      $channel->delete();
+  }
+  ```
+</details>
 
 ### Nchan status information
 
 First you have to create a location with the `nchan_stub_status directive`. Then you can query it.
 
-```php
-<?php
+<details>
+  <summary>Show code</summary>
 
-namespace {
+  ```php
+  <?php
 
-    use Marein\Nchan\Nchan;
+  namespace {
 
-    include '/path/to/autoload.php';
+      use Marein\Nchan\Nchan;
 
-    $nchan = new Nchan('http://my-nchan-domain');
-    $status = $nchan->status('/path-to-status-location');
-    $statusInformation = $status->information();
+      include '/path/to/autoload.php';
 
-    var_dump($statusInformation);
-}
+      $nchan = new Nchan('http://my-nchan-domain');
+      $status = $nchan->status('/path-to-status-location');
+      $statusInformation = $status->information();
+
+      var_dump($statusInformation);
+  }
 ```
+</details>
 
 ### Use with authentication
 
 Nchan gives you the possibility to authenticate endpoints with the `nchan_authorize_request` directive.
 The provided http client supports basic and bearer authentication. It needs to be setup as follows.
 
-```php
-<?php
+<details>
+  <summary>Show code</summary>
 
-namespace {
+  ```php
+  <?php
 
-    use Marein\Nchan\HttpAdapter\HttpStreamWrapperClient;
-    use Marein\Nchan\HttpAdapter\BasicAuthenticationCredentials;
-    use Marein\Nchan\HttpAdapter\BearerAuthenticationCredentials;
-    use Marein\Nchan\Nchan;
+  namespace {
 
-    include '/path/to/autoload.php';
+      use Marein\Nchan\HttpAdapter\HttpStreamWrapperClient;
+      use Marein\Nchan\HttpAdapter\BasicAuthenticationCredentials;
+      use Marein\Nchan\HttpAdapter\BearerAuthenticationCredentials;
+      use Marein\Nchan\Nchan;
 
-    // Client with basic authentication
-    $adapter = new HttpStreamWrapperClient(
-        new BasicAuthenticationCredentials('nchan', 'password')
-    );
+      include '/path/to/autoload.php';
 
-    // Client with bearer authentication
-    $adapter = new HttpStreamWrapperClient(
-        new BearerAuthenticationCredentials('my-token')
-    );
+      // Client with basic authentication
+      $adapter = new HttpStreamWrapperClient(
+          new BasicAuthenticationCredentials('nchan', 'password')
+      );
 
-    $nchan = new Nchan('http://my-nchan-domain', $adapter);
-}
-```
+      // Client with bearer authentication
+      $adapter = new HttpStreamWrapperClient(
+          new BearerAuthenticationCredentials('my-token')
+      );
+
+      $nchan = new Nchan('http://my-nchan-domain', $adapter);
+  }
+  ```
+</details>
 
 The
 `\Marein\Nchan\HttpAdapter\HttpStreamWrapperClient`
