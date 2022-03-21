@@ -11,7 +11,7 @@ __Table of contents__
   * [Get channel information](#get-channel-information)
   * [Delete a channel](#delete-a-channel)
   * [Nchan status information](#nchan-status-information)
-  * [Use with authentication](#use-with-authentication)
+  * [Authorize requests](#authorize-requests)
 * [PSR-18 compatibility](#psr-18-compatibility)
 
 ## Overview
@@ -32,7 +32,7 @@ and a library that implements PSR-17 http factories
 ([see here](https://packagist.org/providers/psr/http-factory-implementation)).
 
 If you want to use the built-in http client (default if you don't set anything),
-you must enable the php configuration
+enable the php configuration
 [allow_url_fopen](http://php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen).
 
 ## Usage
@@ -115,7 +115,7 @@ The following code examples use the built-in http client.
 
 ### Nchan status information
 
-First you have to create a location with the `nchan_stub_status directive`. Then you can query it.
+Endpoints with the `nchan_stub_status` directive can be queried as follows.
 
 <details>
   <summary>Show code</summary>
@@ -138,10 +138,17 @@ First you have to create a location with the `nchan_stub_status directive`. Then
 ```
 </details>
 
-### Use with authentication
+### Authorize requests
 
-Nchan gives you the possibility to authenticate endpoints with the `nchan_authorize_request` directive.
-The provided http client supports basic and bearer authentication. It needs to be setup as follows.
+Endpoints with the `nchan_authorize_request` directive must be authorized.
+The constructor of the
+[built-in http client](/src/HttpAdapter/HttpStreamWrapperClient.php)
+takes an implementation of type
+[Credentials](/src/HttpAdapter/Credentials.php).
+This library comes with 2 built-in implementations,
+[BasicAuthenticationCredentials](/src/HttpAdapter/BasicAuthenticationCredentials.php)
+and
+[BearerAuthenticationCredentials](/src/HttpAdapter/BearerAuthenticationCredentials.php).
 
 <details>
   <summary>Show code</summary>
@@ -173,14 +180,9 @@ The provided http client supports basic and bearer authentication. It needs to b
   ```
 </details>
 
-The
-`\Marein\Nchan\HttpAdapter\HttpStreamWrapperClient`
-class constructor takes an implementation of type
-`\Marein\Nchan\HttpAdapter\Credentials`.
-As long as you implement that interface, you can build your own authentication
-method. Take a look at
-`\Marein\Nchan\HttpAdapter\BasicAuthenticationCredentials`
-to see how this works.
+If you use another http client through the
+[PSR-18 adapter](#psr-18-compatibility),
+the respective http client has its own extension points to modify the request before it is sent.
 
 ## PSR-18 compatibility
 
