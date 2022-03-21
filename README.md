@@ -158,9 +158,9 @@ and
 
   namespace {
 
-      use Marein\Nchan\HttpAdapter\HttpStreamWrapperClient;
       use Marein\Nchan\HttpAdapter\BasicAuthenticationCredentials;
       use Marein\Nchan\HttpAdapter\BearerAuthenticationCredentials;
+      use Marein\Nchan\HttpAdapter\HttpStreamWrapperClient;
       use Marein\Nchan\Nchan;
 
       include '/path/to/autoload.php';
