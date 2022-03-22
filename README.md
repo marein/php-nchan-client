@@ -203,6 +203,9 @@ and
 
   ```php
   <?php
+
+  namespace {
+
       use GuzzleHttp\Client;
       use GuzzleHttp\Psr7\HttpFactory;
       use Marein\Nchan\HttpAdapter\Psr18ClientAdapter;
@@ -218,6 +221,7 @@ and
               new HttpFactory()
           )
       );
+  }
   ```
 </details>
 
@@ -231,6 +235,9 @@ and
 
   ```php
   <?php
+
+  namespace {
+
       use Marein\Nchan\HttpAdapter\Psr18ClientAdapter;
       use Marein\Nchan\Nchan;
       use Nyholm\Psr7\Factory\Psr17Factory;
@@ -254,5 +261,6 @@ and
               $httpClient
           )
       );
+  }
   ```
 </details>
