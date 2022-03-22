@@ -1,6 +1,6 @@
 # php-nchan-client
 
-![CI](https://github.com/marein/php-nchan-client/workflows/CI/badge.svg?branch=master)
+![CI](https://github.com/marein/php-nchan-client/workflows/CI/badge.svg?branch=v3.0)
 
 __Table of contents__
 
