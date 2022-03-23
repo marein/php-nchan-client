@@ -11,16 +11,12 @@ __Table of contents__
   * [Get channel information](#get-channel-information)
   * [Delete a channel](#delete-a-channel)
   * [Nchan status information](#nchan-status-information)
-  * [Use with authentication](#use-with-authentication)
-* [Exchange the provided http client](#exchange-the-provided-http-client)
+  * [Authorize requests](#authorize-requests)
+* [PSR-18 compatibility](#psr-18-compatibility)
 
 ## Overview
 
 This is a PHP client for [https://nchan.io](https://nchan.io).
-
-This library provides a http client which has some authentication features. If you need more, you can for sure
-exchange this library with another like guzzle. Take a look below to
-"[Exchange the provided http client](#exchange-the-provided-http-client)".
 
 ## Installation and requirements
 
@@ -28,145 +24,243 @@ exchange this library with another like guzzle. Take a look below to
 composer require marein/php-nchan-client
 ```
 
-If you use the provided http client (default if you don't set anything),
-you must enable the php configuration
+If you want to use the
+[PSR-18 adapter](#psr-18-compatibility),
+install a library that implements PSR-18 http client
+([see here](https://packagist.org/providers/psr/http-client-implementation))
+and a library that implements PSR-17 http factories
+([see here](https://packagist.org/providers/psr/http-factory-implementation)).
+
+If you want to use the built-in http client (default if you don't set anything),
+enable the php configuration
 [allow_url_fopen](http://php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen).
 
 ## Usage
 
+The following code examples use the built-in http client.
+
 ### Publish a message
 
-```php
-<?php
+<details>
+  <summary>Show code</summary>
 
-namespace {
+  ```php
+  <?php
 
-    use Marein\Nchan\Api\Model\PlainTextMessage;
-    use Marein\Nchan\Nchan;
+  namespace {
 
-    include '/path/to/autoload.php';
+      use Marein\Nchan\Api\Model\PlainTextMessage;
+      use Marein\Nchan\Nchan;
 
-    $nchan = new Nchan('http://my-nchan-domain');
-    $channel = $nchan->channel('/path-to-publisher-endpoint');
-    $channelInformation = $channel->publish(
-        new PlainTextMessage(
-            'my-message-name',
-            'my message content'
-        )
-    );
+      include '/path/to/autoload.php';
 
-    // Nchan returns some channel information after publishing a message.
-    var_dump($channelInformation);
-}
-```
+      $nchan = new Nchan('http://my-nchan-domain');
+      $channel = $nchan->channel('/path-to-publisher-endpoint');
+      $channelInformation = $channel->publish(
+          new PlainTextMessage(
+              'my-message-name',
+              'my message content'
+          )
+      );
+
+      // Nchan returns some channel information after publishing a message.
+      var_dump($channelInformation);
+  }
+  ```
+</details>
 
 ### Get channel information
 
-```php
-<?php
+<details>
+  <summary>Show code</summary>
 
-namespace {
+  ```php
+  <?php
 
-    use Marein\Nchan\Nchan;
+  namespace {
 
-    include '/path/to/autoload.php';
+      use Marein\Nchan\Nchan;
 
-    $nchan = new Nchan('http://my-nchan-domain');
-    $channel = $nchan->channel('/path-to-publisher-endpoint');
-    $channelInformation = $channel->information();
+      include '/path/to/autoload.php';
 
-    var_dump($channelInformation);
-}
-```
+      $nchan = new Nchan('http://my-nchan-domain');
+      $channel = $nchan->channel('/path-to-publisher-endpoint');
+      $channelInformation = $channel->information();
+
+      var_dump($channelInformation);
+  }
+  ```
+</details>
 
 ### Delete a channel
 
-```php
-<?php
+<details>
+  <summary>Show code</summary>
 
-namespace {
+  ```php
+  <?php
 
-    use Marein\Nchan\Nchan;
+  namespace {
 
-    include '/path/to/autoload.php';
+      use Marein\Nchan\Nchan;
 
-    $nchan = new Nchan('http://my-nchan-domain');
-    $channel = $nchan->channel('/path-to-publisher-endpoint');
-    $channel->delete();
-}
-```
+      include '/path/to/autoload.php';
+
+      $nchan = new Nchan('http://my-nchan-domain');
+      $channel = $nchan->channel('/path-to-publisher-endpoint');
+      $channel->delete();
+  }
+  ```
+</details>
 
 ### Nchan status information
 
-First you have to create a location with the `nchan_stub_status directive`. Then you can query it.
+Endpoints with the `nchan_stub_status` directive can be queried as follows.
 
-```php
-<?php
+<details>
+  <summary>Show code</summary>
 
-namespace {
+  ```php
+  <?php
 
-    use Marein\Nchan\Nchan;
+  namespace {
 
-    include '/path/to/autoload.php';
+      use Marein\Nchan\Nchan;
 
-    $nchan = new Nchan('http://my-nchan-domain');
-    $status = $nchan->status('/path-to-status-location');
-    $statusInformation = $status->information();
+      include '/path/to/autoload.php';
 
-    var_dump($statusInformation);
-}
+      $nchan = new Nchan('http://my-nchan-domain');
+      $status = $nchan->status('/path-to-status-location');
+      $statusInformation = $status->information();
+
+      var_dump($statusInformation);
+  }
 ```
+</details>
 
-### Use with authentication
+### Authorize requests
 
-Nchan gives you the possibility to authenticate endpoints with the `nchan_authorize_request` directive.
-The provided http client supports basic and bearer authentication. It needs to be setup as follows.
+Endpoints with the `nchan_authorize_request` directive must be authorized.
+The constructor of the
+[built-in http client](/src/HttpAdapter/HttpStreamWrapperClient.php)
+takes an implementation of type
+[Credentials](/src/HttpAdapter/Credentials.php).
+This library comes with 2 built-in implementations,
+[BasicAuthenticationCredentials](/src/HttpAdapter/BasicAuthenticationCredentials.php)
+and
+[BearerAuthenticationCredentials](/src/HttpAdapter/BearerAuthenticationCredentials.php).
 
-```php
-<?php
+<details>
+  <summary>Show code</summary>
 
-namespace {
+  ```php
+  <?php
 
-    use Marein\Nchan\HttpAdapter\HttpStreamWrapperClient;
-    use Marein\Nchan\HttpAdapter\BasicAuthenticationCredentials;
-    use Marein\Nchan\HttpAdapter\BearerAuthenticationCredentials;
-    use Marein\Nchan\Nchan;
+  namespace {
 
-    include '/path/to/autoload.php';
+      use Marein\Nchan\HttpAdapter\BasicAuthenticationCredentials;
+      use Marein\Nchan\HttpAdapter\BearerAuthenticationCredentials;
+      use Marein\Nchan\HttpAdapter\HttpStreamWrapperClient;
+      use Marein\Nchan\Nchan;
 
-    // Client with basic authentication
-    $adapter = new HttpStreamWrapperClient(
-        new BasicAuthenticationCredentials('nchan', 'password')
-    );
+      include '/path/to/autoload.php';
 
-    // Client with bearer authentication
-    $adapter = new HttpStreamWrapperClient(
-        new BearerAuthenticationCredentials('my-token')
-    );
+      // Client with basic authentication
+      $adapter = new HttpStreamWrapperClient(
+          new BasicAuthenticationCredentials('nchan', 'password')
+      );
 
-    $nchan = new Nchan('http://my-nchan-domain', $adapter);
-}
-```
+      // Client with bearer authentication
+      $adapter = new HttpStreamWrapperClient(
+          new BearerAuthenticationCredentials('my-token')
+      );
 
-The
-`\Marein\Nchan\HttpAdapter\HttpStreamWrapperClient`
-class constructor takes an implementation of type
-`\Marein\Nchan\HttpAdapter\Credentials`.
-As long as you implement that interface, you can build your own authentication
-method. Take a look at
-`\Marein\Nchan\HttpAdapter\BasicAuthenticationCredentials`
-to see how this works.
+      $nchan = new Nchan('http://my-nchan-domain', $adapter);
+  }
+  ```
+</details>
 
-## Exchange the provided http client
+If you use another http client through the
+[PSR-18 adapter](#psr-18-compatibility),
+the respective http client has its own extension points to modify the request before it is sent.
 
-Sometimes, the provided client is not enough and you want to use features from other libraries like guzzle.
-You can exchange the http client easily because of the
-`\Marein\Nchan\Http\Client`
-interface. I've created a guzzle adapter
-for those who want to use guzzle. This is also a good example to look at, if you want to use another library. The
-guzzle adapter lives at
-[marein/php-nchan-client-guzzle-adapter](https://github.com/marein/php-nchan-client-guzzle-adapter).
+## PSR-18 compatibility
 
-Another good reason to exchange the provided client is to gain performance, since the client uses the http stream wrapper
-from php. There is a little overhead because the tcp connection gets closed after each request. Other implementations,
-like guzzle, can keep the connection alive.
+This library comes with a PSR-18 compatible
+[adapter](/src/HttpAdapter/Psr18ClientAdapter.php).
+There are good reasons not to use the built-in client.
+It's based on the http stream wrapper and `file_get_contents`.
+This closes the TCP connection after each request.
+Other clients, see below, can keep the connection open.
+
+The following example uses
+[guzzlehttp/guzzle](https://packagist.org/packages/guzzlehttp/guzzle)
+and
+[guzzlehttp/psr7](https://packagist.org/packages/guzzlehttp/psr7).
+
+<details>
+  <summary>Show code</summary>
+
+  ```php
+  <?php
+
+  namespace {
+
+      use GuzzleHttp\Client;
+      use GuzzleHttp\Psr7\HttpFactory;
+      use Marein\Nchan\HttpAdapter\Psr18ClientAdapter;
+      use Marein\Nchan\Nchan;
+
+      include '/path/to/autoload.php';
+
+      $nchan = new Nchan(
+          'http://my-nchan-domain',
+          new Psr18ClientAdapter(
+              new Client(),
+              new HttpFactory(),
+              new HttpFactory()
+          )
+      );
+  }
+  ```
+</details>
+
+The following code example uses
+[symfony/http-client](https://packagist.org/packages/symfony/http-client)
+and
+[nyholm/psr7](https://packagist.org/packages/nyholm/psr7).
+
+<details>
+  <summary>Show code</summary>
+
+  ```php
+  <?php
+
+  namespace {
+
+      use Marein\Nchan\HttpAdapter\Psr18ClientAdapter;
+      use Marein\Nchan\Nchan;
+      use Nyholm\Psr7\Factory\Psr17Factory;
+      use Symfony\Component\HttpClient\HttpClient;
+      use Symfony\Component\HttpClient\Psr18Client;
+
+      include '/path/to/autoload.php';
+
+      // Symfony itself needs an adapter to be PSR-18 compliant.
+      $httpClient = new Psr18Client(
+          HttpClient::create(),
+          new Psr17Factory(),
+          new Psr17Factory()
+      );
+
+      $nchan = new Nchan(
+          'http://my-nchan-domain',
+          new Psr18ClientAdapter(
+              $httpClient,
+              $httpClient,
+              $httpClient
+          )
+      );
+  }
+  ```
+</details>
