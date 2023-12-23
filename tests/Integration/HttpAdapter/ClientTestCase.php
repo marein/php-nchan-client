@@ -8,8 +8,6 @@ use Marein\Nchan\Exception\NchanException;
 use Marein\Nchan\Http\Client;
 use Marein\Nchan\Http\Request;
 use Marein\Nchan\Http\Url;
-use Marein\Nchan\HttpAdapter\Credentials;
-use Marein\Nchan\HttpAdapter\HttpStreamWrapperClient;
 use PHPUnit\Framework\TestCase;
 
 abstract class ClientTestCase extends TestCase
