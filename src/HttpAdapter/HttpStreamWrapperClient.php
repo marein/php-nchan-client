@@ -80,7 +80,11 @@ final class HttpStreamWrapperClient implements Client
             );
         }
 
-        return HttpStreamWrapperResponse::fromResponse($http_response_header, $responseBody);
+        $responseHeaders = (function_exists('http_get_last_response_headers')
+            ? http_get_last_response_headers()
+            : $http_response_header) ?? [];
+
+        return HttpStreamWrapperResponse::fromResponse($responseHeaders, $responseBody);
     }
 
     /**
