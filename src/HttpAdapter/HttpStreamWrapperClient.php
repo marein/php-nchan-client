@@ -80,7 +80,7 @@ final class HttpStreamWrapperClient implements Client
             );
         }
 
-        $responseHeaders = (function_exists('http_get_last_response_headers')
+        $responseHeaders = (PHP_VERSION_ID >= 80500
             ? http_get_last_response_headers()
             : $http_response_header) ?? [];
 

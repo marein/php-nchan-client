@@ -2,3 +2,6 @@ parameters:
   paths:
     - src
   level: max
+  reportUnmatchedIgnoredErrors: false
+  ignoreErrors:
+    - '#^Function http_get_last_response_headers not found.$#'
